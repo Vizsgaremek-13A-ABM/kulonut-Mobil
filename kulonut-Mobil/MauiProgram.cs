@@ -2,6 +2,7 @@
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.ViewModels;
 using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Handlers;
 using System.Net;
 
 namespace kulonut_Mobil
@@ -17,7 +18,16 @@ namespace kulonut_Mobil
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+				.ConfigureMauiHandlers(handlers =>
+				{
+#if ANDROID
+					EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+					{
+						handler.PlatformView.Background = null;
+					});
+#endif
+				});
 
 			builder.Services.AddMemoryCache();
 			builder.Services.AddSingleton<ICacheService, DualLayerCacheService>();
