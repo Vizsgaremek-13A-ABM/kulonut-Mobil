@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using kulonut_Mobil.API;
+using kulonut_Mobil.Pages;
+using kulonut_Mobil.ViewModels;
+using Microsoft.Extensions.Logging;
+using System.Net;
 
 namespace kulonut_Mobil
 {
@@ -15,11 +19,29 @@ namespace kulonut_Mobil
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+			builder.Services.AddMemoryCache();
+			builder.Services.AddSingleton<ICacheService, DualLayerCacheService>();
+			builder.Services.AddHttpClient(OptimizedApiClient.NAME, client =>
+			{
+				client.Timeout = TimeSpan.FromSeconds(5);
+				client.DefaultRequestHeaders.Add("Accept", "application/json");
+			})
+			.ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
+			{
+				PooledConnectionLifetime = TimeSpan.FromMinutes(2),
+				AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+				AllowAutoRedirect = false,
+			});
+			builder.Services.AddTransient<IApiClient, OptimizedApiClient>();
 
-            return builder.Build();
+			builder.Services.AddSingleton<MainPage>();
+			builder.Services.AddSingleton<MainViewModel>();
+
+
+#if DEBUG
+			builder.Logging.AddDebug();
+        #endif
+			return builder.Build();
         }
     }
 }
