@@ -9,14 +9,8 @@
             <Label Grid.Row="1" VerticalOptions="End" Margin="0, 0, 0, 30" Text="Bejelentkezés" Style="{StaticResource AuthHeader1}"/>
             <Border Style="{StaticResource BlockBorder}" Grid.Row="2">
                 <Grid RowDefinitions="1.5*, 1.5*, *, *, 0.5*, 0.3*">
-                    <VerticalStackLayout Grid.Row="0">
-                        <Label Text="Email Cím" Style="{StaticResource AuthLabel}"/>
-                        <views:AuthEntry Placeholder="Béla@gmail.com"/>
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Grid.Row="1">
-                        <Label Text="Jelszó" Style="{StaticResource AuthLabel}" />
-                        <views:AuthEntry IsPassword="True" Placeholder="Password"/>
-                    </VerticalStackLayout>
+                    <views:AuthEntry Grid.Row="0" LabelText="Email Cím" Text="" Placeholder="Béla@gmail.com"/>
+                    <views:AuthEntry Grid.Row="1" LabelText="Jelszó" IsPassword="True" Placeholder="Password"/>
                     <Button Grid.Row="2" Background="{StaticResource DarkGray}" Style="{StaticResource AuthButton}" Text="Belépés"/>
                     <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Text="Regisztráció"/>
                     <Label Grid.Row="4" VerticalOptions="End" Text="Elfelejtett jelszó" Style="{StaticResource AuthLabel}" TextDecorations="Underline"/>
