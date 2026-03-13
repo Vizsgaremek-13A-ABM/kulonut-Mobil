@@ -7,7 +7,7 @@
         <Border
             Margin="0, 5"
             x:Name="InputBorder"
-            Padding="12,6"
+            Padding="12,4"
             StrokeShape="RoundRectangle 10">
 
             <Entry
