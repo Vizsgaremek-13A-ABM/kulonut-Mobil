@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kulonut_Mobil.Views.AuthEntry">
+    <Border
+        Margin="0, 5"
+        x:Name="InputBorder"
+        Padding="12,6"
+        StrokeShape="RoundRectangle 10">
+
+        <Entry
+            x:Name="TextInput"
+            Text="{Binding Text, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+            FontSize="16"
+            HeightRequest="40"/>
+
+    </Border>
+</ContentView>
