@@ -21,6 +21,11 @@ public partial class AuthEntry : ContentView
 		get => (string)GetValue(TextProperty);
 		set => SetValue(TextProperty, value);
 	}
+	public string LabelText
+	{
+		get => HeadLabel.Text;
+		set => HeadLabel.Text = value;
+	}
 	public bool IsPassword
 	{
 		get => TextInput.IsPassword;

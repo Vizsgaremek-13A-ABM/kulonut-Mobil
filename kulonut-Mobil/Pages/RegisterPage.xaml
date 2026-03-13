@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:kulonut_Mobil.Views"
+             x:Class="kulonut_Mobil.Pages.RegisterPage"
+             >
+    <ScrollView Margin="20">
+        <Grid RowDefinitions="*, *, 5*, 0.5*">
+            <Label Grid.Row="0" Text="Különút KFT" Style="{StaticResource AuthHeader1}"/>
+            <Label Grid.Row="1" VerticalOptions="End" Margin="0, 0, 0, 30" Text="Regisztáció" Style="{StaticResource AuthHeader1}"/>
+            <Border Style="{StaticResource BlockBorder}" Grid.Row="2">
+                <Grid RowDefinitions="1.5*, 1.5*, 1.5*, 1.5*, 0.7*">
+                    <views:AuthEntry Grid.Row="0" LabelText="Felhasználónév" Text="" Placeholder="Béla"/>
+                    <views:AuthEntry Grid.Row="1" LabelText="Email Cím" Text="" Placeholder="Béla@gmail.com"/>
+                    <views:AuthEntry Grid.Row="2" LabelText="Jelszó" IsPassword="True" Placeholder="erősjelszó12!"/>
+                    <views:AuthEntry Grid.Row="3" LabelText="Jelszó megerősítése" IsPassword="True" Placeholder="erősjelszó12!"/>
+                    <Button Grid.Row="4" VerticalOptions="Center" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Text="Regisztráció"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </ScrollView>
+</ContentPage>
