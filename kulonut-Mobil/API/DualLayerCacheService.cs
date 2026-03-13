@@ -1,12 +1,18 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
+using System;
 
 namespace kulonut_Mobil.API
 {
 	public class DualLayerCacheService : ICacheService
 	{
-		private readonly IMemoryCache memoryCache = new MemoryCache(new MemoryCacheOptions());
+		private readonly IMemoryCache memoryCache;
 		private readonly string localCachePath = FileSystem.CacheDirectory;
+
+		public DualLayerCacheService(IMemoryCache memoryCache)
+		{
+			this.memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
+		}
 
 		public async Task<T?> GetAsync<T>(string key)
 		{
