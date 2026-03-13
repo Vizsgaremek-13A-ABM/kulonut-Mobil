@@ -32,7 +32,7 @@ namespace kulonut_Mobil
 				AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
 				AllowAutoRedirect = false,
 			});
-			builder.Services.AddSingleton<IApiClient, OptimizedApiClient>();
+			builder.Services.AddTransient<IApiClient, OptimizedApiClient>();
 
 			builder.Services.AddSingleton<MainPage>();
 			builder.Services.AddSingleton<MainViewModel>();
