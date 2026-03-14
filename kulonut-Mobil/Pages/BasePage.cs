@@ -11,9 +11,10 @@ namespace kulonut_Mobil.Pages
 	{
 		protected override bool OnBackButtonPressed()
 		{
-			if(BindingContext is BaseViewModel vm)
+			if (BindingContext is BaseViewModel vm)
 				return vm.OnBackButtonPressed();
 			return base.OnBackButtonPressed();
 		}
+
 	}
 }

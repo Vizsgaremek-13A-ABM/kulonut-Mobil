@@ -11,7 +11,22 @@ namespace kulonut_Mobil.ViewModels
 	{
 		public virtual bool OnBackButtonPressed()
 		{
-			return false;
+			MainThread.BeginInvokeOnMainThread(async () =>
+			{
+				bool shouldExit = await Application.Current!.MainPage!.DisplayAlert("Kilépés", "Ki akarsz lépni az applikációból", "Igen", "Nem");
+				if (shouldExit) CloseApp();
+			});
+			return true;
+		}
+		protected void CloseApp()
+		{
+			#if ANDROID
+					Microsoft.Maui.ApplicationModel.Platform.CurrentActivity?.FinishAffinity();
+			#elif WINDOWS
+					Microsoft.UI.Xaml.Application.Current.Exit();
+			#elif IOS
+					System.Environment.Exit(0);
+			#endif
 		}
 	}
 }

@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Pages.MapPage"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
-             Title="MapPage">
+             Title="Térkép Nézet">
     <VerticalStackLayout>
         <Label 
             Text="Térkép Nézet"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button Text="Details" Command="{Binding NavigateToDetailsCommand}"/>
     </VerticalStackLayout>
 </pages:BasePage>
