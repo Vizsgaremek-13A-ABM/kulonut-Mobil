@@ -53,7 +53,7 @@
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
         <Setter Property="MinimumWidthRequest" Value="44"/>
-        <Setter Property="VisualStateManager.VisualStateGroups">
+        <!--<Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">
                     <VisualState x:Name="Normal" />
@@ -64,7 +64,7 @@
                     </VisualState>
                 </VisualStateGroup>
             </VisualStateGroupList>
-        </Setter>
+        </Setter>-->
     </Style>
 
     <Style TargetType="DatePicker">
