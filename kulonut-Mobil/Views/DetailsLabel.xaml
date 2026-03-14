@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kulonut_Mobil.Views.DetailsLabel">
+    
+    <VerticalStackLayout Spacing="2" x:Name="ContainerLayout">
+        <Label x:Name="HeaderLabel" FontSize="20" FontAttributes="Bold"/>
+        <Label x:Name="BodyLabel" Text="{Binding BodyText, Source={RelativeSource AncestorType={x:Type ContentView}}}" FontSize="18" />
+    </VerticalStackLayout>
+</ContentView>

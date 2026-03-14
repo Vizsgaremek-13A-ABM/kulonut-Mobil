@@ -1,80 +1,53 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:kulonut_Mobil.Views"
              x:Class="kulonut_Mobil.Pages.DetailsPage">
     
-    <Grid Margin="20" RowDefinitions="Auto, *">
+    <Grid Margin="20, 0" RowDefinitions="Auto, *">
         <Border Grid.Row="0" Margin="0, 0, 0, 30" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-            <VerticalStackLayout>
-                <Label Text="Projekt Neve" HorizontalOptions="Start" FontSize="24" FontAttributes="Bold"/>
-                <Label Text="Győr, Pápai út melletti kerékpárút, 2923 hrsz.-ú földút becsatlakozása melletti egyirányú kerékpáros átvezetés jelzőlámpás
-                   forgalomirányítás kiviteli terve" HorizontalOptions="Start" FontSize="18" />
-            </VerticalStackLayout>
+            <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Címe" BodyText="Győr, Pápai út melletti kerékpárút, 2923 hrsz.-ú földút becsatlakozása melletti egyirányú kerékpáros" />
         </Border>
         <ScrollView Grid.Row="1" >
-            <VerticalStackLayout Spacing="30">
+            <VerticalStackLayout Spacing="30" Margin="0,0,0,20">
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-                    <VerticalStackLayout>
-                        <Label Text="Generáltervező" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="Különút Kft." FontSize="16"/>
-                        <Label Text="Tervezők" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="Baulingva, Gt-Vill" FontSize="16"/>
-                        <Label Text="Geodézia" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="Irányszög Bt." FontSize="16"/>
-                        <Label Text="Megrendelő" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="Győr Ph" FontSize="16"/>
-                    </VerticalStackLayout>
-                </Border>
-                <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-                    <VerticalStackLayout>
-                        <Label Text="Munkaszám" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="493/2025" FontSize="18"/>
-                        <Label Text="Iratpapucs száma" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="1212312" FontSize="18"/>
-                        <Label Text="Egyéb munkarészek" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="Munkarész1, Munkarész2" FontSize="18"/>
-                    </VerticalStackLayout>
-                </Border>
-                <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-                    <VerticalStackLayout>
-                        <Label Text="Eközmű nyilatkozat kiadás dátuma" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="2026.05.05" FontSize="18"/>
-                        <Label Text="Útépítési engedély kiadás dátuma" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="2026.05.05" FontSize="18"/>
-                        <Label Text="Vízjogi engedély kiadás dátuma" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="2026.05.05" FontSize="18"/>
-                        <Label Text="Tervkiadás Dátuma" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="2026.05.05" FontSize="18"/>
-                    </VerticalStackLayout>
-                </Border>
-                <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-                    <VerticalStackLayout>
-                        <HorizontalStackLayout>
-                            <CheckBox VerticalOptions="Center"  HorizontalOptions="Start" Color="{StaticResource DarkGray}" IsEnabled="False"/>
-                            <Label VerticalOptions="Center" Text="Útépítési terv" FontSize="20" FontAttributes="Bold"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <CheckBox VerticalOptions="Center"  HorizontalOptions="Start" Color="{StaticResource DarkGray}" IsEnabled="False"/>
-                            <Label VerticalOptions="Center" Text="Vízhálózati terv" FontSize="20" FontAttributes="Bold"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <CheckBox VerticalOptions="Center"  HorizontalOptions="Start" Color="{StaticResource DarkGray}" IsEnabled="False"/>
-                            <Label VerticalOptions="Center" Text="Közvilágítási terv" FontSize="20" FontAttributes="Bold"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <CheckBox VerticalOptions="Center"  HorizontalOptions="Start" Color="{StaticResource DarkGray}" IsEnabled="False"/>
-                            <Label VerticalOptions="Center" Text="Szennyvíz csatorna terv" FontSize="20" FontAttributes="Bold"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout>
-                            <CheckBox VerticalOptions="Center"  HorizontalOptions="Start" Color="{StaticResource DarkGray}" IsEnabled="False"/>
-                            <Label VerticalOptions="Center" Text="Csapadékvíz elvezetési terv" FontSize="20" FontAttributes="Bold"/>
-                        </HorizontalStackLayout>
+                    <VerticalStackLayout Spacing="10">
+                        <views:DetailsLabel HeaderText="Generáltervező" BodyText="Különút Kft."/>
+                        <views:DetailsLabel HeaderText="Tervezők" BodyText="Baulingva, Gt-Vill"/>
+                        <views:DetailsLabel HeaderText="Geodézia" BodyText="Irányszög Bt."/>
+                        <views:DetailsLabel HeaderText="Megrendelő" BodyText="Győr Ph"/>
                     </VerticalStackLayout>
                 </Border>
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
-                        <Label Text="Megjegyzés" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="Ez egy megjegyzés a tervhez kapcsolódóan Ez egy megjegyzés a tervhez kapcsolódóan Ez egy megjegyzés a tervhez kapcsolódóan Ez egy megjegyzés a tervhez kapcsolódóan " FontSize="14" LineBreakMode="WordWrap"/>
+                        <views:DetailsLabel HeaderText="Munkaszám" BodyText="493/2025"/>
+                        <views:DetailsLabel HeaderText="Iratpapucs száma" BodyText="1212312"/>
+                        <views:DetailsLabel HeaderText="Egyéb munkarészek" BodyText="Munkarész1, Munkarész2"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <views:DetailsLabel HeaderText="Eközmű nyilatkozat kiadás dátuma" BodyText="2026.05.05"/>
+                        <views:DetailsLabel HeaderText="Útépítési engedély kiadás dátuma" BodyText="2026.05.05"/>
+                        <views:DetailsLabel HeaderText="Vízjogi engedély kiadás dátuma" BodyText="2026.05.05"/>
+                        <views:DetailsLabel HeaderText="Tervkiadás Dátuma" BodyText="2026.05.05"/>
+                    </VerticalStackLayout>
+                </Border>
+                <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout>
+                        <views:DetailsCheckbox HeaderText="Útépítési terv" IsChecked="False" />
+                        <views:DetailsCheckbox HeaderText="Vízhálózati terv" IsChecked="True" />
+                        <views:DetailsCheckbox HeaderText="Közvilágítási terv" IsChecked="False" />
+                        <views:DetailsCheckbox HeaderText="Szennyvíz csatorna terv" IsChecked="True" />
+                        <views:DetailsCheckbox HeaderText="Csapadékvíz elvezetési terv" IsChecked="True" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <views:DetailsLabel HeaderText="Megjegyzés" 
+                                            Spacing="10"
+                                            BodyFontSize="14"
+                                            BodyText="Ez egy megjegyzés a tervhez kapcsolódóan Ez egy megjegyzés a tervhez kapcsolódóan Ez egy megjegyzés a tervhez kapcsolódóan"/>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>
