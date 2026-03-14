@@ -6,7 +6,8 @@
     xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
     Shell.FlyoutBehavior="Flyout"
     FlyoutBackgroundColor="{StaticResource LightestGray}"
-    Title="kulonut_Mobil">
+    Title="kulonut_Mobil"
+    FlyoutIsPresented="{Binding FlyoutIsOpen}">
 
     <Shell.ItemTemplate>
         <DataTemplate>
@@ -17,7 +18,15 @@
             </Grid>
         </DataTemplate>
     </Shell.ItemTemplate>
-
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid ColumnDefinitions="Auto,*" Padding="25,0">
+                <Line Stroke="White" X2="1000" Grid.ColumnSpan="2"/>
+                <Image Source="{Binding Icon}" WidthRequest="25"/>
+                <Label Text="{Binding Text}" Grid.Column="1" Padding="25" FontAttributes="Bold"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
     <Shell.FlyoutHeader>
         <StackLayout Padding="20">
             <Border WidthRequest="100" StrokeShape="RoundRectangle 50">
@@ -40,4 +49,8 @@
             <ShellContent ContentTemplate="{DataTemplate pages:TablePage}"/>
         </Tab>
     </FlyoutItem>
+    <MenuItem 
+        Text="Kijelentkezés"
+        IconImageSource="logouticon"
+        Command="{Binding LogoutCommand}" />
 </Shell>
