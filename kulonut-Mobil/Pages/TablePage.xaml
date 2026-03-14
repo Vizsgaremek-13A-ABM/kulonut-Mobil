@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<pages:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              x:Class="kulonut_Mobil.Pages.TablePage"
-             Title="TablePage">
+             Title="Táblázat Nézet">
     <VerticalStackLayout>
         <Label 
             Text="Táblázat nézet"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button Text="Details" Command="{Binding NavigateToDetailsCommand}"/>
     </VerticalStackLayout>
-</ContentPage>
+</pages:BasePage>

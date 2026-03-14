@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	public partial class AppShellViewModel : ObservableObject
+	public partial class AppShellViewModel : BaseViewModel
 	{
 		[ObservableProperty]
 		private bool flyoutIsOpen;
@@ -19,6 +19,9 @@ namespace kulonut_Mobil.ViewModels
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
-		
+		public override bool OnBackButtonPressed()
+		{
+			return true;
+		}
 	}
 }

@@ -10,7 +10,10 @@ namespace kulonut_Mobil
             InitializeComponent();
             BindingContext = vm;
             Routing.RegisterRoute(nameof(DetailsPage), typeof(DetailsPage));
-            //Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
+            Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
+            Routing.RegisterRoute(nameof(TablePage), typeof(TablePage));
+			//Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
 		}
     }
 }
