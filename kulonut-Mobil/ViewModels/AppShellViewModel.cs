@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	public partial class AppShellViewModel : ObservableObject
+	public partial class AppShellViewModel : BaseViewModel
 	{
 		[ObservableProperty]
 		private bool flyoutIsOpen;

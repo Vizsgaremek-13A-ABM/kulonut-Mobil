@@ -2,7 +2,7 @@
 
 namespace kulonut_Mobil.Pages
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage : BasePage
     {
         public MainPage(MainViewModel vm)
         {

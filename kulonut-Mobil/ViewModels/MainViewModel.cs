@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	public partial class MainViewModel : ObservableObject
+	public partial class MainViewModel : BaseViewModel
 	{
 		private IApiClient apiClient;
 
