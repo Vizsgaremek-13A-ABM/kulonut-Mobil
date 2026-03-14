@@ -1,13 +1,16 @@
 ﻿using kulonut_Mobil.Pages;
+using kulonut_Mobil.ViewModels;
 
 namespace kulonut_Mobil
 {
     public partial class AppShell : Shell
     {
-        public AppShell()
+        public AppShell(AppShellViewModel vm)
         {
             InitializeComponent();
+            BindingContext = vm;
             Routing.RegisterRoute(nameof(DetailsPage), typeof(DetailsPage));
-        }
+            //Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
+		}
     }
 }

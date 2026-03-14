@@ -1,5 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.API;
+using kulonut_Mobil.Pages;
+using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -13,6 +16,11 @@ namespace kulonut_Mobil.ViewModels
 		{
 			apiClient = _apiClient;
 			BindTest = "BindTest";
+		}
+		[RelayCommand]
+		private async Task NavigateToMap()
+		{
+			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
 	}
 }
