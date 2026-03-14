@@ -9,5 +9,6 @@
             Text="Táblázat nézet"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Button Text="Details" Command="{Binding NavigateToDetailsCommand}"/>
     </VerticalStackLayout>
 </pages:BasePage>

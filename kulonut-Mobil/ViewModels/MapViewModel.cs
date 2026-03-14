@@ -19,7 +19,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>
 			{
-				await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+				await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 			});
 			return true;
 		}

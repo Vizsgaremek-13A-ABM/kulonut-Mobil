@@ -17,7 +17,7 @@ namespace kulonut_Mobil.ViewModels
 		private async Task Logout()
 		{
 			FlyoutIsOpen = false;
-			await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
 		public override bool OnBackButtonPressed()
 		{
