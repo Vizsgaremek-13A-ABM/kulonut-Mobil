@@ -46,6 +46,8 @@ namespace kulonut_Mobil
 
 			builder.Services.AddSingleton<MainPage>();
 			builder.Services.AddSingleton<MainViewModel>();
+			builder.Services.AddSingleton<MapPage>();
+			builder.Services.AddSingleton<TablePage>();
 
 
 #if DEBUG
