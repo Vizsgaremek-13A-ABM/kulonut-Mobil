@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kulonut_Mobil.Views.UserHeader">
+    
+    <Grid
+      ColumnDefinitions="*, Auto" 
+      Padding="0,0,10,0"
+      HeightRequest="50">
+
+        <Label 
+           x:Name="TitleLabel"
+           VerticalTextAlignment="Center" 
+           FontSize="22" 
+           FontAttributes="Bold" />
+
+        <HorizontalStackLayout Grid.Column="1" 
+                           Spacing="10" 
+                           VerticalOptions="Center">
+
+            <VerticalStackLayout VerticalOptions="Center" >
+                <Label 
+                    FontAttributes="Bold"
+                    Text="{Binding NameText, Source={RelativeSource AncestorType={x:Type ContentView}}}"                    
+                    FontSize="16"/>
+                <Label 
+                    Text="{Binding RoleText, Source={RelativeSource AncestorType={x:Type ContentView}}}"
+                    FontSize="14"
+                    HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+            
+
+            <Border VerticalOptions="Center" StrokeShape="RoundRectangle 50"
+                StrokeThickness="0"
+                WidthRequest="50"
+                HeightRequest="50">
+                <ImageButton x:Name="UserIconButton" Clicked="UserIconButton_Clicked" Source="{Binding ImagePath, Source={RelativeSource AncestorType={x:Type ContentView}}}" Aspect="AspectFill" />
+            </Border>
+
+        </HorizontalStackLayout>
+    </Grid>
+</ContentView>

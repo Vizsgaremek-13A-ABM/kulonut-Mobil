@@ -2,9 +2,9 @@ using kulonut_Mobil.ViewModels;
 
 namespace kulonut_Mobil.Pages;
 
-public partial class DetailsPage : BasePage
+public partial class UserDetailsPage : BasePage
 {
-	public DetailsPage(DetailsViewModel vm)
+	public UserDetailsPage(UserDetailsViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;
