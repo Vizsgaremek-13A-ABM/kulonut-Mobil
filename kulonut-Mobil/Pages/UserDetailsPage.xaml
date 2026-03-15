@@ -3,12 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Pages.UserDetailsPage"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
-             Title="UserDetailsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="UserDetailsPage"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Label Text="{Binding UserId}"/>
-    </VerticalStackLayout>
+             xmlns:views="clr-namespace:kulonut_Mobil.Views"
+             Title="Fehasználó Adatok">
+    <ScrollView Margin="20, 40, 20, 20">
+        <Grid RowDefinitions="3*, Auto, 2*">
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding UserSwipedRightCommand}"/>
+            </Grid.GestureRecognizers>
+            <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
+                <Grid RowDefinitions="*,*,*,*">
+                    <HorizontalStackLayout Grid.Row="0">
+                        <views:DetailsLabel HeaderText="Név" BodyText="Pista"/>
+                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Grid.Row="1">
+                        <views:DetailsLabel HeaderText="Felhasználónév" BodyText="Pista157"/>
+                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Grid.Row="2">
+                        <views:DetailsLabel HeaderText="Email Cím" BodyText="Pista157@gmail.com"/>
+                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                    </HorizontalStackLayout>
+                    <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="Admin"/>
+                </Grid>
+            </Border>
+            <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+                <Border Style="{StaticResource UserDetailsIconBorder}">
+                        <ImageButton  Source="splash.png" Aspect="AspectFill"/>
+                </Border>
+                <Border Style="{StaticResource UserIconEditBorder}">
+                    <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent"/>
+                </Border>
+            </Grid>
+            <Button Grid.Row="2" Style="{StaticResource AuthButton}" Text="Jelszó Megváltoztatása"/>
+        </Grid>
+    </ScrollView>
+    
 </pages:BasePage>

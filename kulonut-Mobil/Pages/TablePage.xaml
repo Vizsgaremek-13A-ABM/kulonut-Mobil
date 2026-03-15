@@ -6,7 +6,7 @@
              x:Class="kulonut_Mobil.Pages.TablePage"
              Title="Táblázat Nézet">
     <Shell.TitleView>
-        <views:UserHeader Title="Táblázat Nézet" RoleText="Admin" NameText="Username" ImagePath="splash.png"/>
+        <views:UserHeader Title="Táblázat Nézet" RoleText="Admin" NameText="Username" NavigatedFrom="TablePage" ImagePath="splash.png"/>
     </Shell.TitleView>
     <VerticalStackLayout>
         <Label 

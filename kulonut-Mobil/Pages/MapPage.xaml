@@ -6,7 +6,7 @@
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              Title="Térkép Nézet">
     <Shell.TitleView>
-        <views:UserHeader Title="Térkép Nézet" RoleText="Admin" NameText="Username" ImagePath="splash.png"/>
+        <views:UserHeader Title="Térkép Nézet" RoleText="Admin" NameText="Username" NavigatedFrom="MapPage" ImagePath="splash.png"/>
     </Shell.TitleView>
     <VerticalStackLayout>
         <Label 
