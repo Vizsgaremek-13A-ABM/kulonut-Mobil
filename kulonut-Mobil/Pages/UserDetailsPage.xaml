@@ -8,24 +8,28 @@
     <ScrollView Margin="20, 40, 20, 20">
         <Grid RowDefinitions="3*, Auto, 2*">
             <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
-                <Grid RowDefinitions="*,*,*, *">
-                    <views:DetailsLabel Grid.Row="0" HeaderText="Név" BodyText="Pista"/>
-                    <views:DetailsLabel Grid.Row="1" HeaderText="Felhasználónév" BodyText="Pista157"/>
-                    <views:DetailsLabel Grid.Row="2" HeaderText="Email Cím" BodyText="Pista157@gmail.com"/>
+                <Grid RowDefinitions="*,*,*,*">
+                    <HorizontalStackLayout Grid.Row="0">
+                        <views:DetailsLabel HeaderText="Név" BodyText="Pista"/>
+                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Grid.Row="1">
+                        <views:DetailsLabel HeaderText="Felhasználónév" BodyText="Pista157"/>
+                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout Grid.Row="2">
+                        <views:DetailsLabel HeaderText="Email Cím" BodyText="Pista157@gmail.com"/>
+                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                    </HorizontalStackLayout>
                     <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="Admin"/>
                 </Grid>
             </Border>
             <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <Border Margin="0, 20, 0, 0"   VerticalOptions="Center" StrokeShape="RoundRectangle 100"
-                         StrokeThickness="0" WidthRequest="200" HeightRequest="200">
+                <Border Style="{StaticResource UserDetailsIconBorder}">
                         <ImageButton  Source="splash.png" Aspect="AspectFill"/>
                 </Border>
-                <Border VerticalOptions="Start" HorizontalOptions="End" TranslationX="-15" TranslationY="15" WidthRequest="40"
-                        HeightRequest="40" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource LightestGray}"
-                        Padding="8" Shadow="{Shadow Brush=Black, Offset='0,2', Opacity=0.3}">
-                    <ImageButton Source="edit" 
-                     Aspect="AspectFit"
-                     BackgroundColor="Transparent"/>
+                <Border Style="{StaticResource UserIconEditBorder}">
+                    <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent"/>
                 </Border>
             </Grid>
             <Button Grid.Row="2" Style="{StaticResource AuthButton}" Text="Jelszó Megváltoztatása"/>

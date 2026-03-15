@@ -19,9 +19,38 @@
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="FontSize" Value="20"/>
     </Style>
+    <Style TargetType="ImageButton" x:Key="UserEditButton">
+        <Setter Property="TranslationY" Value="3"/>
+        <Setter Property="TranslationX" Value="3"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="WidthRequest" Value="20"/>
+        <Setter Property="HeightRequest" Value="20"/>
+        <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
     <Style TargetType="Border" x:Key="BlockBorder">
         <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
         <Setter Property="Padding" Value="20"/>
+    </Style>
+    <Style TargetType="Border" x:Key="UserIconEditBorder">
+        <Setter Property="VerticalOptions" Value="Start"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="TranslationX" Value="-20"/>
+        <Setter Property="TranslationY" Value="20"/>
+        <Setter Property="WidthRequest" Value="40"/>
+        <Setter Property="HeightRequest" Value="40"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
+        <Setter Property="Background" Value="{StaticResource LightestGray}"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Shadow" Value="{Shadow Brush=Black, Offset='0,2', Opacity=0.3}"/>
+    </Style>
+    <Style TargetType="Border" x:Key="UserDetailsIconBorder">
+        <Setter Property="Margin" Value="0, 20, 0, 0"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 100"/>
+        <Setter Property="StrokeThickness" Value="0"/>
+        <Setter Property="WidthRequest" Value="200"/>
+        <Setter Property="HeightRequest" Value="200"/>
     </Style>
     <Style TargetType="views:AuthEntry">
         <Setter Property="FocusColor" Value="{StaticResource Primary}"/>
