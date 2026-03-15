@@ -11,7 +11,6 @@ namespace kulonut_Mobil.ViewModels
 	public partial class UserDetailsViewModel : BaseViewModel
     {
 		public const string ID_URL = "userId";
-		[ObservableProperty]
-		public string userId;
+		public string UserId;
 	}
 }
