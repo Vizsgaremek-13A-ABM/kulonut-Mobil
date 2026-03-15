@@ -6,7 +6,7 @@
              x:Class="kulonut_Mobil.Pages.ProjectDetailsPage"
              Title="Projekt Adatok">
     <Shell.TitleView>
-        <views:UserHeader Title="Projekt Adatok" RoleText="Admin" NameText="Username" ImagePath="splash.png"/>
+        <views:UserHeader Title="Projekt Adatok" RoleText="Admin" NameText="Username" NavigatedFrom="ProjectDetailsPage" ImagePath="splash.png"/>
     </Shell.TitleView>
     <Grid Margin="20, 0" RowDefinitions="Auto, *">
         <Border Grid.Row="0" Margin="0, 0, 0, 30" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">

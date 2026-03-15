@@ -29,13 +29,14 @@ namespace kulonut_Mobil.Views
 			get => TitleLabel.Text;
 			set => TitleLabel.Text = value;
 		}
+		public string NavigatedFrom { get; set; }
 		public UserHeader()
 		{
 			InitializeComponent();
 		}
 		private async void UserIconButton_Clicked(object sender, EventArgs e)
 		{
-			await Shell.Current.GoToAsync($"{nameof(UserDetailsPage)}?{UserDetailsViewModel.ID_URL}={Id}");
+			await Shell.Current.GoToAsync($"{nameof(UserDetailsPage)}?{UserDetailsViewModel.ID_URL}={Id}&{UserDetailsViewModel.NAV_URL}={NavigatedFrom}");
 		}
 	}
 }

@@ -7,6 +7,9 @@
              Title="Fehasználó Adatok">
     <ScrollView Margin="20, 40, 20, 20">
         <Grid RowDefinitions="3*, Auto, 2*">
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding UserSwipedRightCommand}"/>
+            </Grid.GestureRecognizers>
             <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
                 <Grid RowDefinitions="*,*,*,*">
                     <HorizontalStackLayout Grid.Row="0">
