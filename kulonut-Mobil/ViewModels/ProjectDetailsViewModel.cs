@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace kulonut_Mobil.ViewModels
 {
 	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
-	public partial class DetailsViewModel : BaseViewModel
+	public partial class ProjectDetailsViewModel : BaseViewModel
 	{
 		public const string NAV_URL = "navigatedFrom";
 		public string? NavigatedFrom { get; set; }

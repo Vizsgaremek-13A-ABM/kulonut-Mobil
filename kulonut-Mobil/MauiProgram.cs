@@ -50,8 +50,10 @@ namespace kulonut_Mobil
 			builder.Services.AddSingleton<MapViewModel>();
 			builder.Services.AddSingleton<TablePage>();
 			builder.Services.AddSingleton<TableViewModel>();
-			builder.Services.AddSingleton<DetailsPage>();
-			builder.Services.AddSingleton<DetailsViewModel>();
+			builder.Services.AddSingleton<ProjectDetailsPage>();
+			builder.Services.AddSingleton<ProjectDetailsViewModel>();
+			builder.Services.AddSingleton<UserDetailsPage>();
+			builder.Services.AddSingleton<UserDetailsViewModel>();
 
 
 #if DEBUG

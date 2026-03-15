@@ -13,7 +13,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task NavigateToDetails()
 		{
-			await Shell.Current.GoToAsync($"{nameof(DetailsPage)}?{DetailsViewModel.NAV_URL}={nameof(MapPage)}");
+			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(MapPage)}");
 		}
 		public override bool OnBackButtonPressed()
 		{

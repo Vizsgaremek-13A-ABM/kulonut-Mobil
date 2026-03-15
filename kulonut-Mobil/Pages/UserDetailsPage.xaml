@@ -6,8 +6,9 @@
              Title="UserDetailsPage">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to .NET MAUI!"
+            Text="UserDetailsPage"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+        <Label Text="{Binding UserId}"/>
     </VerticalStackLayout>
 </pages:BasePage>
