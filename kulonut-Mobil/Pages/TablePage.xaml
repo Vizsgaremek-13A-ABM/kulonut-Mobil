@@ -2,8 +2,12 @@
 <pages:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
+             xmlns:views="clr-namespace:kulonut_Mobil.Views"
              x:Class="kulonut_Mobil.Pages.TablePage"
              Title="Táblázat Nézet">
+    <Shell.TitleView>
+        <views:UserHeader Title="Táblázat Nézet" RoleText="Admin" NameText="Username" ImagePath="splash.png"/>
+    </Shell.TitleView>
     <VerticalStackLayout>
         <Label 
             Text="Táblázat nézet"

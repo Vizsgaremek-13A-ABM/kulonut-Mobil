@@ -2,8 +2,12 @@
 <pages:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Pages.MapPage"
+             xmlns:views="clr-namespace:kulonut_Mobil.Views"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              Title="Térkép Nézet">
+    <Shell.TitleView>
+        <views:UserHeader Title="Térkép Nézet" RoleText="Admin" NameText="Username" ImagePath="splash.png"/>
+    </Shell.TitleView>
     <VerticalStackLayout>
         <Label 
             Text="Térkép Nézet"
