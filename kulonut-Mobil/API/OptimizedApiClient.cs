@@ -36,12 +36,12 @@ namespace kulonut_Mobil.API
 				return cachedData;
 			}
 		}
-		public async Task<T?> PostAsync<T, TBody>(string url, TBody body, string cacheKey)
+		public async Task<T?> PostAsync<T, TBody>(string url, TBody? body)
 		{
 			try
 			{
 				using HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, body).ConfigureAwait(false);
-				return await HandleResponse<T>(response, cacheKey);
+				return await HandleResponse<T>(response, null);
 			}
 			catch (Exception ex)
 			{
@@ -54,7 +54,7 @@ namespace kulonut_Mobil.API
 			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
 			return await HandleResponse<T>(response, cacheKey);	
 		}
-		private async Task<T?> HandleResponse<T>(HttpResponseMessage response, string cacheKey)
+		private async Task<T?> HandleResponse<T>(HttpResponseMessage response, string? cacheKey)
 		{
 			if (!response.IsSuccessStatusCode)
 				return default;
@@ -63,7 +63,7 @@ namespace kulonut_Mobil.API
 			{
 				using Stream content = await response.Content.ReadAsStreamAsync();
 				T? result = await JsonSerializer.DeserializeAsync<T>(content);
-				if (result != null)
+				if (result != null && cacheKey != null)
 					await cacheService.SetAsync(cacheKey, result);
 				return result;
 			}

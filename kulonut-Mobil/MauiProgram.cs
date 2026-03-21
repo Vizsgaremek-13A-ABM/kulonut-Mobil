@@ -1,5 +1,7 @@
 ﻿using kulonut_Mobil.API;
+using kulonut_Mobil.DependencyInjection;
 using kulonut_Mobil.Pages;
+using kulonut_Mobil.Services;
 using kulonut_Mobil.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Handlers;
@@ -29,38 +31,11 @@ namespace kulonut_Mobil
 #endif
 				});
 
-			builder.Services.AddMemoryCache();
-			builder.Services.AddSingleton<ICacheService, DualLayerCacheService>();
-			builder.Services.AddHttpClient(OptimizedApiClient.NAME, client =>
-			{
-				client.Timeout = TimeSpan.FromSeconds(5);
-				client.DefaultRequestHeaders.Add("Accept", "application/json");
-			})
-			.ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
-			{
-				PooledConnectionLifetime = TimeSpan.FromMinutes(2),
-				AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
-				AllowAutoRedirect = false,
-			});
-			builder.Services.AddTransient<IApiClient, OptimizedApiClient>();
-
-			builder.Services.AddSingleton<MainPage>();
-			builder.Services.AddSingleton<MainViewModel>();
-			builder.Services.AddSingleton<RegisterPage>();
-			builder.Services.AddSingleton<RegisterViewModel>();
-			builder.Services.AddSingleton<MapPage>();
-			builder.Services.AddSingleton<MapViewModel>();
-			builder.Services.AddSingleton<TablePage>();
-			builder.Services.AddSingleton<TableViewModel>();
-			builder.Services.AddSingleton<PasswordChangePage>();
-			builder.Services.AddSingleton<PasswordChangeViewModel>();
-			builder.Services.AddSingleton<ProjectDetailsPage>();
-			builder.Services.AddSingleton<ProjectDetailsViewModel>();
-			builder.Services.AddSingleton<PasswordResetPage>();
-			builder.Services.AddSingleton<PasswordResetViewModel>();
-			builder.Services.AddSingleton<UserDetailsPage>();
-			builder.Services.AddSingleton<UserDetailsViewModel>();
-
+			builder.Services
+                .AddInfrastructure()
+				.AddServices()
+				.AddPages()
+				.AddViewModels();
 
 #if DEBUG
 			builder.Logging.AddDebug();

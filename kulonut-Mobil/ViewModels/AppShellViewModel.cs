@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.Pages;
+using kulonut_Mobil.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,16 @@ namespace kulonut_Mobil.ViewModels
 	{
 		[ObservableProperty]
 		private bool flyoutIsOpen;
+
+		private IAuthService authService;
+		public AppShellViewModel(IAuthService _authService)
+		{
+			authService = _authService;
+		}
 		[RelayCommand]
 		private async Task Logout()
 		{
+			await authService.LogoutAsync();
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}

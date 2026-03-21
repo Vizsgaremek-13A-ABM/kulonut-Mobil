@@ -1,0 +1,25 @@
+﻿using kulonut_Mobil.Pages;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace kulonut_Mobil.DependencyInjection
+{
+    public static class PageExtensions
+    {
+		public static IServiceCollection AddPages(this IServiceCollection services)
+		{
+			services.AddSingleton<MainPage>()
+			.AddSingleton<RegisterPage>()
+			.AddSingleton<MapPage>()
+			.AddSingleton<TablePage>()
+			.AddSingleton<PasswordChangePage>()
+			.AddSingleton<ProjectDetailsPage>()
+			.AddSingleton<PasswordResetPage>()
+			.AddSingleton<UserDetailsPage>();
+			return services;
+		}
+	}
+}
