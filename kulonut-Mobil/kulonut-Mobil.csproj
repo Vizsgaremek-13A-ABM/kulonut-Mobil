@@ -75,10 +75,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Models\" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Icons\mapicon.png" />
 	  <MauiImage Include="Resources\Images\Icons\tableicon.png" />
 	</ItemGroup>
