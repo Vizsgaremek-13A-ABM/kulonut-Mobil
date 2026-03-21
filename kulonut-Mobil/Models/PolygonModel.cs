@@ -9,8 +9,8 @@ namespace kulonut_Mobil.Models
 	public class PolygonModel
 	{
 		public int polygon_id { get; set; }
-		public string name { get; set; }
-		public Coordinate[] coordinates { get; set; }
+		public string? name { get; set; }
+		public Coordinate[]? coordinates { get; set; }
 	}
 	public class Coordinate
 	{

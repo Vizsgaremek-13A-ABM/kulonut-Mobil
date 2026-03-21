@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace kulonut_Mobil.Models
+namespace kulonut_Mobil.Models.DTOs
 {
-	public class UserModel
-	{		
-		public int id { get; set; }
+	public class RegisterRequestDTO
+	{
 		public string? name { get; set; }
 		public string? display_name { get; set; }
+		public string? profile_icon { get; set; }
 		public string? email { get; set; }
-		public string? avatar { get; set; }
-		public RoleModel? role { get; set; }
-		public DateTime joined_at { get; set; }
+		public string? password { get; set; }
+		public string? password_confirmation { get; set; }
 	}
 }
