@@ -13,7 +13,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task ForgotPassword()
 		{
-			await Shell.Current.GoToAsync($"{nameof(MainPage)}");
+			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}?{PasswordResetViewModel.NAV_URL}={nameof(PasswordChangePage)}");
 		}
 		public override bool OnBackButtonPressed()
 		{

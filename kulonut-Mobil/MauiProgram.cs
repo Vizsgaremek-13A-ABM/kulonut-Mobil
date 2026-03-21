@@ -56,6 +56,8 @@ namespace kulonut_Mobil
 			builder.Services.AddSingleton<PasswordChangeViewModel>();
 			builder.Services.AddSingleton<ProjectDetailsPage>();
 			builder.Services.AddSingleton<ProjectDetailsViewModel>();
+			builder.Services.AddSingleton<PasswordResetPage>();
+			builder.Services.AddSingleton<PasswordResetViewModel>();
 			builder.Services.AddSingleton<UserDetailsPage>();
 			builder.Services.AddSingleton<UserDetailsViewModel>();
 

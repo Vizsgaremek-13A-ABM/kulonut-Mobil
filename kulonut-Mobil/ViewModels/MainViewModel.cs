@@ -27,5 +27,10 @@ namespace kulonut_Mobil.ViewModels
 		{
 			await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
 		}
+		[RelayCommand]
+		private async Task NavigateToPasswordResetPage()
+		{
+			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}?{PasswordResetViewModel.NAV_URL}={nameof(MainPage)}");
+		}
 	}
 }
