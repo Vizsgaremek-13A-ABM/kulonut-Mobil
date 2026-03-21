@@ -12,6 +12,7 @@ namespace kulonut_Mobil.DependencyInjection
 		public static IServiceCollection AddViewModels(this IServiceCollection services)
 		{
 			services.AddSingleton<MainViewModel>()
+			.AddSingleton<AppShellViewModel>()
 			.AddSingleton<RegisterViewModel>()
 			.AddSingleton<MapViewModel>()
 			.AddSingleton<TableViewModel>()

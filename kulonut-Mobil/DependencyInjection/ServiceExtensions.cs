@@ -14,7 +14,8 @@ namespace kulonut_Mobil.DependencyInjection
 		public static IServiceCollection AddServices(this IServiceCollection services)
 		{
 			services.AddTransient<IApiClient, OptimizedApiClient>()
-			.AddSingleton<IAuthService, AuthService>();
+			.AddSingleton<IAuthService, AuthService>()
+			.AddSingleton<IUserService, UserService>();
 			return services;
 		}
 	}

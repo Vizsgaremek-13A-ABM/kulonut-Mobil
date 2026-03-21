@@ -12,6 +12,7 @@ namespace kulonut_Mobil.DependencyInjection
 		public static IServiceCollection AddPages(this IServiceCollection services)
 		{
 			services.AddSingleton<MainPage>()
+			.AddTransient<AppShell>()
 			.AddSingleton<RegisterPage>()
 			.AddSingleton<MapPage>()
 			.AddSingleton<TablePage>()
