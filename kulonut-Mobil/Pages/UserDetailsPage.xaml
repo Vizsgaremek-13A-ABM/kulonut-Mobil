@@ -29,13 +29,13 @@
             </Border>
             <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
                 <Border Style="{StaticResource UserDetailsIconBorder}">
-                        <ImageButton  Source="splash.png" Aspect="AspectFill"/>
+                        <ImageButton Source="splash.png" Aspect="AspectFill"/>
                 </Border>
                 <Border Style="{StaticResource UserIconEditBorder}">
                     <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent"/>
                 </Border>
             </Grid>
-            <Button Grid.Row="2" Style="{StaticResource AuthButton}" Text="Jelszó Megváltoztatása"/>
+            <Button Grid.Row="2" Style="{StaticResource AuthButton}" Command="{Binding PasswordChangeCommand}" Text="Jelszó Megváltoztatása"/>
         </Grid>
     </ScrollView>
     

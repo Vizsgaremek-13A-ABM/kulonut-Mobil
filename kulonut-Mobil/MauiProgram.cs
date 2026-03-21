@@ -47,10 +47,13 @@ namespace kulonut_Mobil
 			builder.Services.AddSingleton<MainPage>();
 			builder.Services.AddSingleton<MainViewModel>();
 			builder.Services.AddSingleton<RegisterPage>();
+			builder.Services.AddSingleton<RegisterViewModel>();
 			builder.Services.AddSingleton<MapPage>();
 			builder.Services.AddSingleton<MapViewModel>();
 			builder.Services.AddSingleton<TablePage>();
 			builder.Services.AddSingleton<TableViewModel>();
+			builder.Services.AddSingleton<PasswordChangePage>();
+			builder.Services.AddSingleton<PasswordChangeViewModel>();
 			builder.Services.AddSingleton<ProjectDetailsPage>();
 			builder.Services.AddSingleton<ProjectDetailsViewModel>();
 			builder.Services.AddSingleton<UserDetailsPage>();

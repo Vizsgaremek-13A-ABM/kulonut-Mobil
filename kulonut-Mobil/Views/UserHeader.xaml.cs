@@ -5,7 +5,6 @@ namespace kulonut_Mobil.Views
 {
 	public partial class UserHeader : ContentView
 	{
-		const int Id = 0;
 		public static readonly BindableProperty NameTextProperty = BindableProperty.Create(nameof(NameText), typeof(string), typeof(UserHeader), default(string), BindingMode.TwoWay);
 		public static readonly BindableProperty RoleTextProperty = BindableProperty.Create(nameof(RoleText), typeof(string), typeof(UserHeader), default(string), BindingMode.TwoWay);
 		public static readonly BindableProperty ImagePathProperty = BindableProperty.Create(nameof(ImagePath), typeof(string), typeof(UserHeader), default(string), BindingMode.TwoWay);

@@ -22,5 +22,10 @@ namespace kulonut_Mobil.ViewModels
 		{
 			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
+		[RelayCommand]
+		private async Task NavigateToRegister()
+		{
+			await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
+		}
 	}
 }
