@@ -15,6 +15,7 @@ namespace kulonut_Mobil
             Routing.RegisterRoute(nameof(TablePage), typeof(TablePage));
             Routing.RegisterRoute(nameof(UserDetailsPage), typeof(UserDetailsPage));
             Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(PasswordChangePage), typeof(PasswordChangePage));
 			//Routing.RegisterRoute(nameof(MapPage), typeof(MapPage));
 		}
     }

@@ -23,6 +23,11 @@ namespace kulonut_Mobil.ViewModels
 		{
 			await Shell.Current.GoToAsync($"//{NavigatedFrom}");
 		}
+		[RelayCommand]
+		private async Task PasswordChange()
+		{
+			await Shell.Current.GoToAsync($"{nameof(PasswordChangePage)}");
+		}
 		public override bool OnBackButtonPressed()
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>

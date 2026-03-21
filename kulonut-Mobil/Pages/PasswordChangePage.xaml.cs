@@ -2,9 +2,9 @@ using kulonut_Mobil.ViewModels;
 
 namespace kulonut_Mobil.Pages;
 
-public partial class RegisterPage : BasePage	
+public partial class PasswordChangePage : BasePage
 {
-	public RegisterPage(RegisterViewModel vm)
+	public PasswordChangePage(PasswordChangeViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

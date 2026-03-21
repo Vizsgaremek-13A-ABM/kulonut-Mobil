@@ -14,7 +14,7 @@
                     <views:AuthEntry Grid.Row="0" LabelText="Email Cím" Text="" Placeholder="Béla@gmail.com"/>
                     <views:AuthEntry Grid.Row="1" LabelText="Jelszó" IsPassword="True" Placeholder="Password"/>
                     <Button Grid.Row="2" Background="{StaticResource DarkGray}" Style="{StaticResource AuthButton}" Command="{Binding NavigateToMapCommand}" Text="Belépés"/>
-                    <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Text="Regisztráció"/>
+                    <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Command="{Binding NavigateToRegisterCommand}" Text="Regisztráció"/>
                     <Label Grid.Row="4" VerticalOptions="End" Text="Elfelejtett jelszó" Style="{StaticResource AuthLabel}" TextDecorations="Underline"/>
                 </Grid>
             </Border>
