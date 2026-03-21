@@ -42,8 +42,6 @@ namespace kulonut_Mobil.Services
 			SecureStorage.Remove("token");
 			token = null;
 		}
-		
-
 		public async Task<string?> GetTokenAsync()
 		{
 			return await SecureStorage.GetAsync("token");
