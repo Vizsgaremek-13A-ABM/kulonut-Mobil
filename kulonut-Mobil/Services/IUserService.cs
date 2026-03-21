@@ -9,7 +9,7 @@ namespace kulonut_Mobil.Services
 {
     public interface IUserService
     {
-		public Task<UserModel?> GetCurrentUserAsync();
+		public Task<UserModel?> GetCurrentUserAsync(bool setCurrent = true);
 		public UserModel? GetCurrentUser();
 		public Task<UserModel> UpdateCurrentUserAsync(UserModel? request);
 		public void SetCurrentUser(UserModel _user);

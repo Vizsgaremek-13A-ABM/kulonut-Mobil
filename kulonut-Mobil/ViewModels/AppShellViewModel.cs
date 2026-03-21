@@ -16,14 +16,17 @@ namespace kulonut_Mobil.ViewModels
 		private bool flyoutIsOpen;
 
 		private IAuthService authService;
-		public AppShellViewModel(IAuthService _authService)
+		private IUserService userService;
+		public AppShellViewModel(IAuthService _authService, IUserService _userService)
 		{
 			authService = _authService;
+			userService = _userService;
 		}
 		[RelayCommand]
 		private async Task Logout()
 		{
 			await authService.LogoutAsync();
+			userService.ClearCurrentUser();
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}

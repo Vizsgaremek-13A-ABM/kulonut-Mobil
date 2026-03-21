@@ -22,9 +22,12 @@ namespace kulonut_Mobil.Services
 			return user;
 		}
 
-		public async Task<UserModel?> GetCurrentUserAsync()
+		public async Task<UserModel?> GetCurrentUserAsync(bool setCurrent = true)
 		{
-			return await apiClient.GetWithCachingAsync<UserModel?>("/users", "user");
+			UserModel? response = await apiClient.GetWithCachingAsync<UserModel?>("/users", "user");
+			if (response != null && setCurrent)
+				user = response;
+			return response;
 		}
 
 		public void SetCurrentUser(UserModel _user)

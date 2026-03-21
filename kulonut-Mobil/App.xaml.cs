@@ -4,11 +4,10 @@ namespace kulonut_Mobil
 {
     public partial class App : Application
     {
-        private AppShellViewModel vm = new AppShellViewModel();
-        public App()
+        public App(IServiceProvider serviceProvider)
         {
             InitializeComponent();
-            MainPage = new AppShell(vm);
+            MainPage = serviceProvider.GetRequiredService<AppShell>();
         }
     }
 }
