@@ -38,7 +38,7 @@ namespace kulonut_Mobil.Services
 		}
 		public async Task LogoutAsync()
 		{
-			LogoutResponseDTO? response = await apiClient.PostAsync<LogoutResponseDTO, object?>("/auth/logout", null);
+			await apiClient.PostAsync<LogoutResponseDTO?, object?>("/auth/logout", null);
 			SecureStorage.Remove("token");
 			token = null;
 		}

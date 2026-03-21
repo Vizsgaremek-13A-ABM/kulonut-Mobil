@@ -14,13 +14,16 @@ namespace kulonut_Mobil.ViewModels
 	{
 		[ObservableProperty]
 		private bool flyoutIsOpen;
-		public AppShellViewModel(IAuthService authService)
+
+		private IAuthService authService;
+		public AppShellViewModel(IAuthService _authService)
 		{
-			
+			authService = _authService;
 		}
 		[RelayCommand]
 		private async Task Logout()
 		{
+			await authService.LogoutAsync();
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
