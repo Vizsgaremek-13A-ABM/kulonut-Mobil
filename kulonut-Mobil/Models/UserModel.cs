@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kulonut_Mobil.Models.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
