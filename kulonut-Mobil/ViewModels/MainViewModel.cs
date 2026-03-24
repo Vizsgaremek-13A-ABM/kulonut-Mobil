@@ -35,6 +35,10 @@ namespace kulonut_Mobil.ViewModels
 			if (!check_result) return;
 			UserModel? response = await authService.LoginAsync(LoginRequestDTO, RememberLogin);
 			if(response == null)
+			{
+				await popupService.ShowErrorAsync("Wrong Password or Email");
+				return;
+			}
 			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
 		[RelayCommand]
@@ -55,7 +59,7 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowErrorAsync(email_valid);
 				return false;
 			}
-            string? user_password = InputValidator.ValidateName(LoginRequestDTO.Password);
+            string? user_password = InputValidator.ValidatePassword(LoginRequestDTO.Password);
             if (user_password != null)
             {
                 await popupService.ShowErrorAsync(user_password);

@@ -41,17 +41,17 @@ namespace kulonut_Mobil.Validation
             if (string.IsNullOrWhiteSpace(password))
                 return "Password is required.";
 
-            if (password.Length < 8)
-                return "Password must be at least 8 characters.";
+            if (password.Length < 4)
+                return "Password must be at least 4 characters.";
 
-            if (!Regex.IsMatch(password, @"[A-Z]"))
-                return "Must contain an uppercase letter.";
+            //if (!Regex.IsMatch(password, @"[A-Z]"))
+            //    return "Must contain an uppercase letter.";
 
             if (!Regex.IsMatch(password, @"[a-z]"))
                 return "Must contain a lowercase letter.";
 
-            if (!Regex.IsMatch(password, @"\d"))
-                return "Must contain a number.";
+            //if (!Regex.IsMatch(password, @"\d"))
+            //    return "Must contain a number.";
 
             return null;
         }

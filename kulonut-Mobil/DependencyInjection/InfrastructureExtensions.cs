@@ -18,7 +18,7 @@ namespace kulonut_Mobil.DependencyInjection
 			{
 				client.Timeout = TimeSpan.FromSeconds(5);
 				client.DefaultRequestHeaders.Add("Accept", "application/json");
-				client.BaseAddress = new Uri("https://kulonutapi.jcloud.jedlik.cloud/api");
+				client.BaseAddress = new Uri("https://kulonutapi.jcloud.jedlik.cloud/api/");
 			})
 			.ConfigurePrimaryHttpMessageHandler(() => new SocketsHttpHandler
 			{

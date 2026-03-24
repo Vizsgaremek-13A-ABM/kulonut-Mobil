@@ -41,6 +41,7 @@ namespace kulonut_Mobil.API
 			try
 			{
 				using HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, body).ConfigureAwait(false);
+				Debug.WriteLine(url);
 				return await HandleResponse<T>(response, null);
 			}
 			catch (Exception ex)
@@ -57,7 +58,10 @@ namespace kulonut_Mobil.API
 		private async Task<T?> HandleResponse<T>(HttpResponseMessage response, string? cacheKey)
 		{
 			if (!response.IsSuccessStatusCode)
+			{
+				Debug.WriteLine(response.StatusCode);
 				return default;
+			}
 
 			try
 			{

@@ -3,6 +3,7 @@ using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace kulonut_Mobil.Services
 		}
 		public async Task<UserModel?> LoginAsync(LoginRequestDTO request, bool remember)
 		{
-			LoginResponseDTO? response = await apiClient!.PostAsync<LoginResponseDTO, LoginRequestDTO>("/auth/login", request);
+			LoginResponseDTO? response = await apiClient!.PostAsync<LoginResponseDTO, LoginRequestDTO>("auth/login", request);
+			Debug.WriteLine(response?.message);
 			if (response != null && response.token != null)
 			{
 				token = response.token;
