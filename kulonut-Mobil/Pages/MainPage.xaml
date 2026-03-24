@@ -11,13 +11,13 @@
             <Label Grid.Row="1" VerticalOptions="End" Margin="0, 0, 0, 30" Text="Bejelentkezés" Style="{StaticResource AuthHeader1}"/>
             <Border Style="{StaticResource BlockBorder}" Grid.Row="2">
                 <Grid RowDefinitions="1.2*, 1.2*, *, *, 0.5*, 0.3*">
-                    <views:AuthEntry Grid.Row="0" LabelText="Email Cím" Text="" Placeholder="Béla@gmail.com"/>
-                    <views:AuthEntry Grid.Row="1" LabelText="Jelszó" IsPassword="True" Placeholder="Password"/>
-                    <Button Grid.Row="2" Background="{StaticResource DarkGray}" Style="{StaticResource AuthButton}" Command="{Binding NavigateToMapCommand}" Text="Belépés"/>
-                    <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Command="{Binding NavigateToRegisterCommand}" Text="Regisztráció"/>
+                    <views:AuthEntry Grid.Row="0" Text="{Binding LoginRequestDTO.Email}" LabelText="Email Cím" Placeholder="Béla@gmail.com"/>
+                    <views:AuthEntry Grid.Row="1" Text="{Binding LoginRequestDTO.Password}" LabelText="Jelszó" IsPassword="True" Placeholder="Password"/>
+                    <Button Grid.Row="2" Background="{StaticResource DarkGray}" Style="{StaticResource AuthButton}" Command="{Binding LoginCommand}" Text="Belépés"/>
+                    <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Command="{Binding RegisterCommand}" Text="Regisztráció"/>
                     <Label Grid.Row="4" VerticalOptions="End" Text="Elfelejtett jelszó" Style="{StaticResource AuthLabel}" TextDecorations="Underline">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding NavigateToPasswordResetPageCommand}"/>
+                            <TapGestureRecognizer Command="{Binding PasswordResetCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
                 </Grid>
