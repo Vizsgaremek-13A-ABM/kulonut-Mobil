@@ -11,12 +11,23 @@
     </Shell.TitleView>
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
+        <tool:EventToCommandBehavior Command="{Binding HandleProjectLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    <VerticalStackLayout>
-        <Label 
-            Text="Táblázat nézet"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Details" Command="{Binding NavigateToDetailsCommand}"/>
-    </VerticalStackLayout>
+    <CollectionView Margin="20" ItemsSource="{Binding Projects}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Border Margin="0, 20" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
+                    <VerticalStackLayout Spacing="10">
+                        <views:DetailsLabel HeaderText="Projekt Címe" BodyText="{Binding project_name}"/>
+                        <views:DetailsLabel HeaderText="Kiadás Dátuma" BodyText="{Binding plan_issue_date, StringFormat='{0:yyyy.MM.dd}'}"/>
+                        <views:DetailsLabel HeaderText="Generáltervező" BodyText="{Binding general_designer, TargetNullValue='Nincs'}" />
+                        <views:DetailsLabel HeaderText="Tervezők" BodyText="{Binding designer, TargetNullValue='Nincs'}" />
+                        <views:DetailsLabel HeaderText="Megrendelő" BodyText="{Binding client, TargetNullValue='Nincs'}" />
+                        <views:DetailsLabel HeaderText="Megjegyzés" BodyText="{Binding notes, TargetNullValue='Nincs'}"/>
+
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </pages:BasePage>

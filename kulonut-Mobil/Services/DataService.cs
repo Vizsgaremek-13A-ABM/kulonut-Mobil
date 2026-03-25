@@ -1,5 +1,6 @@
 ﻿using kulonut_Mobil.API;
 using kulonut_Mobil.Models;
+using kulonut_Mobil.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,9 @@ namespace kulonut_Mobil.Services
 		{
 			apiclient = _apiClient;
 		}
-		public async Task<List<ProjectModel>?> GetProjects()
+		public async Task<ProjectsResponseDTO?> GetProjects()
 		{
-			return await apiclient.GetWithCachingAsync<List<ProjectModel>>("projects", "AllProjects");
+			return await apiclient.GetWithCachingAsync<ProjectsResponseDTO>("projects", "AllProjects");
 		}
 		public async Task<List<ProjectModel>?> GetProjectsByPolygonId(int polygonId)
 		{
