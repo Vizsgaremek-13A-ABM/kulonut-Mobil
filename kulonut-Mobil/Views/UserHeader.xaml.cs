@@ -24,7 +24,7 @@ namespace kulonut_Mobil.Views
 		}
 		private async void UserIconButton_Clicked(object sender, EventArgs e)
 		{
-			await Shell.Current.GoToAsync($"{nameof(UserDetailsPage)}?{UserDetailsViewModel.ID_URL}={User.id}&{UserDetailsViewModel.NAV_URL}={NavigatedFrom}");
+			await Shell.Current.GoToAsync($"{nameof(UserDetailsPage)}?{UserDetailsViewModel.NAV_URL}={NavigatedFrom}");
 		}
 	}
 }

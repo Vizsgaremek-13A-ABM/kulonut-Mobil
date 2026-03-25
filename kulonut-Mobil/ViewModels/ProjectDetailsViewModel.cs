@@ -1,4 +1,5 @@
 ﻿using kulonut_Mobil.Pages;
+using kulonut_Mobil.Services;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,9 +10,14 @@ using System.Threading.Tasks;
 namespace kulonut_Mobil.ViewModels
 {
 	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
-	public partial class ProjectDetailsViewModel : BaseViewModel
+	public partial class ProjectDetailsViewModel : UserViewModelBase
 	{
 		public const string NAV_URL = "navigatedFrom";
+
+		public ProjectDetailsViewModel(IUserService userService) : base(userService)
+		{
+		}
+
 		public string? NavigatedFrom { get; set; }
 		public override bool OnBackButtonPressed()
 		{

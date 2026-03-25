@@ -11,13 +11,13 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	public partial class UserHeaderViewModel : BaseViewModel
+	public partial class UserViewModelBase : BaseViewModel
 	{
 		protected IUserService userService;
 
 		[ObservableProperty]
 		private UserModel user;
-		public UserHeaderViewModel(IUserService _userService)
+		public UserViewModelBase(IUserService _userService)
 		{
 			userService = _userService;
 		}

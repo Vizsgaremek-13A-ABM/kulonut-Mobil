@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	public partial class MapViewModel : UserHeaderViewModel
+	public partial class MapViewModel : UserViewModelBase
 	{
 
 		public MapViewModel(IUserService userService) : base(userService) { }

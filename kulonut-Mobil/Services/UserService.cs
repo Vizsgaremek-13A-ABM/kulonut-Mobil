@@ -32,7 +32,7 @@ namespace kulonut_Mobil.Services
 
 		public async Task<UserModel?> GetCurrentUserAsync(bool setCurrent = true)
 		{
-			UserModel? response = await apiClient.GetWithCachingAsync<UserModel?>("/users", "user");
+			UserModel? response = await apiClient.GetWithCachingAsync<UserModel?>("auth/me", "user");
 			if (response != null && setCurrent)
 				await SetCurrentUser(response);
 			return response;

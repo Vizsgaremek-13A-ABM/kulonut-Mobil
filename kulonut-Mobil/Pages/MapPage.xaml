@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<pages:UserHeaderPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<pages:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Pages.MapPage"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              Title="Térkép Nézet">
-    <!--<Shell.TitleView>
+    <Shell.TitleView>
         <views:UserHeader Title="Térkép Nézet" User="{Binding User}" NavigatedFrom="MapPage" />
-    </Shell.TitleView>-->
-    <!--<ContentPage.Behaviors>
+    </Shell.TitleView>
+    <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
-    </ContentPage.Behaviors>-->
+    </ContentPage.Behaviors>
     <VerticalStackLayout>
         <Label 
             Text="Térkép Nézet"
@@ -19,4 +19,4 @@
             HorizontalOptions="Center" />
         <Button Text="Details" Command="{Binding NavigateToDetailsCommand}"/>
     </VerticalStackLayout>
-</pages:UserHeaderPage>
+</pages:BasePage>

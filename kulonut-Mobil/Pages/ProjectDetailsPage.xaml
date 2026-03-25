@@ -3,11 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="kulonut_Mobil.Pages.ProjectDetailsPage"
              Title="Projekt Adatok">
     <Shell.TitleView>
-        <views:UserHeader Title="Projekt Adatok"  NavigatedFrom="ProjectDetailsPage" />
+        <views:UserHeader Title="Projekt Adatok" User="{Binding User}" NavigatedFrom="ProjectDetailsPage" />
     </Shell.TitleView>
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
+
     <Grid Margin="20, 0" RowDefinitions="Auto, *">
         <Border Grid.Row="0" Margin="0, 0, 0, 30" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
             <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Címe" BodyText="Győr, Pápai út melletti kerékpárút, 2923 hrsz.-ú földút becsatlakozása melletti egyirányú kerékpáros" />
