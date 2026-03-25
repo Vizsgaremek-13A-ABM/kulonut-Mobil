@@ -1,4 +1,5 @@
 ﻿using kulonut_Mobil.Models;
+using kulonut_Mobil.Models.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace kulonut_Mobil.Services
 {
 	public interface IDataService
 	{
-		public Task<List<ProjectModel>?> GetProjects();
+		public Task<ProjectsResponseDTO?> GetProjects();
 		public Task<List<ProjectModel>?>GetProjectsByPolygonId(int polygonId);
 		public Task<ProjectModel?> GetProjectById(int projectId);
 		public Task<List<ProjectMapModel>?>GetProjectsForMap();

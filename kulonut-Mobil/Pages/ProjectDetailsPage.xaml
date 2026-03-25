@@ -14,7 +14,7 @@
     </ContentPage.Behaviors>
 
     <Grid Margin="20, 0" RowDefinitions="Auto, *">
-        <Border Grid.Row="0" Margin="0, 0, 0, 30" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
+        <Border Grid.Row="0" Margin="0, 30" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
             <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Címe" BodyText="Győr, Pápai út melletti kerékpárút, 2923 hrsz.-ú földút becsatlakozása melletti egyirányú kerékpáros" />
         </Border>
         <ScrollView Grid.Row="1" >

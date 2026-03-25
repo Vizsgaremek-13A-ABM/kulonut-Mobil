@@ -16,10 +16,10 @@ namespace kulonut_Mobil.Models
 		public string? general_designer { get; set; }
 		public string? client { get; set; }
 		public string? geodesy { get; set; }
-		public DateTime plan_issue_date { get; set; }
-		public DateTime eutility_statement_issue_date { get; set; }
-		public DateTime road_construction_permit_date { get; set; }
-		public DateTime water_rights_permit_date { get; set; }
+		public DateTime? plan_issue_date { get; set; }
+		public DateTime? eutility_statement_issue_date { get; set; }
+		public DateTime? road_construction_permit_date { get; set; }
+		public DateTime? water_rights_permit_date { get; set; }
 		public bool road_construction_plan { get; set; }
 		public bool water_network_plan { get; set; }
 		public bool sewage_plan { get; set; }
