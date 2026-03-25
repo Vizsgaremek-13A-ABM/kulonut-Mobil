@@ -14,29 +14,23 @@ namespace kulonut_Mobil.Services
 	public class AuthService : IAuthService
 	{
 		private IApiClient apiClient;
-		public string? token;
+		private string? token;
 		public const string TOKEN_KEY = "token";
 
         public AuthService(IApiClient _apiClient)
 		{
 			apiClient = _apiClient;
-			Task.Run(async () =>
-			{
-				token = await SecureStorage.GetAsync(TOKEN_KEY);
-			});
 		}
 		public async Task<UserModel?> LoginAsync(LoginRequestDTO request, bool remember)
 		{
 			LoginResponseDTO? response = await apiClient!.PostAsync<LoginResponseDTO, LoginRequestDTO>("auth/login", request);
-			Debug.WriteLine(response?.message);
 			if (response != null && response.token != null)
 			{
 				token = response.token;
+				SetToken(token);
 				if(remember)
-				{
 					await SecureStorage.SetAsync(TOKEN_KEY, response.token);
-
-				}
+				
 			}
 			return response?.user;
 		}
@@ -57,12 +51,19 @@ namespace kulonut_Mobil.Services
 		{
 			return await SecureStorage.GetAsync(TOKEN_KEY);
 		}
-
 		public bool IsAuthenticated()
 		{
-			return token != null && IsJwtValid();
+			return token != null;
+			//return token != null && IsJwtValid(); TODO: Fix JWT validation for offline use
 		}
-
+		public void SetToken(string _token)
+		{
+			if(_token != null)
+			{
+				token = _token;
+				apiClient.SetToken(_token);
+			}
+		}
 		private bool IsJwtValid()
 		{
 			if (string.IsNullOrWhiteSpace(token))

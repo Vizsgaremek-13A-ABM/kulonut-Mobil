@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using kulonut_Mobil.Models;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using System;
@@ -12,11 +13,12 @@ namespace kulonut_Mobil.ViewModels
 {
 	public partial class AppShellViewModel : BaseViewModel
 	{
+		private IAuthService authService;
+		private IUserService userService;
+
 		[ObservableProperty]
 		private bool flyoutIsOpen;
 
-		private IAuthService authService;
-		private IUserService userService;
 		public AppShellViewModel(IAuthService _authService, IUserService _userService)
 		{
 			authService = _authService;

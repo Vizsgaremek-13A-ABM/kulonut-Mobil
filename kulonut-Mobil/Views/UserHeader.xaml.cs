@@ -1,3 +1,4 @@
+using kulonut_Mobil.Models;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.ViewModels;
 
@@ -5,23 +6,11 @@ namespace kulonut_Mobil.Views
 {
 	public partial class UserHeader : ContentView
 	{
-		public static readonly BindableProperty NameTextProperty = BindableProperty.Create(nameof(NameText), typeof(string), typeof(UserHeader), default(string), BindingMode.TwoWay);
-		public static readonly BindableProperty RoleTextProperty = BindableProperty.Create(nameof(RoleText), typeof(string), typeof(UserHeader), default(string), BindingMode.TwoWay);
-		public static readonly BindableProperty ImagePathProperty = BindableProperty.Create(nameof(ImagePath), typeof(string), typeof(UserHeader), default(string), BindingMode.TwoWay);
-		public string NameText
+		public static readonly BindableProperty UserProperty = BindableProperty.Create(nameof(User), typeof(UserModel), typeof(UserHeader), default(UserModel), BindingMode.TwoWay);
+		public UserModel User
 		{
-			get => (string)GetValue(NameTextProperty);
-			set => SetValue(NameTextProperty, value);
-		}
-		public string RoleText
-		{
-			get => (string)GetValue(RoleTextProperty);
-			set => SetValue(RoleTextProperty, value);
-		}
-		public string ImagePath
-		{
-			get => (string)GetValue(ImagePathProperty);
-			set => SetValue(ImagePathProperty, value);
+			get => (UserModel)GetValue(UserProperty);
+			set => SetValue(UserProperty, value);
 		}
 		public string Title
 		{
@@ -35,7 +24,7 @@ namespace kulonut_Mobil.Views
 		}
 		private async void UserIconButton_Clicked(object sender, EventArgs e)
 		{
-			await Shell.Current.GoToAsync($"{nameof(UserDetailsPage)}?{UserDetailsViewModel.ID_URL}={Id}&{UserDetailsViewModel.NAV_URL}={NavigatedFrom}");
+			await Shell.Current.GoToAsync($"{nameof(UserDetailsPage)}?{UserDetailsViewModel.ID_URL}={User.id}&{UserDetailsViewModel.NAV_URL}={NavigatedFrom}");
 		}
 	}
 }

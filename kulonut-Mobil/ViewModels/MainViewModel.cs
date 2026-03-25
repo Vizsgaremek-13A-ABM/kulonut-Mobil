@@ -6,6 +6,7 @@ using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
@@ -33,9 +34,17 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task HandleRemember()
 		{
+			string? token = await authService.GetTokenAsync();
+			if (token == null) return; 
+			authService.SetToken(token);
 			if(authService.IsAuthenticated())
 			{
-
+				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+			}
+			else
+			{
+				await popupService.ShowErrorAsync("Lejárt token");
+				//await authService.LogoutAsync();
 			}
 		}
 
@@ -50,7 +59,7 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowErrorAsync("Wrong Password or Email");
 				return;
 			}
-			userService.SetCurrentUser(response);
+			await userService.SetCurrentUser(response);
 			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
 		[RelayCommand]

@@ -4,10 +4,14 @@
              x:Class="kulonut_Mobil.Pages.MapPage"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              Title="Térkép Nézet">
     <Shell.TitleView>
-        <views:UserHeader Title="Térkép Nézet" RoleText="Admin" NameText="Username" NavigatedFrom="MapPage" ImagePath="splash.png"/>
+        <views:UserHeader Title="Térkép Nézet" User="{Binding User}" NavigatedFrom="MapPage" />
     </Shell.TitleView>
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
     <VerticalStackLayout>
         <Label 
             Text="Térkép Nézet"

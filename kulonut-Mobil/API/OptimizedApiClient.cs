@@ -50,6 +50,12 @@ namespace kulonut_Mobil.API
 				return default;
 			}
 		}
+
+		public void SetToken(string token)
+		{
+			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
+		}
+
 		private async Task<T?> GetAsync<T>(string url, string cacheKey)
 		{
 			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
