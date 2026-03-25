@@ -11,19 +11,19 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	public partial class AppShellViewModel : BaseViewModel
+	public partial class AppShellViewModel : UserViewModelBase
 	{
 		private IAuthService authService;
-		private IUserService userService;
 
 		[ObservableProperty]
 		private bool flyoutIsOpen;
 
-		public AppShellViewModel(IAuthService _authService, IUserService _userService)
+		public AppShellViewModel(IAuthService _authService, IUserService userService) : base(userService)
 		{
 			authService = _authService;
-			userService = _userService;
 		}
+
+
 		[RelayCommand]
 		private async Task Logout()
 		{
