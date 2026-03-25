@@ -21,11 +21,13 @@ namespace kulonut_Mobil.ViewModels
 
 		private IAuthService authService;
 		private IPopupService popupService;
+		private IUserService userService;
 
-		public MainViewModel(IAuthService _authService, IPopupService _popupService)
+		public MainViewModel(IAuthService _authService, IPopupService _popupService, IUserService _userService)
 		{
 			authService = _authService;
 			popupService = _popupService;
+			userService = _userService;
 		}
 		
 		[RelayCommand]
@@ -39,6 +41,7 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowErrorAsync("Wrong Password or Email");
 				return;
 			}
+			userService.SetCurrentUser(response);
 			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
 		[RelayCommand]
