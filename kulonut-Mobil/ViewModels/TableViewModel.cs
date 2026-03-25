@@ -35,7 +35,6 @@ namespace kulonut_Mobil.ViewModels
 				return;
 			}
 			Projects = projects_response.data;
-			Debug.WriteLine(Projects.Count);
 		}
 		[RelayCommand]
 		private async Task NavigateToDetails()

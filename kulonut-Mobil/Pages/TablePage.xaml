@@ -18,7 +18,7 @@
             <DataTemplate>
                 <Border Margin="0, 20" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
-                        <views:DetailsLabel HeaderText="Projekt Címe" BodyText="{Binding project_name}"/>
+                        <views:DetailsLabel BodyFontSize="20" HeaderFontSize="26" HeaderText="Projekt Címe" BodyText="{Binding project_name}" Margin="0, 0, 0, 15"/>
                         <views:DetailsLabel HeaderText="Kiadás Dátuma" BodyText="{Binding plan_issue_date, StringFormat='{0:yyyy.MM.dd}'}"/>
                         <views:DetailsLabel HeaderText="Generáltervező" BodyText="{Binding general_designer, TargetNullValue='Nincs'}" />
                         <views:DetailsLabel HeaderText="Tervezők" BodyText="{Binding designer, TargetNullValue='Nincs'}" />
