@@ -1,4 +1,5 @@
-﻿using kulonut_Mobil.API;
+﻿using CommunityToolkit.Maui;
+using kulonut_Mobil.API;
 using kulonut_Mobil.DependencyInjection;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
@@ -16,6 +17,7 @@ namespace kulonut_Mobil
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

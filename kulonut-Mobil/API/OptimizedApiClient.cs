@@ -41,6 +41,7 @@ namespace kulonut_Mobil.API
 			try
 			{
 				using HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, body).ConfigureAwait(false);
+				Debug.WriteLine(url);
 				return await HandleResponse<T>(response, null);
 			}
 			catch (Exception ex)
@@ -49,6 +50,12 @@ namespace kulonut_Mobil.API
 				return default;
 			}
 		}
+
+		public void SetToken(string token)
+		{
+			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
+		}
+
 		private async Task<T?> GetAsync<T>(string url, string cacheKey)
 		{
 			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
@@ -57,7 +64,10 @@ namespace kulonut_Mobil.API
 		private async Task<T?> HandleResponse<T>(HttpResponseMessage response, string? cacheKey)
 		{
 			if (!response.IsSuccessStatusCode)
+			{
+				Debug.WriteLine(response.StatusCode);
 				return default;
+			}
 
 			try
 			{

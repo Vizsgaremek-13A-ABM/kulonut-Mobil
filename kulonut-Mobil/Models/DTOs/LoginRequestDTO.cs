@@ -8,7 +8,7 @@ namespace kulonut_Mobil.Models.DTOs
 {
 	public class LoginRequestDTO
 	{
-		public string? Email { get; set; }
-		public string? Password { get; set; }
+		public string? Email { get; set; } = "user1@example.com";
+		public string? Password { get; set; } = "password";
 	}
 }
