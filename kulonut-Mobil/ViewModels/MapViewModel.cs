@@ -46,6 +46,12 @@ namespace kulonut_Mobil.ViewModels
 		{
 			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(MapPage)}");
 		}
+		[RelayCommand]
+		private void PolygonClicked(PolygonFeature polygonFeature)
+		{
+			// TODO: Itt a egy popupot nyisson meg ami megjeleniti a polygonhoz tartozó terveket
+			Debug.WriteLine(polygonFeature.Id);
+		}
 		//public override bool OnBackButtonPressed()
 		//{
 		//	MainThread.BeginInvokeOnMainThread(async () =>

@@ -22,7 +22,7 @@ namespace kulonut_Mobil.MapFeatures
 		public void CreateMap()
 		{
 			map.Layers.Add(OpenStreetMap.CreateTileLayer());
-			polyLayer = new MemoryLayer { Name="PolygonLayer", Style = CreatePolyStyle() };
+			polyLayer = new MemoryLayer { Name="PolygonLayer", Style = CreatePolyStyle(), IsMapInfoLayer = true };
 			map.Layers.Add(polyLayer);
 			var gyor = SphericalMercator.FromLonLat(17.6504, 47.6875);
 			map.Home = n => n.CenterOnAndZoomTo(gyor.ToMPoint(), 3.0);
