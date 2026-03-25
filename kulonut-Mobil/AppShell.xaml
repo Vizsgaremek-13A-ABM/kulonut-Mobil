@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Shell
-    x:Class="kulonut_Mobil.AppShell"
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
-    Shell.FlyoutBehavior="Flyout"
-    FlyoutBackgroundColor="{StaticResource LightestGray}"
-    Title="kulonut_Mobil"
-    FlyoutIsPresented="{Binding FlyoutIsOpen}">
+<Shell x:Class="kulonut_Mobil.AppShell"
+            xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+            xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
+            Shell.FlyoutBehavior="Flyout"
+            FlyoutBackgroundColor="{StaticResource LightestGray}"
+            Title="kulonut_Mobil"
+            FlyoutIsPresented="{Binding FlyoutIsOpen}">
+    
+    <Shell.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
+    </Shell.Behaviors>
+    
     <Shell.ItemTemplate>
         <DataTemplate>
             <Grid ColumnDefinitions="Auto,*" Padding="25,0">
@@ -31,10 +36,11 @@
     <Shell.FlyoutHeader>
         <StackLayout Padding="20">
             <Border WidthRequest="100" StrokeShape="RoundRectangle 50">
+                <!--<Image Source="{Binding User.avatar}"/>-->
                 <Image Source="dotnet_bot.png"/>
             </Border>
             <Label Text="Bejelentkezve mint:" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="0,10,0,0"/>
-            <Label Text="Fehasználónév" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+            <Label Text="{Binding User.display_name}" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
         </StackLayout>
     </Shell.FlyoutHeader>
 
