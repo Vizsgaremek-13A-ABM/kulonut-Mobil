@@ -15,9 +15,15 @@ namespace kulonut_Mobil.Services
 	{
 		private IApiClient apiClient;
 		public string? token;
-		public AuthService(IApiClient _apiClient)
+		public const string TOKEN_KEY = "token";
+
+        public AuthService(IApiClient _apiClient)
 		{
 			apiClient = _apiClient;
+			Task.Run(async () =>
+			{
+				token = await SecureStorage.GetAsync(TOKEN_KEY);
+			});
 		}
 		public async Task<UserModel?> LoginAsync(LoginRequestDTO request, bool remember)
 		{
@@ -26,8 +32,11 @@ namespace kulonut_Mobil.Services
 			if (response != null && response.token != null)
 			{
 				token = response.token;
-				if(remember) 
-					await SecureStorage.SetAsync("token", response.token);
+				if(remember)
+				{
+					await SecureStorage.SetAsync(TOKEN_KEY, response.token);
+
+				}
 			}
 			return response?.user;
 		}
@@ -41,17 +50,17 @@ namespace kulonut_Mobil.Services
 		public async Task LogoutAsync()
 		{
 			await apiClient.PostAsync<LogoutResponseDTO?, object?>("/auth/logout", null);
-			SecureStorage.Remove("token");
+			SecureStorage.Remove(TOKEN_KEY);
 			token = null;
 		}
 		public async Task<string?> GetTokenAsync()
 		{
-			return await SecureStorage.GetAsync("token");
+			return await SecureStorage.GetAsync(TOKEN_KEY);
 		}
 
 		public bool IsAuthenticated()
 		{
-			return token == null && IsJwtValid();
+			return token != null && IsJwtValid();
 		}
 
 		private bool IsJwtValid()

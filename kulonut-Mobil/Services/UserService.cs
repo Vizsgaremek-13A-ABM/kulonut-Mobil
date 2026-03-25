@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace kulonut_Mobil.Services
@@ -12,9 +13,16 @@ namespace kulonut_Mobil.Services
     {
         private UserModel? user;
 		private IApiClient apiClient;
+		public const string USER_KEY = "user";
 		public UserService(IApiClient _apiClient)
 		{
 			apiClient = _apiClient;
+			Task.Run(async () =>
+			{
+				string? user_str = await SecureStorage.GetAsync(USER_KEY);
+				if(user_str != null)
+					user = JsonSerializer.Deserialize<UserModel?>(user_str);
+			});
 		}
 
 		public UserModel? GetCurrentUser()
@@ -26,13 +34,14 @@ namespace kulonut_Mobil.Services
 		{
 			UserModel? response = await apiClient.GetWithCachingAsync<UserModel?>("/users", "user");
 			if (response != null && setCurrent)
-				user = response;
+				await SetCurrentUser(response);
 			return response;
 		}
 
-		public void SetCurrentUser(UserModel _user)
+		public async Task SetCurrentUser(UserModel _user)
 		{
 			user = _user;
+			await SecureStorage.SetAsync(USER_KEY, JsonSerializer.Serialize(_user));
  		}
 
 		public Task<UserModel> UpdateCurrentUserAsync(UserModel? request)
@@ -42,6 +51,7 @@ namespace kulonut_Mobil.Services
 		public void ClearCurrentUser()
 		{
 			user = null;
+			SecureStorage.Remove(USER_KEY);
 		}
 	}
 }

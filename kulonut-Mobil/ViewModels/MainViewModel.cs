@@ -29,7 +29,16 @@ namespace kulonut_Mobil.ViewModels
 			popupService = _popupService;
 			userService = _userService;
 		}
-		
+
+		[RelayCommand]
+		private async Task HandleRemember()
+		{
+			if(authService.IsAuthenticated())
+			{
+
+			}
+		}
+
 		[RelayCommand]
 		private async Task Login()
 		{
