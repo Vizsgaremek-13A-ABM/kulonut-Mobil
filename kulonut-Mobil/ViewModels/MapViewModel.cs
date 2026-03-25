@@ -11,24 +11,11 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	public partial class MapViewModel : BaseViewModel
+	public partial class MapViewModel : UserViewModelBase
 	{
-		[ObservableProperty]
-		private UserModel user;
 
-		private IUserService userService;
-		public MapViewModel(IUserService _userService)
-		{
-			userService = _userService;
-		}
-
-		[RelayCommand]
-		private async Task HandleUserLoad()
-		{
-			UserModel? _user = await userService.GetCurrentUserAsync();
-			if (_user == null) User = userService.GetCurrentUser()!;
-			else User = _user;
-		}
+		public MapViewModel(IUserService userService) : base(userService) { }
+		
 		[RelayCommand]
 		private async Task NavigateToDetails()
 		{

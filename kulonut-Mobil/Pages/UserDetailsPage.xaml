@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Pages.UserDetailsPage"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              Title="Fehasználó Adatok">
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
     <ScrollView Margin="20, 40, 20, 20">
         <Grid RowDefinitions="3*, Auto, 2*">
             <Grid.GestureRecognizers>
@@ -13,23 +17,24 @@
             <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
                 <Grid RowDefinitions="*,*,*,*">
                     <HorizontalStackLayout Grid.Row="0">
-                        <views:DetailsLabel HeaderText="Név" BodyText="Pista"/>
+                        <views:DetailsLabel HeaderText="Név" BodyText="{Binding User.name}"/>
                         <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Grid.Row="1">
-                        <views:DetailsLabel HeaderText="Felhasználónév" BodyText="Pista157"/>
+                        <views:DetailsLabel HeaderText="Felhasználónév" BodyText="{Binding User.display_name}"/>
                         <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
                     </HorizontalStackLayout>
                     <HorizontalStackLayout Grid.Row="2">
-                        <views:DetailsLabel HeaderText="Email Cím" BodyText="Pista157@gmail.com"/>
+                        <views:DetailsLabel HeaderText="Email Cím" BodyText="{Binding User.email}"/>
                         <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
                     </HorizontalStackLayout>
-                    <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="Admin"/>
+                    <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
                 </Grid>
             </Border>
             <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
                 <Border Style="{StaticResource UserDetailsIconBorder}">
-                        <ImageButton Source="splash.png" Aspect="AspectFill"/>
+                    <ImageButton Source="splash.png" Aspect="AspectFill"/>
+                    <!--<ImageButton Source="{Binding User.avatar}" Aspect="AspectFill"/>-->
                 </Border>
                 <Border Style="{StaticResource UserIconEditBorder}">
                     <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent"/>

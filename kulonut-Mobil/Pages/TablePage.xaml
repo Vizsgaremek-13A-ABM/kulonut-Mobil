@@ -3,11 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
+             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="kulonut_Mobil.Pages.TablePage"
              Title="Táblázat Nézet">
     <Shell.TitleView>
-        <views:UserHeader Title="Táblázat Nézet"  NavigatedFrom="TablePage" />
+        <views:UserHeader Title="Táblázat Nézet"  User="{Binding User}" NavigatedFrom="TablePage" />
     </Shell.TitleView>
+    <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
+    </ContentPage.Behaviors>
     <VerticalStackLayout>
         <Label 
             Text="Táblázat nézet"

@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.Pages;
+using kulonut_Mobil.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,12 +11,14 @@ using System.Threading.Tasks;
 namespace kulonut_Mobil.ViewModels
 {
 	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
-	[QueryProperty(nameof(UserId), ID_URL)]
-	public partial class UserDetailsViewModel : BaseViewModel
+	public partial class UserDetailsViewModel : UserViewModelBase
     {
-		public const string ID_URL = "userId";
 		public const string NAV_URL = "navigatedFrom";
-		public string UserId { get; set; }
+
+		public UserDetailsViewModel(IUserService userService) : base(userService)
+		{
+		}
+
 		public string NavigatedFrom { get; set; }
 
 		[RelayCommand]
