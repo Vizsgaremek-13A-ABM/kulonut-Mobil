@@ -14,7 +14,7 @@ namespace kulonut_Mobil.Services
 		public Task<List<ProjectModel>?>GetProjectsByPolygonId(int polygonId);
 		public Task<ProjectModel?> GetProjectById(int projectId);
 		public Task<List<ProjectMapModel>?>GetProjectsForMap();
-		public Task<List<PolygonModel>?> GetPolygons();
+		public Task<PolygonsResponseDTO?> GetPolygons();
 		public Task<List<PolygonModel>?> GetPolygonsByProject(int projectId);
 	}
 }

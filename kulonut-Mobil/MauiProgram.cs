@@ -6,6 +6,7 @@ using kulonut_Mobil.Services;
 using kulonut_Mobil.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Handlers;
+using SkiaSharp.Views.Maui.Controls.Hosting;
 using System.Net;
 
 namespace kulonut_Mobil
@@ -17,6 +18,7 @@ namespace kulonut_Mobil
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseSkiaSharp()
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
