@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Views.DetailsCheckbox">
     <HorizontalStackLayout>
-        <CheckBox VerticalOptions="Center" IsChecked="{Binding IsChecked, Source={RelativeSource AncestorType={x:Type ContentView}}}" HorizontalOptions="Start" Color="{StaticResource DarkGray}" IsEnabled="False"/>
-        <Label x:Name="HeaderLabel" VerticalOptions="Center" FontSize="20" FontAttributes="Bold"/>
+        <CheckBox x:Name="CheckBox" IsChecked="{Binding IsChecked, Source={RelativeSource AncestorType={x:Type ContentView}}}" Style="{StaticResource DetailsCheckbox}" IsEnabled="False" />
+        <Label x:Name="HeaderLabel" Style="{StaticResource CheckboxLabel}"/>
     </HorizontalStackLayout>
 </ContentView>
