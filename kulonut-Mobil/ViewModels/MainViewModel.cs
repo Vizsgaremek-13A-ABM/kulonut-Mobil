@@ -23,9 +23,6 @@ namespace kulonut_Mobil.ViewModels
 		[ObservableProperty]
 		private bool rememberLogin = false;
 
-		[ObservableProperty]
-		private bool isLoading = false;
-
 		private IAuthService authService;
 		private IPopupService popupService;
 		private IUserService userService;

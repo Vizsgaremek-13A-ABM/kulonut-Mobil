@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.MapFeatures;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
@@ -15,7 +16,9 @@ namespace kulonut_Mobil.ViewModels
 		private readonly IDataService dataService;
 		private readonly IPopupService popupService;
 		private readonly IMapHandler mapHandler;
+
 		
+
 		public Map Map { get; } = new Map();
 
 		public MapViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService) : base(userService)
@@ -30,25 +33,31 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task HandleMapLoading()
 		{
+			IsLoading = true;
 			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
 			if(polygons == null || polygons.data == null || polygons.data.Count == 0)
 			{
 				await popupService.ShowErrorAsync("Nem találtunk polygont");
+				IsLoading = false;
 				return;
 			}
 			Debug.WriteLine(polygons.data.Count);
 			mapHandler.ShowPolygons(polygons.data);
+			IsLoading = false;
 		}
 		[RelayCommand]
 		private async Task PolygonClicked(PolygonFeature polygonFeature)
 		{
+			IsLoading = true;
 			ProjectsByPolygonResponseDTO? response = await dataService.GetProjectsByPolygonId(polygonFeature.Id);
 			if (response == null || response.data == null)
 			{
 				await popupService.ShowErrorAsync("Nem sikerült lekérni a projekt adatokat");
+				IsLoading = false;
                 return;
             }
 			await popupService.ShowPolygonAsync(response.data);
+			IsLoading = false;
         }
 	}
 }

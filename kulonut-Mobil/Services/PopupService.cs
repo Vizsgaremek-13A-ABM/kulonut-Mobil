@@ -35,8 +35,5 @@ namespace kulonut_Mobil.Services
 			popup.Initialize(propname);
 			await Application.Current!.MainPage!.ShowPopupAsync(popup);
 		}
-		public async Task ClosePopupAsync()
-		{
-		}
 	}
 }
