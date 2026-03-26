@@ -6,6 +6,8 @@ using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
+using Plugin.Fingerprint;
+using Plugin.Fingerprint.Abstractions;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -30,32 +32,58 @@ namespace kulonut_Mobil.ViewModels
 			popupService = _popupService;
 			userService = _userService;
 		}
+		[RelayCommand]
+		private async Task BiometricAuth()
+		{
+			bool is_available = await CrossFingerprint.Current.IsAvailableAsync(true);
+			if (is_available)
+			{
+				AuthenticationRequestConfiguration request = new AuthenticationRequestConfiguration("Biometrikus azonosítás", "Kérjük azonosítsa magát.");
+				FingerprintAuthenticationResult result = await CrossFingerprint.Current.AuthenticateAsync(request);
+				if (result.Authenticated)
+				{
+
+					UserModel? user = await userService.GetCurrentUserFromStorageAsync();
+					if (user != null)
+					{
+						await Login();
+						return;
+					}
+					await popupService.ShowErrorAsync("Nem található a megadott felhasználó");
+				}
+			}
+			else
+				await popupService.ShowErrorAsync("A biometrikus azonosítás nem elérhető a készülékén!");
+		}
 
 		[RelayCommand]
 		private async Task HandleRemember()
 		{
+			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
 			string? token = await authService.GetTokenAsync();
 			if (token == null) return; 
 			authService.SetToken(token);
 			if(authService.IsAuthenticated())
 			{
-				//UserModel? user = await userService.GetCurrentUserAsync();
-				//if (user == null)
-				//{
-				//	await popupService.ShowErrorAsync("Nem található a megadott felhasználó");
-				//	return;
-				//}
-				//else if(user.role == null)
-				//{
-				//	await NavigateToRegister();
-				//	return;
-				//}
+				if (user == null)
+					user = await userService.GetCurrentUserAsync();
+
+				if(user == null)
+				{
+					await popupService.ShowErrorAsync("Nem található a megadott felhasználóasdasd");
+					return;
+				}
+
+				else if (user.role == null)
+				{
+					await NavigateToRegister();
+					return;
+				}
 				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 			}
 			else
 			{
 				await popupService.ShowErrorAsync("Lejárt token");
-				//await authService.LogoutAsync();
 			}
 		}
 
