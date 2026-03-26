@@ -99,7 +99,22 @@ namespace kulonut_Mobil.ViewModels
 				return;
 			}
 			await userService.SetCurrentUser(response);
+			await SetUserAppshell();
 			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+		}
+		private async Task SetUserAppshell()
+		{
+			if (Shell.Current is AppShell shell && shell.BindingContext is AppShellViewModel appVm)
+			{
+				try
+				{
+					await appVm.HandleUserLoadCommand.ExecuteAsync(null);
+				}
+				catch
+				{
+					appVm.HandleUserLoadCommand.Execute(null);
+				}
+			}
 		}
 		[RelayCommand]
 		private async Task NavigateToRegister()
