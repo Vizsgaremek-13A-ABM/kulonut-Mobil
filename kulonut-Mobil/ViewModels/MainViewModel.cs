@@ -39,6 +39,17 @@ namespace kulonut_Mobil.ViewModels
 			authService.SetToken(token);
 			if(authService.IsAuthenticated())
 			{
+				//UserModel? user = await userService.GetCurrentUserAsync();
+				//if (user == null)
+				//{
+				//	await popupService.ShowErrorAsync("Nem található a megadott felhasználó");
+				//	return;
+				//}
+				//else if(user.role == null)
+				//{
+				//	await NavigateToRegister();
+				//	return;
+				//}
 				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 			}
 			else
@@ -63,7 +74,7 @@ namespace kulonut_Mobil.ViewModels
 			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
 		[RelayCommand]
-		private async Task Register()
+		private async Task NavigateToRegister()
 		{
 			await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
 		}

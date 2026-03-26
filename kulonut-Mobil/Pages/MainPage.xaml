@@ -18,7 +18,7 @@
                     <views:AuthEntry Grid.Row="0" Text="{Binding LoginRequestDTO.Email}" LabelText="Email Cím" Placeholder="Béla@gmail.com"/>
                     <views:AuthEntry Grid.Row="1" Text="{Binding LoginRequestDTO.Password}" LabelText="Jelszó" IsPassword="True" Placeholder="Password"/>
                     <Button Grid.Row="2" Background="{StaticResource DarkGray}" Style="{StaticResource AuthButton}" Command="{Binding LoginCommand}" Text="Bejelentkezés"/>
-                    <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Command="{Binding RegisterCommand}" Text="Regisztráció"/>
+                    <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Command="{Binding NavigateToRegisterCommand}" Text="Regisztráció"/>
                     <HorizontalStackLayout Grid.Row="4">
                         <Label VerticalOptions="Center" Text="Bejelentkezve Maradok" Style="{StaticResource AuthLabel}"/>
                         <CheckBox IsChecked="{Binding RememberLogin}" Style="{StaticResource DetailsCheckbox}"/>
