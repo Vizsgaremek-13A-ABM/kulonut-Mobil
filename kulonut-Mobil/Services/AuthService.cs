@@ -36,14 +36,14 @@ namespace kulonut_Mobil.Services
 		}
 		public async Task<UserModel?> RegisterAsync(RegisterRequestDTO request)
 		{
-			LoginResponseDTO? response = await apiClient!.PostAsync<LoginResponseDTO, RegisterRequestDTO>("/auth/register", request);
+			LoginResponseDTO? response = await apiClient!.PostAsync<LoginResponseDTO, RegisterRequestDTO>("auth/register", request);
 			if(response != null && response.token != null)
 				token = response.token;
 			return response?.user;
 		}
 		public async Task LogoutAsync()
 		{
-			await apiClient.PostAsync<LogoutResponseDTO?, object?>("/auth/logout", null);
+			await apiClient.PostAsync<LogoutResponseDTO?, object?>("auth/logout", null);
 			SecureStorage.Remove(TOKEN_KEY);
 			token = null;
 		}
