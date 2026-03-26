@@ -14,12 +14,13 @@ namespace kulonut_Mobil.ViewModels
 	public partial class UserDetailsViewModel : UserViewModelBase
     {
 		public const string NAV_URL = "navigatedFrom";
+		public string? NavigatedFrom { get; set; }
 
 		public UserDetailsViewModel(IUserService userService) : base(userService)
 		{
+			
 		}
-
-		public string? NavigatedFrom { get; set; }
+		
 
 		[RelayCommand]
 		private async Task UserSwipedRight()

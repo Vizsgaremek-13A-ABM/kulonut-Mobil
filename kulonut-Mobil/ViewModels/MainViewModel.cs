@@ -73,12 +73,12 @@ namespace kulonut_Mobil.ViewModels
 					await popupService.ShowErrorAsync("Nem található a megadott felhasználóasdasd");
 					return;
 				}
-
 				else if (user.role == null)
 				{
-					await NavigateToRegister();
+					await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
 					return;
 				}
+				await SetUserAppshell(); 
 				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 			}
 			else
