@@ -16,13 +16,15 @@
         <tool:EventToCommandBehavior Command="{Binding HandleMapLoadingCommand}" EventName="Appearing"/>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    
-    <Grid RowDefinitions="0.1*, 3*">
-        <mapsui:MapControl Grid.Row="1" Map="{Binding Map}">
-            <mapsui:MapControl.Behaviors>
-                <mapfeatures:PolygonClickBehavior 
-                    Command="{Binding PolygonClickedCommand}"/>
-            </mapsui:MapControl.Behaviors>
-        </mapsui:MapControl>
+    <Grid>
+        <Grid RowDefinitions="0.1*, 3*">
+            <mapsui:MapControl Grid.Row="1" Map="{Binding Map}">
+                <mapsui:MapControl.Behaviors>
+                    <mapfeatures:PolygonClickBehavior 
+                        Command="{Binding PolygonClickedCommand}"/>
+                </mapsui:MapControl.Behaviors>
+            </mapsui:MapControl>
+        </Grid>
+        <views:Loader IsLoading="{Binding IsLoading}"/>
     </Grid>
 </pages:BasePage>

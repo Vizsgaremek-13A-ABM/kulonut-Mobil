@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kulonut_Mobil.Views.Loader">
+    <Grid 
+        IsVisible="{Binding IsLoading}"
+        BackgroundColor="#80000000"
+        InputTransparent="False">
+        <Frame Padding="20" CornerRadius="12" 
+           HorizontalOptions="Center" 
+           VerticalOptions="Center">
+            <ActivityIndicator 
+                IsRunning="{Binding IsLoading}" />
+
+        </Frame>
+    </Grid>
+</ContentView>

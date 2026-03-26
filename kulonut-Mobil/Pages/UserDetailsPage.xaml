@@ -9,39 +9,42 @@
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    <ScrollView Margin="20, 40, 20, 20">
-        <Grid RowDefinitions="3*, Auto, 2*">
-            <Grid.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Right" Command="{Binding UserSwipedRightCommand}"/>
-            </Grid.GestureRecognizers>
-            <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
-                <Grid RowDefinitions="*,*,*,*">
-                    <HorizontalStackLayout Grid.Row="0">
-                        <views:DetailsLabel HeaderText="Név" BodyText="{Binding User.name}"/>
-                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Grid.Row="1">
-                        <views:DetailsLabel HeaderText="Felhasználónév" BodyText="{Binding User.display_name}"/>
-                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Grid.Row="2">
-                        <views:DetailsLabel HeaderText="Email Cím" BodyText="{Binding User.email}"/>
-                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                    </HorizontalStackLayout>
-                    <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
+    <Grid>
+        <ScrollView Margin="20, 40, 20, 20">
+            <Grid RowDefinitions="3*, Auto, 2*">
+                <Grid.GestureRecognizers>
+                    <SwipeGestureRecognizer Direction="Right" Command="{Binding UserSwipedRightCommand}"/>
+                </Grid.GestureRecognizers>
+                <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
+                    <Grid RowDefinitions="*,*,*,*">
+                        <HorizontalStackLayout Grid.Row="0">
+                            <views:DetailsLabel HeaderText="Név" BodyText="{Binding User.name}"/>
+                            <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Row="1">
+                            <views:DetailsLabel HeaderText="Felhasználónév" BodyText="{Binding User.display_name}"/>
+                            <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                        </HorizontalStackLayout>
+                        <HorizontalStackLayout Grid.Row="2">
+                            <views:DetailsLabel HeaderText="Email Cím" BodyText="{Binding User.email}"/>
+                            <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
+                        </HorizontalStackLayout>
+                        <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
+                    </Grid>
+                </Border>
+                <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Border Style="{StaticResource UserDetailsIconBorder}">
+                        <ImageButton Source="splash.png" Aspect="AspectFill"/>
+                        <!--<ImageButton Source="{Binding User.avatar}" Aspect="AspectFill"/>-->
+                    </Border>
+                    <Border Style="{StaticResource UserIconEditBorder}">
+                        <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent"/>
+                    </Border>
                 </Grid>
-            </Border>
-            <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <Border Style="{StaticResource UserDetailsIconBorder}">
-                    <ImageButton Source="splash.png" Aspect="AspectFill"/>
-                    <!--<ImageButton Source="{Binding User.avatar}" Aspect="AspectFill"/>-->
-                </Border>
-                <Border Style="{StaticResource UserIconEditBorder}">
-                    <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent"/>
-                </Border>
+                <Button Grid.Row="2" Style="{StaticResource AuthButton}" Command="{Binding PasswordChangeCommand}" Text="Jelszó Megváltoztatása"/>
             </Grid>
-            <Button Grid.Row="2" Style="{StaticResource AuthButton}" Command="{Binding PasswordChangeCommand}" Text="Jelszó Megváltoztatása"/>
-        </Grid>
-    </ScrollView>
+        </ScrollView>
+        <views:Loader IsLoading="{Binding IsLoading}"/>
+    </Grid>
     
 </pages:BasePage>

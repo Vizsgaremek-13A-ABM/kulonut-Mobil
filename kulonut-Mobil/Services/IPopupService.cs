@@ -12,6 +12,5 @@ namespace kulonut_Mobil.Services
         public Task ShowErrorAsync(string message, string titleHead = "Hiba");
 		public Task ShowPolygonAsync(ProjectsByPolygonModel projectsForPolygon);
         public Task ShowUserEditAsync(string propname);
-        public Task ClosePopupAsync();
     }
 }

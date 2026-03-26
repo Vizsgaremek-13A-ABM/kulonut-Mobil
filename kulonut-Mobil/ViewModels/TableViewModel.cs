@@ -28,18 +28,23 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task HandleProjectLoad()
 		{
+			IsLoading = true;
 			ProjectsResponseDTO? projects_response = await dataService.GetProjects();
 			if (projects_response == null || projects_response.data == null)
 			{
 				await popupService.ShowErrorAsync("Nem sikerult betölteni a projekteket");
+				IsLoading = false;
 				return;
 			}
 			Projects = projects_response.data;
+			IsLoading = false;
 		}
 		[RelayCommand]
 		private async Task NavigateToDetails(int project_id)
 		{
+			IsLoading = true;
 			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(TablePage)}&{ProjectDetailsViewModel.ID_URL}={project_id}");
+			IsLoading = false;
 		}
 		public override bool OnBackButtonPressed()
 		{
