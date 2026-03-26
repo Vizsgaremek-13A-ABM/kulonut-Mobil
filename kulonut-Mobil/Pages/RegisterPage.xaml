@@ -11,11 +11,11 @@
             <Label Grid.Row="1" VerticalOptions="End" Margin="0, 0, 0, 30" Text="Regisztáció" Style="{StaticResource AuthHeader1}"/>
             <Border Style="{StaticResource BlockBorder}" Grid.Row="2">
                 <Grid RowDefinitions="1.5*, 1.5*, 1.5*, 1.5*, 0.7*">
-                    <views:AuthEntry Grid.Row="0" LabelText="Felhasználónév" Text="" Placeholder="Béla"/>
-                    <views:AuthEntry Grid.Row="1" LabelText="Email Cím" Text="" Placeholder="Béla@gmail.com"/>
-                    <views:AuthEntry Grid.Row="2" LabelText="Jelszó" IsPassword="True" Placeholder="erősjelszó12!"/>
-                    <views:AuthEntry Grid.Row="3" LabelText="Jelszó megerősítése" IsPassword="True" Placeholder="erősjelszó12!"/>
-                    <Button Grid.Row="4" VerticalOptions="Center" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Text="Regisztráció"/>
+                    <views:AuthEntry Grid.Row="0" LabelText="Felhasználónév" Text="{Binding RegisterRequestDTO.name}" Placeholder="Béla"/>
+                    <views:AuthEntry Grid.Row="1" LabelText="Email Cím" Text="{Binding RegisterRequestDTO.email}" Placeholder="Béla@gmail.com"/>
+                    <views:AuthEntry Grid.Row="2" LabelText="Jelszó" Text="{Binding RegisterRequestDTO.password}" IsPassword="True" Placeholder="erősjelszó12!"/>
+                    <views:AuthEntry Grid.Row="3" LabelText="Jelszó megerősítése" Text="{Binding RegisterRequestDTO.password_confirmation}" IsPassword="True" Placeholder="erősjelszó12!"/>
+                    <Button Grid.Row="4" VerticalOptions="Center" Command="{Binding HandleRegisterCommand}" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Text="Regisztráció"/>
                 </Grid>
             </Border>
         </Grid>
