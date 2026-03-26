@@ -9,8 +9,8 @@ namespace kulonut_Mobil.Services
 {
     public interface IPopupService
     {
-        public Task ShowErrorAsync(string message);
-        public Task ShowPolygonAsync(ProjectsByPolygonModel projectsForPolygon);
+        public Task ShowErrorAsync(string message, string titleHead = "Hiba");
+		public Task ShowPolygonAsync(ProjectsByPolygonModel projectsForPolygon);
         public Task ShowUserEditAsync(string propname);
         public Task ClosePopupAsync();
     }

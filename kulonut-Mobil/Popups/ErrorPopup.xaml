@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tool:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:tool="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kulonut_Mobil.Popups.ErrorPopup"
+             Color="Transparent">
+    <Border Padding="20" WidthRequest="350" StrokeShape="RoundRectangle 30" BackgroundColor="White">
+        <Grid Margin="5" RowDefinitions="Auto, Auto, *">
+            <Label Grid.Row="0" Text="{Binding TitleHead}" FontSize="26" FontAttributes="Bold"/>
+            <Label Grid.Row="1" Margin="0, 25" Text="{Binding Description}" FontSize="18"/>
+            <Button Grid.Row="2" x:Name="CloseBTN" Clicked="CloseBTN_Clicked" Style="{StaticResource ErrorPopupButton}" Text="Bezárás"/>
+        </Grid>
+    </Border>
+</tool:Popup>
