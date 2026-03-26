@@ -22,15 +22,15 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task HandleRegister()
 		{
-			bool input_check = await InputCheck();
-			if (!input_check)
-				return;
-			var response = await authService.RegisterAsync(RegisterRequestDTO);
-			if(response == null)
-			{
-				await popupService.ShowErrorAsync("Hiba történt a regisztrációban");
-				return;
-			}
+			//bool input_check = await InputCheck();
+			//if (!input_check)
+			//	return;
+			//var response = await authService.RegisterAsync(RegisterRequestDTO);
+			//if(response == null)
+			//{
+			//	await popupService.ShowErrorAsync("Hiba történt a regisztrációban");
+			//	return;
+			//}
 			await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
 		}
 		private async Task<bool> InputCheck()

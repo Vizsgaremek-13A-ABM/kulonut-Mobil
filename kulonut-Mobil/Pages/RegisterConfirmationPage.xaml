@@ -2,12 +2,13 @@
 <pages:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
+             xmlns:views="clr-namespace:kulonut_Mobil.Views"
              x:Class="kulonut_Mobil.Pages.RegisterConfirmationPage"
-             >
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+             Shell.NavBarIsVisible="False">
+    <VerticalStackLayout Margin="20, 60">
+        <Label Text="Különtút" Style="{StaticResource AuthHeader1}" Margin="0,0,0,100"/>
+        <Border Style="{StaticResource BlockBorder}">
+            <views:DetailsLabel HeaderText="Regisztrált" BodyText="Most nincs más tennivalója csak hitelesíteni email-címét és várni amíg az admin elfogadja a regisztrációját és ad megfelelő jogosultásgot"/>
+        </Border>
     </VerticalStackLayout>
 </pages:BasePage>
