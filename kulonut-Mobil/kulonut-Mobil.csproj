@@ -56,12 +56,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\Icons\faceidicon.png" />
 	  <None Remove="Resources\Images\Icons\mapicon.png" />
 	  <None Remove="Resources\Images\Icons\tableicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Icons\edit.png" />
+	  <MauiImage Include="Resources\Images\Icons\faceidicon.png" />
 	  <MauiImage Include="Resources\Images\Icons\logouticon.png" />
 	</ItemGroup>
 
@@ -74,6 +76,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
+		<PackageReference Include="Plugin.Fingerprint" Version="2.1.5" />
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.16.0" />
 	</ItemGroup>
 

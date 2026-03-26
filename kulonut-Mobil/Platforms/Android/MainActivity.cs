@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Plugin.Fingerprint;
 
 namespace kulonut_Mobil
 {
@@ -10,6 +11,7 @@ namespace kulonut_Mobil
 		protected override void OnCreate(Bundle? savedInstanceState)
 		{
 			base.OnCreate(savedInstanceState);
+			CrossFingerprint.SetCurrentActivityResolver(() => this);
 			RequestedOrientation = Android.Content.PM.ScreenOrientation.Portrait;
 		}
     }

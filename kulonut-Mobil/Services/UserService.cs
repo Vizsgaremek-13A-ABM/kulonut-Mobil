@@ -17,22 +17,22 @@ namespace kulonut_Mobil.Services
 		public UserService(IApiClient _apiClient)
 		{
 			apiClient = _apiClient;
-			Task.Run(async () =>
-			{
-				string? user_str = await SecureStorage.GetAsync(USER_KEY);
-				if(user_str != null)
-					user = JsonSerializer.Deserialize<UserModel?>(user_str);
-			});
 		}
 
 		public UserModel? GetCurrentUser()
 		{
 			return user;
 		}
-
+		public async Task<UserModel?> GetCurrentUserFromStorageAsync(bool setCurrent = true)
+		{
+			string? user_str = await SecureStorage.GetAsync(USER_KEY);
+			if (user_str != null)
+				user = JsonSerializer.Deserialize<UserModel?>(user_str);
+			return user;
+		}
 		public async Task<UserModel?> GetCurrentUserAsync(bool setCurrent = true)
 		{
-			UserModel? response = await apiClient.GetWithCachingAsync<UserModel?>("auth/me", "user");
+			UserModel? response = await apiClient.GetWithCachingAsync<UserModel?>("user", "user");
 			if (response != null && setCurrent)
 				await SetCurrentUser(response);
 			return response;

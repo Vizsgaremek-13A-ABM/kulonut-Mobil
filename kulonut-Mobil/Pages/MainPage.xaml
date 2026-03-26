@@ -10,11 +10,11 @@
         <tool:EventToCommandBehavior Command="{Binding HandleRememberCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
     <ScrollView Margin="20">
-        <Grid RowDefinitions="*, *, 5*, 0.5*">
+        <Grid RowDefinitions="*, *, 5.5*, 0.5*">
                 <Label Grid.Row="0" Text="Különút KFT" Style="{StaticResource AuthHeader1}"/>
             <Label Grid.Row="1" VerticalOptions="End" Margin="0, 0, 0, 30" Text="Bejelentkezés" Style="{StaticResource AuthHeader1}"/>
             <Border Style="{StaticResource BlockBorder}" Grid.Row="2">
-                <Grid RowDefinitions="1.2*, 1.2*, *, *, 0.7*, 0.7*">
+                <Grid RowDefinitions="1.2*, 1.2*, *, *, 0.7*, 0.7*, Auto">
                     <views:AuthEntry Grid.Row="0" Text="{Binding LoginRequestDTO.Email}" LabelText="Email Cím" Placeholder="Béla@gmail.com"/>
                     <views:AuthEntry Grid.Row="1" Text="{Binding LoginRequestDTO.Password}" LabelText="Jelszó" IsPassword="True" Placeholder="Password"/>
                     <Button Grid.Row="2" Background="{StaticResource DarkGray}" Style="{StaticResource AuthButton}" Command="{Binding LoginCommand}" Text="Bejelentkezés"/>
@@ -28,6 +28,7 @@
                             <TapGestureRecognizer Command="{Binding PasswordResetCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
+                    <ImageButton WidthRequest="70" HeightRequest="70" Grid.Row="6" Source="faceidicon.png" Command="{Binding BiometricAuthCommand}"/>
                 </Grid>
             </Border>
         </Grid>

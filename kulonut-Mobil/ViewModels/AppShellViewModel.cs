@@ -28,7 +28,7 @@ namespace kulonut_Mobil.ViewModels
 		private async Task Logout()
 		{
 			await authService.LogoutAsync();
-			userService.ClearCurrentUser();
+			//userService.ClearCurrentUser();
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
