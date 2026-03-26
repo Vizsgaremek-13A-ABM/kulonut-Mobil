@@ -8,7 +8,6 @@ namespace kulonut_Mobil.Popups;
 public partial class UserEditPopup : Popup
 {
 	
-	private IUserService userService;
 	private readonly UserEditPopupViewModel userEditPopupViewModel;
     public UserEditPopup(UserEditPopupViewModel _userEditPopupViewModel)
 	{

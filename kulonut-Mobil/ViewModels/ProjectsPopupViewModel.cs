@@ -24,8 +24,8 @@ namespace kulonut_Mobil.ViewModels
         [RelayCommand]
         private async Task NavigateToDetails(int project_id)
         {
-            await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(MapPage)}&{ProjectDetailsViewModel.ID_URL}={project_id}");
             await CloseAsync();
+            await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(MapPage)}&{ProjectDetailsViewModel.ID_URL}={project_id}");
         }
 
 	}

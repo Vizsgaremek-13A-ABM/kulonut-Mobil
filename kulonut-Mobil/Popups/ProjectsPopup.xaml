@@ -5,7 +5,6 @@
              xmlns:popups="clr-namespace:kulonut_Mobil.Popups"
              x:Class="kulonut_Mobil.Popups.ProjectsPopup"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
-            
              Color="Transparent">
 
     <Border WidthRequest="300" HeightRequest="600" Padding="20" StrokeShape="RoundRectangle 30" BackgroundColor="White">
