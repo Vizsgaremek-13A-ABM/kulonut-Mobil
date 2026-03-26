@@ -18,9 +18,10 @@ namespace kulonut_Mobil.Services
 		{
 			_serviceProvider = serviceProvider;
 		}
-		public async Task ShowErrorAsync(string message)
+		public async Task ShowErrorAsync(string message, string titleHead = "Hiba")
         {
-            await Application.Current!.MainPage!.DisplayAlert("Error", message, "Ok");
+			ErrorPopup errorPopup = new ErrorPopup(message, titleHead);
+            await Application.Current!.MainPage!.ShowPopupAsync(errorPopup);
         }
 		public async Task ShowPolygonAsync(ProjectsByPolygonModel projectsForPolygon)
 		{

@@ -24,6 +24,15 @@
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="FontSize" Value="20"/>
     </Style>
+    <Style TargetType="Button" x:Key="ErrorPopupButton">
+        <Setter Property="WidthRequest" Value="100"/>
+        <Setter Property="HeightRequest" Value="40"/>
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+        <Setter Property="Padding" Value="5"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="18"/>
+    </Style>
     <Style TargetType="ImageButton" x:Key="UserEditButton">
         <Setter Property="TranslationY" Value="3"/>
         <Setter Property="TranslationX" Value="3"/>
