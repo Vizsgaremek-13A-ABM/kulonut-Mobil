@@ -1,4 +1,5 @@
-﻿using System;
+﻿using kulonut_Mobil.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,9 @@ namespace kulonut_Mobil.Services
 {
     public interface IPopupService
     {
-        Task ShowErrorAsync(string message);
+        public Task ShowErrorAsync(string message);
+        public Task ShowPolygonAsync(ProjectsByPolygonModel projectsForPolygon);
+        public Task ShowUserEditAsync(string propname);
+        public Task ClosePopupAsync();
     }
 }

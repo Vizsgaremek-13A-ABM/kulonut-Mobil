@@ -14,7 +14,7 @@ namespace kulonut_Mobil.Models
 	}
 	public class Coordinate
 	{
-		public float lat { get; set; }
-		public float lng { get; set; }
+		public float latitude { get; set; }
+		public float longitude { get; set; }
 	}
 }

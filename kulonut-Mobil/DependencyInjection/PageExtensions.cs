@@ -1,4 +1,5 @@
 ﻿using kulonut_Mobil.Pages;
+using kulonut_Mobil.Popups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,9 @@ namespace kulonut_Mobil.DependencyInjection
 			.AddSingleton<PasswordChangePage>()
 			.AddSingleton<ProjectDetailsPage>()
 			.AddSingleton<PasswordResetPage>()
-			.AddSingleton<UserDetailsPage>();
+			.AddSingleton<UserDetailsPage>()
+			.AddTransient<ProjectsPopup>()
+			.AddTransient<UserEditPopup>();
 			return services;
 		}
 	}

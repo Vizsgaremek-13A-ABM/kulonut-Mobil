@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Pages.MapPage"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
+             xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
+             xmlns:viewmodels="clr-namespace:kulonut_Mobil.ViewModels"
+             xmlns:mapfeatures="clr-namespace:kulonut_Mobil.MapFeatures"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              Title="Térkép Nézet">
@@ -10,13 +13,16 @@
         <views:UserHeader Title="Térkép Nézet" User="{Binding User}" NavigatedFrom="MapPage" />
     </Shell.TitleView>
     <ContentPage.Behaviors>
+        <tool:EventToCommandBehavior Command="{Binding HandleMapLoadingCommand}" EventName="Appearing"/>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    <VerticalStackLayout>
-        <Label 
-            Text="Térkép Nézet"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button Text="Details" Command="{Binding NavigateToDetailsCommand}"/>
-    </VerticalStackLayout>
+    
+    <Grid RowDefinitions="0.1*, 3*">
+        <mapsui:MapControl Grid.Row="1" Map="{Binding Map}">
+            <mapsui:MapControl.Behaviors>
+                <mapfeatures:PolygonClickBehavior 
+                    Command="{Binding PolygonClickedCommand}"/>
+            </mapsui:MapControl.Behaviors>
+        </mapsui:MapControl>
+    </Grid>
 </pages:BasePage>
