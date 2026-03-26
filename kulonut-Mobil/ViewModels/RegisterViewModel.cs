@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
+using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
 using System.Threading.Tasks;
@@ -30,6 +31,7 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowErrorAsync("Hiba történt a regisztrációban");
 				return;
 			}
+			await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
 		}
 		private async Task<bool> InputCheck()
 		{
@@ -51,7 +53,7 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowErrorAsync(password_error);
 				return false;
 			}	
-			if(RegisterRequestDTO?.password != RegisterRequestDTO.password_confirmation)
+			if(RegisterRequestDTO?.password != RegisterRequestDTO?.password_confirmation)
 			{
 				await popupService.ShowErrorAsync("Nem egyezik a két jelszó");
 				return false;

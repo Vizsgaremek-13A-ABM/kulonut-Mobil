@@ -21,6 +21,7 @@ namespace kulonut_Mobil.DependencyInjection
 			.AddSingleton<ProjectDetailsPage>()
 			.AddSingleton<PasswordResetPage>()
 			.AddSingleton<UserDetailsPage>()
+			.AddSingleton<RegisterConfirmationPage>()
 			.AddTransient<ProjectsPopup>()
 			.AddTransient<UserEditPopup>();
 			return services;
