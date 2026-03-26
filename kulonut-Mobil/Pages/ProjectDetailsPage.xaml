@@ -11,44 +11,49 @@
     </Shell.TitleView>
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
+        <tool:EventToCommandBehavior Command="{Binding HandleProjectLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
 
     <Grid Margin="20, 0" RowDefinitions="Auto, *">
         <Border Grid.Row="0" Margin="0, 30" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-            <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Címe" BodyText="Győr, Pápai út melletti kerékpárút, 2923 hrsz.-ú földút becsatlakozása melletti egyirányú kerékpáros" />
+            <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Címe" BodyText="{Binding CurrentProject.project_name}" />
         </Border>
         <ScrollView Grid.Row="1" >
             <VerticalStackLayout Spacing="30" Margin="0,0,0,20">
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
-                        <views:DetailsLabel HeaderText="Generáltervező" BodyText="Különút Kft."/>
-                        <views:DetailsLabel HeaderText="Tervezők" BodyText="Baulingva, Gt-Vill"/>
-                        <views:DetailsLabel HeaderText="Geodézia" BodyText="Irányszög Bt."/>
-                        <views:DetailsLabel HeaderText="Megrendelő" BodyText="Győr Ph"/>
+                        <views:DetailsLabel HeaderText="Generáltervező" BodyText="{Binding CurrentProject.general_designer, TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel HeaderText="Tervezők" BodyText="{Binding CurrentProject.designer, TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel HeaderText="Geodézia" BodyText="{Binding CurrentProject.geodesy, TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel HeaderText="Megrendelő" BodyText="{Binding CurrentProject.client, TargetNullValue='Nincs'}"/>
                     </VerticalStackLayout>
                 </Border>
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
-                        <views:DetailsLabel HeaderText="Munkaszám" BodyText="493/2025"/>
-                        <views:DetailsLabel HeaderText="Iratpapucs száma" BodyText="1212312"/>
-                        <views:DetailsLabel HeaderText="Egyéb munkarészek" BodyText="Munkarész1, Munkarész2"/>
+                        <views:DetailsLabel HeaderText="Munkaszám" BodyText="{Binding CurrentProject.work_number, TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel HeaderText="Iratpapucs száma" BodyText="{Binding CurrentProject.folder_number, TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel HeaderText="Egyéb munkarészek" BodyText="{Binding CurrentProject.other_work_parts, TargetNullValue='Nincs' }"/>
                     </VerticalStackLayout>
                 </Border>
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
-                        <views:DetailsLabel HeaderText="Eközmű nyilatkozat kiadás dátuma" BodyText="2026.05.05"/>
-                        <views:DetailsLabel HeaderText="Útépítési engedély kiadás dátuma" BodyText="2026.05.05"/>
-                        <views:DetailsLabel HeaderText="Vízjogi engedély kiadás dátuma" BodyText="2026.05.05"/>
-                        <views:DetailsLabel HeaderText="Tervkiadás Dátuma" BodyText="2026.05.05"/>
+                        <views:DetailsLabel HeaderText="Eközmű nyilatkozat kiadás dátuma" 
+                                            BodyText="{Binding CurrentProject.eutility_statement_issue_date, StringFormat='{0:yyyy.MM.dd}', TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel HeaderText="Útépítési engedély kiadás dátuma" 
+                                            BodyText="{Binding CurrentProject.road_construction_permit_date, StringFormat='{0:yyyy.MM.dd}', TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel HeaderText="Vízjogi engedély kiadás dátuma"
+                                            BodyText="{Binding CurrentProject.water_rights_permit_date, StringFormat='{0:yyyy.MM.dd}', TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel HeaderText="Tervkiadás Dátuma"
+                                            BodyText="{Binding CurrentProject.plan_issue_date, StringFormat='{0:yyyy.MM.dd}', TargetNullValue='Nincs'}"/>
                     </VerticalStackLayout>
                 </Border>
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout>
-                        <views:DetailsCheckbox HeaderText="Útépítési terv" IsChecked="False" />
-                        <views:DetailsCheckbox HeaderText="Vízhálózati terv" IsChecked="True" />
-                        <views:DetailsCheckbox HeaderText="Közvilágítási terv" IsChecked="False" />
-                        <views:DetailsCheckbox HeaderText="Szennyvíz csatorna terv" IsChecked="True" />
-                        <views:DetailsCheckbox HeaderText="Csapadékvíz elvezetési terv" IsChecked="True" />
+                        <views:DetailsCheckbox HeaderText="Útépítési terv" IsChecked="{Binding CurrentProject.road_construction_plan}" />
+                        <views:DetailsCheckbox HeaderText="Vízhálózati terv" IsChecked="{Binding CurrentProject.water_network_plan}" />
+                        <views:DetailsCheckbox HeaderText="Közvilágítási terv" IsChecked="{Binding CurrentProject.public_lighting_plan}" />
+                        <views:DetailsCheckbox HeaderText="Szennyvíz csatorna terv" IsChecked="{Binding CurrentProject.sewage_plan}" />
+                        <views:DetailsCheckbox HeaderText="Csapadékvíz elvezetési terv" IsChecked="{Binding CurrentProject.stormwater_drainage_plan}" />
                     </VerticalStackLayout>
                 </Border>
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
@@ -56,7 +61,7 @@
                         <views:DetailsLabel HeaderText="Megjegyzés" 
                                             Spacing="10"
                                             BodyFontSize="14"
-                                            BodyText="Ez egy megjegyzés a tervhez kapcsolódóan Ez egy megjegyzés a tervhez kapcsolódóan Ez egy megjegyzés a tervhez kapcsolódóan"/>
+                                            BodyText="{Binding CurrentProject.notes, TargetNullValue='Nincs'}"/>
                     </VerticalStackLayout>
                 </Border>
             </VerticalStackLayout>

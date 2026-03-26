@@ -19,7 +19,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 		}
 
-		public string NavigatedFrom { get; set; }
+		public string? NavigatedFrom { get; set; }
 
 		[RelayCommand]
 		private async Task UserSwipedRight()
