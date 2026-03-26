@@ -37,9 +37,9 @@ namespace kulonut_Mobil.ViewModels
 			Projects = projects_response.data;
 		}
 		[RelayCommand]
-		private async Task NavigateToDetails()
+		private async Task NavigateToDetails(int project_id)
 		{
-			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(TablePage)}");
+			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(TablePage)}&{ProjectDetailsViewModel.ID_URL}={project_id}");
 		}
 		public override bool OnBackButtonPressed()
 		{

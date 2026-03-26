@@ -39,7 +39,7 @@ namespace kulonut_Mobil.MapFeatures
 				return;
 
 			var coords = polygonModel.coordinates
-				.Select(c => SphericalMercator.FromLonLat(c.lng, c.lat).ToCoordinate())
+				.Select(c => SphericalMercator.FromLonLat(c.longitude, c.latitude).ToCoordinate())
 				.ToList();
 
 			if (!coords.First().Equals2D(coords.Last()))

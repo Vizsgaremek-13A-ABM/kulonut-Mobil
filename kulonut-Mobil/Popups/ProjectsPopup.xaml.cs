@@ -1,15 +1,21 @@
 using CommunityToolkit.Maui.Views;
 using kulonut_Mobil.Models;
+using kulonut_Mobil.ViewModels;
 
 namespace kulonut_Mobil.Popups;
 
 public partial class ProjectsPopup : Popup
 {
-	public ProjectsByPolygonModel ProjectsForPolygon { get; set; }
-    public ProjectsPopup(ProjectsByPolygonModel projectsForPolygon)
+	private readonly ProjectsPopupViewModel projectsPopupViewModel;
+    public ProjectsPopup(ProjectsPopupViewModel _projectsPopupViewModel)
 	{
 		InitializeComponent();
-		ProjectsForPolygon = projectsForPolygon;
-		BindingContext = this;
-    }
+		projectsPopupViewModel = _projectsPopupViewModel;
+		BindingContext = _projectsPopupViewModel;
+		projectsPopupViewModel.OnClose += async result => await CloseAsync(result, CancellationToken.None);
+	}
+	public void Initialize(ProjectsByPolygonModel projectsForPolygon)
+	{
+		projectsPopupViewModel.Initialize(projectsForPolygon);
+	}
 }

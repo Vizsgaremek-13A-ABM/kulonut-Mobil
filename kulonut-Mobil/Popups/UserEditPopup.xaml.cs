@@ -1,20 +1,24 @@
 using CommunityToolkit.Maui.Views;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Services;
+using kulonut_Mobil.ViewModels;
 
 namespace kulonut_Mobil.Popups;
 
 public partial class UserEditPopup : Popup
 {
-	public string PropName { get; set; }
-	public UserModel User { get; set; }
+	
 	private IUserService userService;
-    public UserEditPopup(string propname, IUserService _userService)
+	private readonly UserEditPopupViewModel userEditPopupViewModel;
+    public UserEditPopup(UserEditPopupViewModel _userEditPopupViewModel)
 	{
 		InitializeComponent();
-		BindingContext = this;
-		PropName = propname;
-		userService = _userService;
-		User = userService.GetCurrentUser()!;
-    }
+		userEditPopupViewModel = _userEditPopupViewModel;
+		BindingContext = _userEditPopupViewModel;
+		userEditPopupViewModel.OnClose += async result => await CloseAsync(result, CancellationToken.None);
+	}
+	public void Initialize(string propname)
+	{
+		userEditPopupViewModel.Initialize(propname);
+	}
 }

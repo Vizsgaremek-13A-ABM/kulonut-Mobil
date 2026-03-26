@@ -1,13 +1,11 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.MapFeatures;
-using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
-using Mapsui;
 using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
+
+using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -18,7 +16,7 @@ namespace kulonut_Mobil.ViewModels
 		private readonly IPopupService popupService;
 		private readonly IMapHandler mapHandler;
 		
-		public Mapsui.Map Map { get; } = new Mapsui.Map();
+		public Map Map { get; } = new Map();
 
 		public MapViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService) : base(userService)
 		{
@@ -40,12 +38,6 @@ namespace kulonut_Mobil.ViewModels
 			}
 			Debug.WriteLine(polygons.data.Count);
 			mapHandler.ShowPolygons(polygons.data);
-		}
-
-		[RelayCommand]
-		private async Task NavigateToDetails()
-		{
-			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(MapPage)}");
 		}
 		[RelayCommand]
 		private async Task PolygonClicked(PolygonFeature polygonFeature)

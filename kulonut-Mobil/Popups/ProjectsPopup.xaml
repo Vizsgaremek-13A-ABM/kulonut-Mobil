@@ -2,19 +2,29 @@
 <tool:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:tool="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:popups="clr-namespace:kulonut_Mobil.Popups"
              x:Class="kulonut_Mobil.Popups.ProjectsPopup"
+             xmlns:views="clr-namespace:kulonut_Mobil.Views"
+            
              Color="Transparent">
 
     <Border WidthRequest="300" HeightRequest="600" Padding="20" StrokeShape="RoundRectangle 30" BackgroundColor="White">
-        <Grid RowDefinitions="*,Auto,*">
-            <Label Grid.Row="0" Text="Projects for Polygon 1"/>
-            <CollectionView ItemsSource="{Binding ProjectsForPolygon.projects}">
+        <Grid RowDefinitions="Auto,*,Auto">
+            <Label Grid.Row="0" Text="Projektek az adott polygonhoz" HorizontalOptions="Center" FontSize="22" FontAttributes="Bold"/>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding ProjectsByPolygon.projects}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <VerticalStackLayout>
-                            <Label Text="{Binding project_name}"/>
-                            <Label Text="{Binding issue_date, StringFormat='{0:yyyy.MM.dd}'}}"/>
-                        </VerticalStackLayout>
+                        <Border Margin="0, 10" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type popups:ProjectsPopup}}, Path=BindingContext.NavigateToDetailsCommand}"
+                                        CommandParameter="{Binding project_id}" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="5">
+                                <views:DetailsLabel BodyFontSize="16" HeaderFontSize="20" HeaderText="Projekt Címe" BodyText="{Binding name}" Margin="0, 0, 0, 10"/>
+                                <views:DetailsLabel BodyFontSize="16" HeaderText="Kiadás Dátuma" HeaderFontSize="20" BodyText="{Binding plan_issue_date, StringFormat='{0:yyyy.MM.dd}'}"/>
+                            </VerticalStackLayout>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
