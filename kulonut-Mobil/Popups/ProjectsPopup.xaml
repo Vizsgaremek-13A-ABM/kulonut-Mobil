@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tool:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tool="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="kulonut_Mobil.Popups.ProjectsPopup"
+             Color="Transparent">
+
+    <Border WidthRequest="300" HeightRequest="600" Padding="20" StrokeShape="RoundRectangle 30" BackgroundColor="White">
+        <Grid RowDefinitions="*,Auto,*">
+            <Label Grid.Row="0" Text="Projects for Polygon 1"/>
+            <CollectionView ItemsSource="{Binding ProjectsForPolygon.projects}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Label Text="{Binding project_name}"/>
+                            <Label Text="{Binding issue_date, StringFormat='{0:yyyy.MM.dd}'}}"/>
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </Border>
+</tool:Popup>

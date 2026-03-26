@@ -10,7 +10,6 @@ namespace kulonut_Mobil.Models
 	{
 		public int project_id { get; set; }
 		public string? project_name { get; set; }
-		public string? plan_issue_date { get; set; }
-		public int[]? polygon_ids { get; set; }
+		public DateTime? plan_issue_date { get; set; }
 	}
 }

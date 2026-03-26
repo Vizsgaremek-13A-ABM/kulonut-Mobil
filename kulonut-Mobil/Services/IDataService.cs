@@ -11,7 +11,7 @@ namespace kulonut_Mobil.Services
 	public interface IDataService
 	{
 		public Task<ProjectsResponseDTO?> GetProjects();
-		public Task<List<ProjectModel>?>GetProjectsByPolygonId(int polygonId);
+		public Task<ProjectsByPolygonResponseDTO?> GetProjectsByPolygonId(int polygonId);
 		public Task<ProjectModel?> GetProjectById(int projectId);
 		public Task<List<ProjectMapModel>?>GetProjectsForMap();
 		public Task<PolygonsResponseDTO?> GetPolygons();

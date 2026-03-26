@@ -6,6 +6,7 @@ using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using Mapsui;
 using System.Diagnostics;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
@@ -47,18 +48,15 @@ namespace kulonut_Mobil.ViewModels
 			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(MapPage)}");
 		}
 		[RelayCommand]
-		private void PolygonClicked(PolygonFeature polygonFeature)
+		private async Task PolygonClicked(PolygonFeature polygonFeature)
 		{
-			// TODO: Itt a egy popupot nyisson meg ami megjeleniti a polygonhoz tartozó terveket
-			Debug.WriteLine(polygonFeature.Id);
-		}
-		//public override bool OnBackButtonPressed()
-		//{
-		//	MainThread.BeginInvokeOnMainThread(async () =>
-		//	{
-		//		await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-		//	});
-		//	return true;
-		//}
+			ProjectsByPolygonResponseDTO? response = await dataService.GetProjectsByPolygonId(polygonFeature.Id);
+			if (response == null || response.data == null)
+			{
+				await popupService.ShowErrorAsync("Nem sikerült lekérni a projekt adatokat");
+                return;
+            }
+			await popupService.ShowPolygonAsync(response.data);
+        }
 	}
 }

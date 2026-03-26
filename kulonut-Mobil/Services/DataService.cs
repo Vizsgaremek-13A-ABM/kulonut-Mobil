@@ -20,9 +20,9 @@ namespace kulonut_Mobil.Services
 		{
 			return await apiclient.GetWithCachingAsync<ProjectsResponseDTO>("projects", "AllProjects");
 		}
-		public async Task<List<ProjectModel>?> GetProjectsByPolygonId(int polygonId)
+		public async Task<ProjectsByPolygonResponseDTO?> GetProjectsByPolygonId(int polygonId)
 		{
-			return await apiclient.GetWithCachingAsync<List<ProjectModel>>($"polygon/project/{polygonId}", $"Polygons{polygonId}");
+			return await apiclient.GetWithCachingAsync<ProjectsByPolygonResponseDTO>($"polygon/{polygonId}", $"Polygons{polygonId}");
 		}
 		public async Task<ProjectModel?> GetProjectById(int projectId)
 		{

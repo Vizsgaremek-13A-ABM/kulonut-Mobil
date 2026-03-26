@@ -15,6 +15,6 @@ namespace kulonut_Mobil.Models
 		public string? email { get; set; }
 		public string? avatar { get; set; }
 		public RoleModel? role { get; set; }
-		public DateTime joined_at { get; set; }
+		public DateTime? joined_at { get; set; }
 	}
 }
