@@ -16,18 +16,9 @@
             </Grid.GestureRecognizers>
             <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
                 <Grid RowDefinitions="*,*,*,*">
-                    <HorizontalStackLayout Grid.Row="0">
-                        <views:DetailsLabel HeaderText="Név" BodyText="{Binding User.name}"/>
-                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Grid.Row="1">
-                        <views:DetailsLabel HeaderText="Felhasználónév" BodyText="{Binding User.display_name}"/>
-                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                    </HorizontalStackLayout>
-                    <HorizontalStackLayout Grid.Row="2">
-                        <views:DetailsLabel HeaderText="Email Cím" BodyText="{Binding User.email}"/>
-                        <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                    </HorizontalStackLayout>
+                    <views:UserEditLabel Grid.Row="0" HeaderText="Név" BodyText="{Binding User.name}"/>
+                    <views:UserEditLabel Grid.Row="1" HeaderText="Felhasználónév" BodyText="{Binding User.display_name}"/>
+                    <views:UserEditLabel Grid.Row="2" HeaderText="Email Cím" BodyText="{Binding User.email}"/>
                     <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
                 </Grid>
             </Border>

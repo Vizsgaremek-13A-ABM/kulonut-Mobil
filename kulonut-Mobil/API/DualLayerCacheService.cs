@@ -46,6 +46,7 @@ namespace kulonut_Mobil.API
 		}
 		public async Task SetAsync<T>(string key, T value, TimeSpan? expiration = null)
 		{
+			if (string.IsNullOrEmpty(key)) return;
 			memoryCache.Set(key, value, expiration ?? TimeSpan.FromMinutes(30));
 			using FileStream stream = File.Create(GetfilePath(key));
 			await JsonSerializer.SerializeAsync(stream, value);

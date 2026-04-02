@@ -1,7 +1,10 @@
 ﻿using kulonut_Mobil.API;
 using kulonut_Mobil.Models;
+using kulonut_Mobil.Models.DTOs;
+using Org.Apache.Http.Impl.Client;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -37,10 +40,15 @@ namespace kulonut_Mobil.Services
 		}
 		public async Task<UserModel?> GetCurrentUserAsync(bool setCurrent = true)
 		{
-			UserModel? response = await apiClient.GetWithCachingAsync<UserModel?>("user", "user");
-			if (response != null && setCurrent)
-				await SetCurrentUser(response);
-			return response;
+			GetUserResponseDTO? response = await apiClient.GetAsync<GetUserResponseDTO?> ("user");
+			if (response != null && response.data != null)
+			{
+				if(setCurrent)
+					await SetCurrentUser(response.data);
+				return response.data;
+			}
+			Debug.WriteLine("No User Data Found");
+			return default;
 		}
 
 		public async Task SetCurrentUser(UserModel _user)

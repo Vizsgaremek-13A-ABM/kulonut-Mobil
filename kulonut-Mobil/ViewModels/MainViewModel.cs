@@ -61,17 +61,18 @@ namespace kulonut_Mobil.ViewModels
 		{
 			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
 			string? token = await authService.GetTokenAsync();
-			if (string.IsNullOrEmpty(token))
-				return; 
+			if (string.IsNullOrEmpty(token)) return;
+
 			authService.SetToken(token);
-			if(authService.IsAuthenticated())
+			if (authService.IsAuthenticated())
 			{
-				if (user == null)
+				if (user == null || user.email == null)
 					user = await userService.GetCurrentUserAsync();
 
-				if(user == null)
+				Debug.WriteLine($"name: {user.name} role: {user.role}");
+				if (user == null)
 				{
-					await popupService.ShowErrorAsync("Nem található a megadott felhasználóasdasd");
+					await popupService.ShowErrorAsync("Nem található a megadott fehasználó");
 					return;
 				}
 				else if (user.role == null)
@@ -79,7 +80,8 @@ namespace kulonut_Mobil.ViewModels
 					await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
 					return;
 				}
-				await SetUserAppshell(); 
+				await SetUserAppshell();
+
 				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 			}
 			else

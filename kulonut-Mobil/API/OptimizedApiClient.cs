@@ -1,9 +1,6 @@
-﻿using Android.Net.Http;
-using kulonut_Mobil.Pages;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.API
 {
@@ -56,7 +53,7 @@ namespace kulonut_Mobil.API
 			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 		}
 
-		private async Task<T?> GetAsync<T>(string url, string cacheKey)
+		public async Task<T?> GetAsync<T>(string url, string? cacheKey = null)
 		{
 			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
 			return await HandleResponse<T>(response, cacheKey);	
@@ -68,7 +65,6 @@ namespace kulonut_Mobil.API
 				Debug.WriteLine(response.StatusCode);
 				return default;
 			}
-
 			try
 			{
 				using Stream content = await response.Content.ReadAsStreamAsync();

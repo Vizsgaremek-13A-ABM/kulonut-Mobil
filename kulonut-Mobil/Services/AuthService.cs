@@ -53,7 +53,9 @@ namespace kulonut_Mobil.Services
 		}
 		public bool IsAuthenticated()
 		{
-			return !string.IsNullOrEmpty(token);
+			if (string.IsNullOrEmpty(token)) return false;
+			apiClient.SetToken(token);
+			return true;
 			//return !string.IsNullOrEmpty(token) && IsJwtValid(); TODO: Fix JWT validation for offline use
 		}
 		public void SetToken(string _token)

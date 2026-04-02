@@ -22,13 +22,10 @@ namespace kulonut_Mobil.ViewModels
 		{
 			authService = _authService;
 		}
-
-
 		[RelayCommand]
 		private async Task Logout()
 		{
 			await authService.LogoutAsync();
-			//userService.ClearCurrentUser();
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
