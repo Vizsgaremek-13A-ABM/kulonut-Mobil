@@ -53,12 +53,11 @@ namespace kulonut_Mobil.API
 
 		public void SetToken(string token)
 		{
-			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
+			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 		}
 
 		private async Task<T?> GetAsync<T>(string url, string cacheKey)
 		{
-			Debug.WriteLine($"Token: {httpClient.DefaultRequestHeaders.Authorization}");
 			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
 			return await HandleResponse<T>(response, cacheKey);	
 		}

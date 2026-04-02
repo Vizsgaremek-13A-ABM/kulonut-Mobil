@@ -61,9 +61,9 @@ namespace kulonut_Mobil.ViewModels
 		{
 			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
 			string? token = await authService.GetTokenAsync();
-			if (token == null) return; 
+			if (string.IsNullOrEmpty(token))
+				return; 
 			authService.SetToken(token);
-			Debug.WriteLine(token);
 			if(authService.IsAuthenticated())
 			{
 				if (user == null)
