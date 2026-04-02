@@ -63,6 +63,7 @@ namespace kulonut_Mobil.ViewModels
 			string? token = await authService.GetTokenAsync();
 			if (token == null) return; 
 			authService.SetToken(token);
+			Debug.WriteLine(token);
 			if(authService.IsAuthenticated())
 			{
 				if (user == null)

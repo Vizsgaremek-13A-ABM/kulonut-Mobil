@@ -143,6 +143,9 @@
 	  <MauiXaml Update="Views\DetailsLabel.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\UserEditLabel.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\UserHeader.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

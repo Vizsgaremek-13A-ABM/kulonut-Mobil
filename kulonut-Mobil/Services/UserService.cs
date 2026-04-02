@@ -26,8 +26,13 @@ namespace kulonut_Mobil.Services
 		public async Task<UserModel?> GetCurrentUserFromStorageAsync(bool setCurrent = true)
 		{
 			string? user_str = await SecureStorage.GetAsync(USER_KEY);
-			if (user_str != null)
-				user = JsonSerializer.Deserialize<UserModel?>(user_str);
+			if (!string.IsNullOrEmpty(user_str))
+			{
+				if(!setCurrent) 
+					return JsonSerializer.Deserialize<UserModel?>(user_str);
+				else
+					user = JsonSerializer.Deserialize<UserModel?>(user_str);
+			}
 			return user;
 		}
 		public async Task<UserModel?> GetCurrentUserAsync(bool setCurrent = true)
