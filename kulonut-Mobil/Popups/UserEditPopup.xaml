@@ -8,7 +8,7 @@
     <Border Style="{StaticResource PopupBorder}">
         <Grid Margin="5" RowDefinitions="*, Auto, Auto">
             <views:AuthEntry Grid.Row="0" LabelText="{Binding PropName}" Text="{Binding PropValue}"/>
-            <Label Margin="0, 5" Grid.Row="1" Text="{Binding ErrorText}" TextColor="Red" FontSize="16" FontAttributes="Bold"
+            <Label Grid.Row="1" Text="{Binding ErrorText}"
                 IsVisible="{Binding ErrorText, Converter={tool:IsStringNotNullOrEmptyConverter}}" />
             <HorizontalStackLayout Grid.Row="2" Spacing="5">
                 <Button Style="{StaticResource PopupButton}" Command="{Binding SubmitCommand}" Text="Mentés"/>

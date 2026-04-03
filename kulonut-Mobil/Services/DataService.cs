@@ -69,9 +69,9 @@ namespace kulonut_Mobil.Services
 		}
 		private bool projectFilterFunc(ProjectMapModel project)
 		{
-			if (currentFilter!.after != null && currentFilter.after < project.plan_issue_date)
+			if (currentFilter!.After != null && currentFilter.After > project.plan_issue_date)
 				return false;
-			if (currentFilter!.before != null && currentFilter.before > project.plan_issue_date)
+			if (currentFilter!.Before != null && currentFilter.Before < project.plan_issue_date)
 				return false;
 			if (!string.IsNullOrEmpty(currentFilter.name) && !project!.name!.Contains(currentFilter.name, StringComparison.InvariantCultureIgnoreCase))
 				return false;
@@ -79,9 +79,9 @@ namespace kulonut_Mobil.Services
 		}
 		private bool projectFilterFunc(ProjectModel project)
 		{
-			if (currentFilter!.after != null && currentFilter.after < project.plan_issue_date)
+			if (currentFilter!.After != null && currentFilter.After > project.plan_issue_date)
 				return false;
-			if (currentFilter!.before != null && currentFilter.before > project.plan_issue_date)
+			if (currentFilter!.Before != null && currentFilter.Before < project.plan_issue_date)
 				return false;
 			if (!string.IsNullOrEmpty(currentFilter.name) && !project!.project_name!.Contains(currentFilter.name, StringComparison.InvariantCultureIgnoreCase))
 				return false;

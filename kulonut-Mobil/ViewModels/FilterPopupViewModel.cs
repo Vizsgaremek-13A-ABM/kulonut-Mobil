@@ -14,6 +14,8 @@ namespace kulonut_Mobil.ViewModels
 	{
 		private readonly IDataService dataService;
 		[ObservableProperty]
+		private string error = string.Empty;
+		[ObservableProperty]
 		private FilterModel filterModel = new FilterModel();
 		public FilterPopupViewModel(IDataService _dataService)
 		{
@@ -26,11 +28,27 @@ namespace kulonut_Mobil.ViewModels
 		{
 			if (!inputCheck())
 				return;
+			Error = "";
 			dataService.FilterModel = FilterModel;
 			await ClosePopup();
 		}
+		[RelayCommand]
+		private void ClearBefore()
+		{
+			FilterModel.Before = null;
+		}
+		[RelayCommand]
+		private void ClearAfter()
+		{
+			FilterModel.After = null;
+		}
 		private bool inputCheck()
 		{
+			if(FilterModel.Before == null && FilterModel.After == null && string.IsNullOrEmpty(FilterModel.name))
+			{
+				Error = "Valamelyik mezőt muszáj kitölteni";
+				return false;
+			}
 			return true;
 		}
 

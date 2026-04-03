@@ -20,6 +20,19 @@
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
+    <Style TargetType="Label" x:Key="ErrorLabel">
+        <Setter Property="TextColor" Value="{StaticResource ErrorColor}"/>
+        <Setter Property="Margin" Value="0, 5"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+    <Style TargetType="Label" x:Key="FilterHideLabel">
+        <Setter Property="Text" Value="Válassz dátumot"/>
+        <Setter Property="TextColor" Value="{StaticResource LightestGray}"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
     <Style TargetType="Label" x:Key="FilterLabel" BaseResourceKey="AuthLabel">
         <Setter Property="Margin" Value="0, 15, 0, 0"/>
     </Style>
