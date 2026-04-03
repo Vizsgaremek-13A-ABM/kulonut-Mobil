@@ -12,28 +12,22 @@ namespace kulonut_Mobil.Services
 {
 	public class DataService : IDataService
 	{
-		private IApiClient apiclient;
-		private FilterModel? currentFilter;
-		private FilterModel? filterModel;
+		private readonly IApiClient apiclient;
+		public FilterModel? ProjectFilterModel { get; set; }
+		public FilterModel? PolygonFilterModel { get; set; }
 
-		public FilterModel? FilterModel
-		{
-			get { return filterModel; }
-			set { filterModel = value; currentFilter = value; }
-		}
 		public DataService(IApiClient _apiClient) 
 		{
 			apiclient = _apiClient;
 		}
 		public async Task<ProjectsResponseDTO?> GetProjects()
 		{
-			if(currentFilter == null)
+			if(ProjectFilterModel == null)
 				return await apiclient.GetWithCachingAsync<ProjectsResponseDTO>("projects", "AllProjects");
 			
 			ProjectsResponseDTO? dto = await apiclient.GetWithCachingAsync<ProjectsResponseDTO>("projects", "AllProjects");
 			if (dto != null && dto.data != null)
 				dto.data = dto.data.Where(projectFilterFunc).ToList();
-			currentFilter = null;
 			return dto;
 		}
 		public async Task<ProjectsByPolygonResponseDTO?> GetProjectsByPolygonId(int polygonId)
@@ -50,38 +44,36 @@ namespace kulonut_Mobil.Services
 		}
 		public async Task<PolygonsResponseDTO?> GetPolygons()
 		{
-			if(currentFilter == null)
+			if(PolygonFilterModel == null)
 				return await apiclient.GetWithCachingAsync<PolygonsResponseDTO>("polygons", "AllPolygons");
 				
 			PolygonsResponseDTO? dto = await apiclient.GetWithCachingAsync<PolygonsResponseDTO>("polygons", "AllPolygons");
 			if (dto != null && dto.data != null)
-				dto.data = dto.data.Where(polygon => polygon.projects!.Any(projectFilterFunc)).ToList();
-			currentFilter = null;
+				dto.data = dto.data.Where(polygon => polygon.projects!.Any(polygonFilterFunc)).ToList();
 			return dto;
 		}
 		public async Task<List<PolygonModel>?> GetPolygonsByProject(int projectId)
 		{
 			return await apiclient.GetWithCachingAsync<List<PolygonModel>>($"projects/{projectId}/polygons", $"ProjectPoly{projectId}");
 		}
-		private bool projectFilterFunc(ProjectMapModel project)
+		private bool polygonFilterFunc(ProjectMapModel project)
 		{
-			if (currentFilter!.After != null && currentFilter.After > project.plan_issue_date)
+			if (PolygonFilterModel!.After != null && PolygonFilterModel.After > project.plan_issue_date)
 				return false;
-			if (currentFilter!.Before != null && currentFilter.Before < project.plan_issue_date)
+			if (PolygonFilterModel!.Before != null && PolygonFilterModel.Before < project.plan_issue_date)
 				return false;
-			if (!string.IsNullOrEmpty(currentFilter.name) && !project!.name!.Contains(currentFilter.name, StringComparison.InvariantCultureIgnoreCase))
+			if (!string.IsNullOrEmpty(PolygonFilterModel.name) && !project!.name!.Contains(PolygonFilterModel.name, StringComparison.InvariantCultureIgnoreCase))
 				return false;
 			return true;
 		}
 		private bool projectFilterFunc(ProjectModel project)
 		{
-			if (currentFilter!.After != null && currentFilter.After > project.plan_issue_date)
+			if (ProjectFilterModel!.After != null && ProjectFilterModel.After > project.plan_issue_date)
 				return false;
-			if (currentFilter!.Before != null && currentFilter.Before < project.plan_issue_date)
+			if (ProjectFilterModel!.Before != null && ProjectFilterModel.Before < project.plan_issue_date)
 				return false;
-			if (!string.IsNullOrEmpty(currentFilter.name) && !project!.project_name!.Contains(currentFilter.name, StringComparison.InvariantCultureIgnoreCase))
+			if (!string.IsNullOrEmpty(ProjectFilterModel.name) && !project!.project_name!.Contains(ProjectFilterModel.name, StringComparison.InvariantCultureIgnoreCase))
 				return false;
-			Debug.WriteLine("True");
 			return true;	
 		}
 	}

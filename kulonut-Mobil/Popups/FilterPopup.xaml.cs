@@ -13,4 +13,8 @@ public partial class FilterPopup : Popup
 		BindingContext = filterPopupViewModel;
 		filterPopupViewModel.OnClose += async result => await CloseAsync(result, CancellationToken.None);
 	}
+	public void Initialize(bool isPolygonFilter)
+	{
+		filterPopupViewModel.Initialize(isPolygonFilter);
+	}
 }

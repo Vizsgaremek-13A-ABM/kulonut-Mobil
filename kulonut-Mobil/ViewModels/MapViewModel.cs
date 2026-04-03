@@ -28,7 +28,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task OpenFilter()
 		{
-			await popupService.ShowFilterAsync();
+			await popupService.ShowFilterAsync(true);
 			await HandleMapLoading();
 		}
 		[RelayCommand]
@@ -48,7 +48,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task RemoveFilter()
 		{
-			dataService.FilterModel = null;
+			dataService.PolygonFilterModel = null;
 			await HandleMapLoading();
 		}
 		[RelayCommand]

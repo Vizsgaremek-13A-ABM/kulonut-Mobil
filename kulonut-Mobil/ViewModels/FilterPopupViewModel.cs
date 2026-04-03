@@ -17,11 +17,18 @@ namespace kulonut_Mobil.ViewModels
 		private string error = string.Empty;
 		[ObservableProperty]
 		private FilterModel filterModel = new FilterModel();
+		private bool isPolygonFilter = false;
 		public FilterPopupViewModel(IDataService _dataService)
 		{
 			dataService = _dataService;
-			if(dataService.FilterModel != null) 
-				FilterModel = dataService.FilterModel;
+			if (isPolygonFilter && dataService.PolygonFilterModel != null)
+				FilterModel = dataService.PolygonFilterModel;
+			else if(!isPolygonFilter && dataService.ProjectFilterModel != null) 
+				FilterModel = dataService.ProjectFilterModel;
+		}
+		public void Initialize(bool _isPolygonFilter)
+		{
+			isPolygonFilter = _isPolygonFilter;
 		}
 		[RelayCommand]
 		private async Task Filter()
@@ -29,7 +36,10 @@ namespace kulonut_Mobil.ViewModels
 			if (!inputCheck())
 				return;
 			Error = "";
-			dataService.FilterModel = FilterModel;
+			if(isPolygonFilter)
+				dataService.PolygonFilterModel = FilterModel;
+			else
+				dataService.ProjectFilterModel = FilterModel;
 			await ClosePopup();
 		}
 		[RelayCommand]

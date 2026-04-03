@@ -16,7 +16,7 @@
 
     <Grid Margin="20, 0" RowDefinitions="Auto, *">
         <Border Grid.Row="0" Margin="0, 30" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-            <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Címe" BodyText="{Binding CurrentProject.project_name}" />
+            <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Neve" BodyText="{Binding CurrentProject.project_name}" />
         </Border>
         <ScrollView Grid.Row="1" >
             <VerticalStackLayout Spacing="30" Margin="0,0,0,20">
