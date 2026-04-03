@@ -57,9 +57,17 @@ namespace kulonut_Mobil.Services
 			await SecureStorage.SetAsync(USER_KEY, JsonSerializer.Serialize(_user));
  		}
 
-		public Task<UserModel> UpdateCurrentUserAsync(UserModel? request)
+		public async Task<UserModel?> UpdateCurrentUserAsync(Dictionary<string, string> request, int userId)
 		{
-			throw new NotImplementedException();
+			GetUserResponseDTO? response = await apiClient.PutAsync<GetUserResponseDTO?, Dictionary<string, string>>($"users/{userId}", request);
+			if (response != null && response.data != null)
+			{
+				await SetCurrentUser(response.data);
+				return response.data;
+			}
+			
+			Debug.WriteLine($"No User With Id {userId} found");
+			return default;
 		}
 		public void ClearCurrentUser()
 		{

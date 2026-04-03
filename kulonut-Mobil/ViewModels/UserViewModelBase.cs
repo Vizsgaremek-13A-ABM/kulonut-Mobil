@@ -16,7 +16,7 @@ namespace kulonut_Mobil.ViewModels
 		protected IUserService userService;
 
 		[ObservableProperty]
-		private UserModel user;
+		private UserModel? user;
 		public UserViewModelBase(IUserService _userService)
 		{
 			userService = _userService;

@@ -20,8 +20,6 @@ namespace kulonut_Mobil.ViewModels
 		{
 			
 		}
-		
-
 		[RelayCommand]
 		private async Task UserSwipedRight()
 		{

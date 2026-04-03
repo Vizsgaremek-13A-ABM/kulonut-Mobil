@@ -33,12 +33,16 @@ namespace kulonut_Mobil.API
 				return cachedData;
 			}
 		}
+		public async Task<T?> GetAsync<T>(string url, string? cacheKey = null)
+		{
+			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
+			return await HandleResponse<T>(response, cacheKey);
+		}
 		public async Task<T?> PostAsync<T, TBody>(string url, TBody? body)
 		{
 			try
 			{
 				using HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, body).ConfigureAwait(false);
-				Debug.WriteLine(url);
 				return await HandleResponse<T>(response, null);
 			}
 			catch (Exception ex)
@@ -47,16 +51,22 @@ namespace kulonut_Mobil.API
 				return default;
 			}
 		}
-
+		public async Task<T?> PutAsync<T, TBody>(string url, TBody? body)
+		{
+			try
+			{
+				using HttpResponseMessage response = await httpClient.PutAsJsonAsync(url, body).ConfigureAwait(false);
+				return await HandleResponse<T>(response, null);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine($"Error in Put: {ex}");
+				return default;
+			}
+		}
 		public void SetToken(string token)
 		{
 			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-		}
-
-		public async Task<T?> GetAsync<T>(string url, string? cacheKey = null)
-		{
-			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
-			return await HandleResponse<T>(response, cacheKey);	
 		}
 		private async Task<T?> HandleResponse<T>(HttpResponseMessage response, string? cacheKey)
 		{
@@ -78,8 +88,6 @@ namespace kulonut_Mobil.API
 				Debug.WriteLine($"JSON deserialize failed {ex.Message}");
 				return default;
 			}
-			
-			
 		}
 	}
 }

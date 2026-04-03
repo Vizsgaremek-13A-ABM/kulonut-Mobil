@@ -6,6 +6,7 @@ namespace kulonut_Mobil.Views
 		public static readonly BindableProperty UnFocusColorProperty = BindableProperty.Create(nameof(UnFocusColor), typeof(Brush), typeof(AuthEntry), default(Brush));
 		public static readonly BindableProperty FocusColorProperty = BindableProperty.Create(nameof(FocusColor), typeof(Brush), typeof(AuthEntry), default(Brush));
 		public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(AuthEntry), default(string), BindingMode.TwoWay);
+		public static readonly BindableProperty LabelTextProperty = BindableProperty.Create(nameof(LabelText), typeof(string), typeof(AuthEntry), default(string), BindingMode.TwoWay);
 		public Brush? UnFocusColor
 		{
 			get => (Brush)GetValue(UnFocusColorProperty);
@@ -23,8 +24,8 @@ namespace kulonut_Mobil.Views
 		}
 		public string LabelText
 		{
-			get => HeadLabel.Text;
-			set => HeadLabel.Text = value;
+			get => (string)GetValue(LabelTextProperty);
+			set => SetValue(LabelTextProperty, value);
 		}
 		public bool IsPassword
 		{
