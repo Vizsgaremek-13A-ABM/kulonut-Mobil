@@ -17,6 +17,7 @@ namespace kulonut_Mobil.Services
         private UserModel? user;
 		private IApiClient apiClient;
 		public const string USER_KEY = "user";
+		public const string ICON_NAME = "profile_icon";
 		public UserService(IApiClient _apiClient)
 		{
 			apiClient = _apiClient;
@@ -50,25 +51,40 @@ namespace kulonut_Mobil.Services
 			Debug.WriteLine("No User Data Found");
 			return default;
 		}
-
-		public async Task SetCurrentUser(UserModel _user)
+		public async Task<UserModel?> UpdateCurrentUserAsync(Dictionary<string, string> request)
 		{
-			user = _user;
-			await SecureStorage.SetAsync(USER_KEY, JsonSerializer.Serialize(_user));
- 		}
-
-		public async Task<UserModel?> UpdateCurrentUserAsync(Dictionary<string, string> request, int userId)
-		{
-			GetUserResponseDTO? response = await apiClient.PutAsync<GetUserResponseDTO?, Dictionary<string, string>>($"users/{userId}", request);
+			GetUserResponseDTO? response = await apiClient.PutAsync<GetUserResponseDTO?, Dictionary<string, string>>($"users/{user!.id}", request);
 			if (response != null && response.data != null)
 			{
 				await SetCurrentUser(response.data);
 				return response.data;
 			}
-			
-			Debug.WriteLine($"No User With Id {userId} found");
+
+			Debug.WriteLine($"No User With Id {user!.id} found");
 			return default;
 		}
+		public async Task<UserModel?> UploadUserImageAsync(Stream stream, string fileName)
+		{
+			using var content = new MultipartFormDataContent
+			{
+				{ new StreamContent(stream), ICON_NAME, fileName } 
+			};
+			GetUserResponseDTO? response = await apiClient.UploadPhotoAsync<GetUserResponseDTO>($"users/{user!.id}/profile-icon", content);
+			if(response != null && response.data != null)
+			{
+				await SetCurrentUser(response.data);
+				return response.data;
+			}
+			Debug.WriteLine($"No User With Id {user!.id} found");
+			return default;
+		}
+		public async Task SetCurrentUser(UserModel _user)
+		{
+			user = _user;
+			await SecureStorage.SetAsync(USER_KEY, JsonSerializer.Serialize(_user));
+ 		}
+		
+		
 		public void ClearCurrentUser()
 		{
 			user = null;

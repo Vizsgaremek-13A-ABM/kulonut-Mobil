@@ -12,7 +12,8 @@ namespace kulonut_Mobil.Services
 		public Task<UserModel?> GetCurrentUserAsync(bool setCurrent = true);
 		public UserModel? GetCurrentUser();
 		public Task<UserModel?> GetCurrentUserFromStorageAsync(bool setCurrent = true);
-		public Task<UserModel?> UpdateCurrentUserAsync(Dictionary<string, string> request, int userId);
+		public Task<UserModel?> UpdateCurrentUserAsync(Dictionary<string, string> request);
+		public Task<UserModel?> UploadUserImageAsync(Stream stream, string fileName);
 		public Task SetCurrentUser(UserModel _user);
 		public void ClearCurrentUser();
 	}

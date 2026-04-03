@@ -64,6 +64,19 @@ namespace kulonut_Mobil.API
 				return default;
 			}
 		}
+		public async Task<T?> UploadPhotoAsync<T>(string url, MultipartFormDataContent data)
+		{
+			try
+			{
+				using HttpResponseMessage response = await httpClient.PostAsync(url, data).ConfigureAwait(false);
+				return await HandleResponse<T>(response, null);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine($"Error uploading photo: {ex}");
+				return default;
+			}
+		}
 		public void SetToken(string token)
 		{
 			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);

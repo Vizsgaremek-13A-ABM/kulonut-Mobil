@@ -50,13 +50,12 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task Submit()
 		{
-			UserModel? updatedUser = await userService.UpdateCurrentUserAsync(requestBody, user.id);
+			UserModel? updatedUser = await userService.UpdateCurrentUserAsync(requestBody);
 			if(updatedUser == null)
 			{
 				ErrorText = $"Nem módosítható felhasználó {user.id} id-vel";
 				return;
 			}
-			user = updatedUser;
 			await CloseAsync();
 		}
 		[RelayCommand]
