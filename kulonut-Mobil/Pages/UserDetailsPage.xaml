@@ -3,34 +3,31 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Pages.UserDetailsPage"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
-             xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:tool="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              Title="Fehasználó Adatok">
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    <Grid>
-        <ScrollView Margin="20, 40, 20, 20">
-            <Grid RowDefinitions="3*, Auto, 2*">
-                <Grid.GestureRecognizers>
-                    <SwipeGestureRecognizer Direction="Right" Command="{Binding UserSwipedRightCommand}"/>
-                </Grid.GestureRecognizers>
-                <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
-                    <Grid RowDefinitions="*,*,*,*">
-                        <HorizontalStackLayout Grid.Row="0">
-                            <views:DetailsLabel HeaderText="Név" BodyText="{Binding User.name}"/>
-                            <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Grid.Row="1">
-                            <views:DetailsLabel HeaderText="Felhasználónév" BodyText="{Binding User.display_name}"/>
-                            <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                        </HorizontalStackLayout>
-                        <HorizontalStackLayout Grid.Row="2">
-                            <views:DetailsLabel HeaderText="Email Cím" BodyText="{Binding User.email}"/>
-                            <ImageButton Source="edit" Style="{StaticResource UserEditButton}"/>
-                        </HorizontalStackLayout>
-                        <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
-                    </Grid>
+    <ScrollView Margin="20, 40, 20, 20">
+        <Grid RowDefinitions="3*, Auto, 2*">
+            <Grid.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Right" Command="{Binding UserSwipedRightCommand}"/>
+            </Grid.GestureRecognizers>
+            <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
+                <Grid RowDefinitions="*,*,*,*">
+                    <views:UserEditLabel Grid.Row="0" HeaderText="Név" BodyText="{Binding User.name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
+                    <views:UserEditLabel Grid.Row="1" HeaderText="Felhasználónév" BodyText="{Binding User.display_name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
+                    <views:UserEditLabel Grid.Row="2" HeaderText="Email Cím" BodyText="{Binding User.email}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
+                    <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
+                </Grid>
+            </Border>
+            <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+                <Border Style="{StaticResource UserDetailsIconBorder}">
+                    <ImageButton Source="{Binding User.avatar, TargetNullValue='splash', FallbackValue='splash'}" Aspect="AspectFill" Command="{Binding UploadPictureCommand}"/>
+                </Border>
+                <Border Style="{StaticResource UserIconEditBorder}" IsVisible="{Binding User.avatar, Converter={tool:IsNullConverter}}">
+                    <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent" Command="{Binding UploadPictureCommand}"/>
                 </Border>
                 <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
                     <Border Style="{StaticResource UserDetailsIconBorder}">

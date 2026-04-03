@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
 using System.Text.Json;
 using System;
+using System.Diagnostics;
 
 namespace kulonut_Mobil.API
 {
@@ -26,10 +27,17 @@ namespace kulonut_Mobil.API
 		}
 		private async Task<T?> GetFromFile<T>(string key, string filePath)
 		{
-			using FileStream stream = File.OpenRead(filePath);
-			T? diskValue = await JsonSerializer.DeserializeAsync<T>(stream);
-			if (diskValue != null)
-				return memoryCache.Set(key, diskValue, TimeSpan.FromMinutes(10));
+			try
+			{
+				using FileStream stream = File.OpenRead(filePath);
+				T? diskValue = await JsonSerializer.DeserializeAsync<T>(stream);
+				if (diskValue != null)
+					return memoryCache.Set(key, diskValue, TimeSpan.FromMinutes(10));
+			}
+			catch (Exception)
+			{
+				Debug.WriteLine("Error parsing from file cache");
+			}
 			return default;
 		}
 		private string GetfilePath(string key)
@@ -38,6 +46,7 @@ namespace kulonut_Mobil.API
 		}
 		public async Task SetAsync<T>(string key, T value, TimeSpan? expiration = null)
 		{
+			if (string.IsNullOrEmpty(key)) return;
 			memoryCache.Set(key, value, expiration ?? TimeSpan.FromMinutes(30));
 			using FileStream stream = File.Create(GetfilePath(key));
 			await JsonSerializer.SerializeAsync(stream, value);

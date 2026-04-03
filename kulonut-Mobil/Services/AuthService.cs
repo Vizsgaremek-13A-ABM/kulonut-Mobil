@@ -24,7 +24,7 @@ namespace kulonut_Mobil.Services
 		public async Task<UserModel?> LoginAsync(LoginRequestDTO request, bool remember)
 		{
 			LoginResponseDTO? response = await apiClient!.PostAsync<LoginResponseDTO, LoginRequestDTO>("auth/login", request);
-			if (response != null && response.token != null)
+			if (response != null && !string.IsNullOrEmpty(response.token))
 			{
 				token = response.token;
 				SetToken(token);
@@ -53,8 +53,10 @@ namespace kulonut_Mobil.Services
 		}
 		public bool IsAuthenticated()
 		{
-			return token != null;
-			//return token != null && IsJwtValid(); TODO: Fix JWT validation for offline use
+			if (string.IsNullOrEmpty(token)) return false;
+			apiClient.SetToken(token);
+			return true;
+			//return !string.IsNullOrEmpty(token) && IsJwtValid(); TODO: Fix JWT validation for offline use
 		}
 		public void SetToken(string _token)
 		{

@@ -1,9 +1,6 @@
-﻿using Android.Net.Http;
-using kulonut_Mobil.Pages;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Net.Http.Json;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.API
 {
@@ -36,12 +33,16 @@ namespace kulonut_Mobil.API
 				return cachedData;
 			}
 		}
+		public async Task<T?> GetAsync<T>(string url, string? cacheKey = null)
+		{
+			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
+			return await HandleResponse<T>(response, cacheKey);
+		}
 		public async Task<T?> PostAsync<T, TBody>(string url, TBody? body)
 		{
 			try
 			{
 				using HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, body).ConfigureAwait(false);
-				Debug.WriteLine(url);
 				return await HandleResponse<T>(response, null);
 			}
 			catch (Exception ex)
@@ -50,16 +51,35 @@ namespace kulonut_Mobil.API
 				return default;
 			}
 		}
-
+		public async Task<T?> PutAsync<T, TBody>(string url, TBody? body)
+		{
+			try
+			{
+				using HttpResponseMessage response = await httpClient.PutAsJsonAsync(url, body).ConfigureAwait(false);
+				return await HandleResponse<T>(response, null);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine($"Error in Put: {ex}");
+				return default;
+			}
+		}
+		public async Task<T?> UploadPhotoAsync<T>(string url, MultipartFormDataContent data)
+		{
+			try
+			{
+				using HttpResponseMessage response = await httpClient.PostAsync(url, data).ConfigureAwait(false);
+				return await HandleResponse<T>(response, null);
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine($"Error uploading photo: {ex}");
+				return default;
+			}
+		}
 		public void SetToken(string token)
 		{
-			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("token", token);
-		}
-
-		private async Task<T?> GetAsync<T>(string url, string cacheKey)
-		{
-			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
-			return await HandleResponse<T>(response, cacheKey);	
+			httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 		}
 		private async Task<T?> HandleResponse<T>(HttpResponseMessage response, string? cacheKey)
 		{
@@ -68,7 +88,6 @@ namespace kulonut_Mobil.API
 				Debug.WriteLine(response.StatusCode);
 				return default;
 			}
-
 			try
 			{
 				using Stream content = await response.Content.ReadAsStreamAsync();
@@ -82,8 +101,6 @@ namespace kulonut_Mobil.API
 				Debug.WriteLine($"JSON deserialize failed {ex.Message}");
 				return default;
 			}
-			
-			
 		}
 	}
 }

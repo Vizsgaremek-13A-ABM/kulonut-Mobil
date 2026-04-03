@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Views.AuthEntry">
     <VerticalStackLayout>
-        <Label x:Name="HeadLabel" Style="{StaticResource AuthLabel}"/>
+        <Label x:Name="HeadLabel" Style="{StaticResource AuthLabel}" Text="{Binding LabelText, Source={RelativeSource AncestorType={x:Type ContentView}}}"/>
         <Border Style="{StaticResource AuthBorder}" x:Name="InputBorder">
             <Entry
                 Style="{StaticResource AuthEntry}" x:Name="TextInput" Text="{Binding Text, Source={RelativeSource AncestorType={x:Type ContentView}}}"/>
