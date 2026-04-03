@@ -79,37 +79,12 @@ namespace kulonut_Mobil.ViewModels
 			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
 			string? token = await authService.GetTokenAsync();
 			if (string.IsNullOrEmpty(token)) return;
-
 			authService.SetToken(token);
 			if (authService.IsAuthenticated())
-			{
-				if (user == null || user.email == null)
-					user = await userService.GetCurrentUserAsync();
-
-				Debug.WriteLine($"name: {user.name} role: {user.role}");
-				if (user == null)
-				{
-					await popupService.ShowErrorAsync("Nem található a megadott fehasználó");
-					return;
-				}
-				else if (user.role == null)
-				{
-					await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
-					return;
-				}
-				await SetUserAppshell();
-
-				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
-			if (token == null)
-				return;
-			
-			authService.SetToken(token);
-			if (authService.IsAuthenticated())
-			{
 				await HandleAuthenticatedRemember(user);
-			}
 			else
 				await popupService.ShowErrorAsync("Lejárt token");
+			
 		}
 		private async Task SetUserAppshell()
 		{
@@ -137,19 +112,20 @@ namespace kulonut_Mobil.ViewModels
 		}
 		private async Task HandleAuthenticatedRemember(UserModel? user)
 		{
-			if (user == null)
+			if (user == null || user.email == null)
 				user = await userService.GetCurrentUserAsync();
-
 			if (user == null)
 			{
-				await popupService.ShowErrorAsync("Nem található a megadott felhasználóasdasd");
+				await popupService.ShowErrorAsync("Nem található a megadott fehasználó");
 				return;
 			}
 			else if (user.role == null)
 			{
-				await NavigateToRegister();
+				await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
 				return;
 			}
+			await SetUserAppshell();
+
 			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
 		private async Task HandleLogin()

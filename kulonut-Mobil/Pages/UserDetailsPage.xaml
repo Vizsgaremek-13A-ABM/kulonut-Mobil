@@ -9,33 +9,26 @@
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    <ScrollView Margin="20, 40, 20, 20">
-        <Grid RowDefinitions="3*, Auto, 2*">
-            <Grid.GestureRecognizers>
-                <SwipeGestureRecognizer Direction="Right" Command="{Binding UserSwipedRightCommand}"/>
-            </Grid.GestureRecognizers>
-            <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
-                <Grid RowDefinitions="*,*,*,*">
-                    <views:UserEditLabel Grid.Row="0" HeaderText="Név" BodyText="{Binding User.name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
-                    <views:UserEditLabel Grid.Row="1" HeaderText="Felhasználónév" BodyText="{Binding User.display_name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
-                    <views:UserEditLabel Grid.Row="2" HeaderText="Email Cím" BodyText="{Binding User.email}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
-                    <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
-                </Grid>
-            </Border>
-            <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
-                <Border Style="{StaticResource UserDetailsIconBorder}">
-                    <ImageButton Source="{Binding User.avatar, TargetNullValue='splash', FallbackValue='splash'}" Aspect="AspectFill" Command="{Binding UploadPictureCommand}"/>
-                </Border>
-                <Border Style="{StaticResource UserIconEditBorder}" IsVisible="{Binding User.avatar, Converter={tool:IsNullConverter}}">
-                    <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent" Command="{Binding UploadPictureCommand}"/>
+    <Grid>
+        <ScrollView Margin="20, 40, 20, 20">
+            <Grid RowDefinitions="3*, Auto, 2*">
+                <Grid.GestureRecognizers>
+                    <SwipeGestureRecognizer Direction="Right" Command="{Binding UserSwipedRightCommand}"/>
+                </Grid.GestureRecognizers>
+                <Border Grid.Row="0" Style="{StaticResource BlockBorder}">
+                    <Grid RowDefinitions="*,*,*,*">
+                        <views:UserEditLabel Grid.Row="0" HeaderText="Név" BodyText="{Binding User.name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
+                        <views:UserEditLabel Grid.Row="1" HeaderText="Felhasználónév" BodyText="{Binding User.display_name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
+                        <views:UserEditLabel Grid.Row="2" HeaderText="Email Cím" BodyText="{Binding User.email}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
+                        <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
+                    </Grid>
                 </Border>
                 <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
                     <Border Style="{StaticResource UserDetailsIconBorder}">
-                        <ImageButton Source="splash.png" Aspect="AspectFill"/>
-                        <!--<ImageButton Source="{Binding User.avatar}" Aspect="AspectFill"/>-->
+                        <ImageButton Source="{Binding User.avatar, TargetNullValue='splash', FallbackValue='splash'}" Aspect="AspectFill" Command="{Binding UploadPictureCommand}"/>
                     </Border>
-                    <Border Style="{StaticResource UserIconEditBorder}">
-                        <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent"/>
+                    <Border Style="{StaticResource UserIconEditBorder}" IsVisible="{Binding User.avatar, Converter={tool:IsNullConverter}}">
+                        <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent" Command="{Binding UploadPictureCommand}"/>
                     </Border>
                 </Grid>
                 <Button Grid.Row="2" Style="{StaticResource AuthButton}" Command="{Binding PasswordChangeCommand}" Text="Jelszó Megváltoztatása"/>
