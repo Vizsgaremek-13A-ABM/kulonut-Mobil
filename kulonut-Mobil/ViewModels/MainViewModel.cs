@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Java.Security;
 using kulonut_Mobil.API;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
@@ -41,16 +42,7 @@ namespace kulonut_Mobil.ViewModels
 				AuthenticationRequestConfiguration request = new AuthenticationRequestConfiguration("Biometrikus azonosítás", "Kérjük azonosítsa magát.");
 				FingerprintAuthenticationResult result = await CrossFingerprint.Current.AuthenticateAsync(request);
 				if (result.Authenticated)
-				{
-
-					UserModel? user = await userService.GetCurrentUserFromStorageAsync();
-					if (user != null)
-					{
-						await Login();
-						return;
-					}
-					await popupService.ShowErrorAsync("Nem található a megadott felhasználó");
-				}
+					await HandleBioAuthenticated();
 			}
 			else
 				await popupService.ShowErrorAsync("A biometrikus azonosítás nem elérhető a készülékén!");
@@ -58,6 +50,31 @@ namespace kulonut_Mobil.ViewModels
 
 		[RelayCommand]
 		private async Task HandleRemember()
+		{
+			IsLoading = true;
+			await Remember();
+			IsLoading = false;
+		}
+		
+		[RelayCommand]
+		private async Task Login()
+		{
+			IsLoading = true;
+			await HandleLogin();
+			IsLoading = false;
+		}
+		
+		[RelayCommand]
+		private async Task NavigateToRegister()
+		{
+			await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
+		}
+		[RelayCommand]
+		private async Task PasswordReset()
+		{
+			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}?{PasswordResetViewModel.NAV_URL}={nameof(MainPage)}");
+		}
+		private async Task Remember()
 		{
 			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
 			string? token = await authService.GetTokenAsync();
@@ -83,27 +100,16 @@ namespace kulonut_Mobil.ViewModels
 				await SetUserAppshell();
 
 				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+			if (token == null)
+				return;
+			
+			authService.SetToken(token);
+			if (authService.IsAuthenticated())
+			{
+				await HandleAuthenticatedRemember(user);
 			}
 			else
-			{
 				await popupService.ShowErrorAsync("Lejárt token");
-			}
-		}
-
-		[RelayCommand]
-		private async Task Login()
-		{
-			bool check_result = await InputCheck();
-			if (!check_result) return;
-			UserModel? response = await authService.LoginAsync(LoginRequestDTO, RememberLogin);
-			if(response == null)
-			{
-				await popupService.ShowErrorAsync("Wrong Password or Email");
-				return;
-			}
-			await userService.SetCurrentUser(response);
-			await SetUserAppshell();
-			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
 		private async Task SetUserAppshell()
 		{
@@ -119,15 +125,46 @@ namespace kulonut_Mobil.ViewModels
 				}
 			}
 		}
-		[RelayCommand]
-		private async Task NavigateToRegister()
+		private async Task HandleBioAuthenticated()
 		{
-			await Shell.Current.GoToAsync($"{nameof(RegisterPage)}");
+			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
+			if (user != null)
+			{
+				await Login();
+				return;
+			}
+			await popupService.ShowErrorAsync("Nem található a megadott felhasználó");
 		}
-		[RelayCommand]
-		private async Task PasswordReset()
+		private async Task HandleAuthenticatedRemember(UserModel? user)
 		{
-			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}?{PasswordResetViewModel.NAV_URL}={nameof(MainPage)}");
+			if (user == null)
+				user = await userService.GetCurrentUserAsync();
+
+			if (user == null)
+			{
+				await popupService.ShowErrorAsync("Nem található a megadott felhasználóasdasd");
+				return;
+			}
+			else if (user.role == null)
+			{
+				await NavigateToRegister();
+				return;
+			}
+			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+		}
+		private async Task HandleLogin()
+		{
+			bool check_result = await InputCheck();
+			if (!check_result) return;
+			UserModel? response = await authService.LoginAsync(LoginRequestDTO, RememberLogin);
+			if (response == null)
+			{
+				await popupService.ShowErrorAsync("Helytelen Email-cím vagy jelszó");
+				return;
+			}
+			await userService.SetCurrentUser(response);
+			await SetUserAppshell();
+			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
 		}
 		private async Task<bool> InputCheck()
 		{

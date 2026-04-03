@@ -29,9 +29,19 @@
                 <Border Style="{StaticResource UserIconEditBorder}" IsVisible="{Binding User.avatar, Converter={tool:IsNullConverter}}">
                     <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent" Command="{Binding UploadPictureCommand}"/>
                 </Border>
+                <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Border Style="{StaticResource UserDetailsIconBorder}">
+                        <ImageButton Source="splash.png" Aspect="AspectFill"/>
+                        <!--<ImageButton Source="{Binding User.avatar}" Aspect="AspectFill"/>-->
+                    </Border>
+                    <Border Style="{StaticResource UserIconEditBorder}">
+                        <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent"/>
+                    </Border>
+                </Grid>
+                <Button Grid.Row="2" Style="{StaticResource AuthButton}" Command="{Binding PasswordChangeCommand}" Text="Jelszó Megváltoztatása"/>
             </Grid>
-            <Button Grid.Row="2" Style="{StaticResource AuthButton}" Command="{Binding PasswordChangeCommand}" Text="Jelszó Megváltoztatása"/>
-        </Grid>
-    </ScrollView>
+        </ScrollView>
+        <views:Loader IsLoading="{Binding IsLoading}"/>
+    </Grid>
     
 </pages:BasePage>

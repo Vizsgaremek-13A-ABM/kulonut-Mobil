@@ -9,6 +9,8 @@ namespace kulonut_Mobil.ViewModels
 {
 	public partial class BaseViewModel : ObservableObject
 	{
+		[ObservableProperty]
+		private bool isLoading = false;
 		public virtual bool OnBackButtonPressed()
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>

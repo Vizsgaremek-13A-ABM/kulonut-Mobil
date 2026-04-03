@@ -25,9 +25,11 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task HandleUserLoad()
 		{
+			IsLoading = true;
 			UserModel? _user = await userService.GetCurrentUserAsync();
 			if (_user == null) User = userService.GetCurrentUser()!;
 			else User = _user;
+			IsLoading = false;
 		}
 	}
 }
