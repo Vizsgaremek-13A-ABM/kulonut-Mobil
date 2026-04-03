@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace kulonut_Mobil.ViewModels
 {
 	public delegate Task CloseHandler<T>(T result);
-	public partial class PopupViewModel : BaseViewModel
+	public partial class PopupViewModelBase : BaseViewModel
 	{
 		public event CloseHandler<bool>? OnClose;
 		public async Task CloseAsync()

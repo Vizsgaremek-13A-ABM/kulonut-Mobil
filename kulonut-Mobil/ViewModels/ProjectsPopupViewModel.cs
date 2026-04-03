@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-    public partial class ProjectsPopupViewModel : PopupViewModel
+    public partial class ProjectsPopupViewModel : PopupViewModelBase
     {
         [ObservableProperty]
         private ProjectsByPolygonModel? projectsByPolygon;

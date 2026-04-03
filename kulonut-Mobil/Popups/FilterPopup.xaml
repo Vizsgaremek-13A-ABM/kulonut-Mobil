@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tool:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tool="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:view="clr-namespace:kulonut_Mobil.Views"
+            x:Class="kulonut_Mobil.Popups.FilterPopup"
+            Color="Transparent">
+    <Border Padding="20" WidthRequest="350" StrokeShape="RoundRectangle 30" BackgroundColor="White">
+        <Grid Margin="5" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+            <Label Margin="2, 0" Grid.Row="0" Text="Szűrők" FontSize="26" FontAttributes="Bold"/>
+            <view:AuthEntry Margin="0, 20, 0, 0" Grid.Row="1" LabelText="Projektnév"/>
+            <Label  Margin="0, 15, 0, 0" Grid.Row="2" Style="{StaticResource AuthLabel}" Text="Tervkiadás dátuma ezután"/>
+            <Border Style="{StaticResource AuthBorder}" Grid.Row="3">
+                <DatePicker Style="{StaticResource FilterDate}"/>
+            </Border>
+            <Label  Margin="0, 15, 0, 0" Grid.Row="4" Style="{StaticResource AuthLabel}" Text="~ ezelőtt"/>
+            <Border Style="{StaticResource AuthBorder}" Grid.Row="5">
+                <DatePicker Style="{StaticResource FilterDate}"/>
+            </Border>
+            <HorizontalStackLayout  Margin="0, 15, 0, 0" Spacing="10" Grid.Row="6">
+                <Button Style="{StaticResource ErrorPopupButton}" Text="Szűrés"/>
+                <Button Style="{StaticResource ErrorPopupButton}" Text="Bezárás" BackgroundColor="{StaticResource Secondary}"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+</tool:Popup>

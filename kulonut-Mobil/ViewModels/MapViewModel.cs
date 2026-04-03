@@ -5,7 +5,7 @@ using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using System.Diagnostics;
-
+using System.Threading.Tasks;
 using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.ViewModels
@@ -16,19 +16,21 @@ namespace kulonut_Mobil.ViewModels
 		private readonly IDataService dataService;
 		private readonly IPopupService popupService;
 		private readonly IMapHandler mapHandler;
-		private readonly IAuthService authService;
 		public Map Map { get; } = new Map();
     
-		public MapViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService, IAuthService authService) : base(userService)
+		public MapViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService) : base(userService)
 		{
 			dataService = _dataService;
 			popupService = _popupService;
 			mapHandler = new MapHandler(Map);
 			mapHandler.CreateMap();
-			this.authService = authService;
 		}
-
-
+		[RelayCommand]
+		private async Task OpenFilter()
+		{
+			await popupService.ShowFilterAsync();
+			await HandleMapLoading();
+		}
 		[RelayCommand]
 		private async Task HandleMapLoading()
 		{

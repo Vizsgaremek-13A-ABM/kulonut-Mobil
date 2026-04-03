@@ -21,7 +21,8 @@ namespace kulonut_Mobil.DependencyInjection
 			.AddSingleton<PasswordResetViewModel>()
 			.AddSingleton<UserDetailsViewModel>()
 			.AddTransient<ProjectsPopupViewModel>()
-			.AddTransient<UserEditPopupViewModel>();
+			.AddTransient<UserEditPopupViewModel>()
+			.AddTransient<FilterPopupViewModel>();
 			return services;
 		}
 	}

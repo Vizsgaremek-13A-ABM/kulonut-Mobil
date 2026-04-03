@@ -35,5 +35,11 @@ namespace kulonut_Mobil.Services
 			popup.Initialize(propname);
 			await Application.Current!.MainPage!.ShowPopupAsync(popup);
 		}
+		public async Task ShowFilterAsync()
+		{
+			FilterPopup filterPopup = _serviceProvider.GetRequiredService<FilterPopup>();
+			await Application.Current!.MainPage!.ShowPopupAsync(filterPopup);
+
+		}
 	}
 }

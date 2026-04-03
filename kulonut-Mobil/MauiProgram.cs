@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Maui;
+﻿using Android.Graphics.Drawables;
+using CommunityToolkit.Maui;
 using kulonut_Mobil.API;
 using kulonut_Mobil.DependencyInjection;
 using kulonut_Mobil.Pages;
@@ -31,6 +32,12 @@ namespace kulonut_Mobil
 					EntryHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
 					{
 						handler.PlatformView.Background = null;
+					});
+					DatePickerHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+					{
+						var nativeView = handler.PlatformView;
+						nativeView.Background = null;
+						nativeView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
 					});
 #endif
 				});

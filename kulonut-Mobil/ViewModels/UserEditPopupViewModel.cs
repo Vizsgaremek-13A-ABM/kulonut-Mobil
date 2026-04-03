@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	public partial class UserEditPopupViewModel : PopupViewModel
+	public partial class UserEditPopupViewModel : PopupViewModelBase
 	{
 		private static readonly Dictionary<string, Func<UserModel, string?>> _propMap = new()
 		{
@@ -23,7 +23,7 @@ namespace kulonut_Mobil.ViewModels
 		private static readonly Dictionary<string, string> _fieldMap = new()
 		{
 			{ "Név", "name" },
-			{ "Felhasználónév", "user_model" },
+			{ "Felhasználónév", "display_name" },
 			{ "Email Cím", "email" }
 		};
 

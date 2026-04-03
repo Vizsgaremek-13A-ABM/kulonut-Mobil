@@ -57,6 +57,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\Icons\faceidicon.png" />
+	  <None Remove="Resources\Images\Icons\Filter.png" />
 	  <None Remove="Resources\Images\Icons\mapicon.png" />
 	  <None Remove="Resources\Images\Icons\tableicon.png" />
 	</ItemGroup>
@@ -64,6 +65,7 @@
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Icons\edit.png" />
 	  <MauiImage Include="Resources\Images\Icons\faceidicon.png" />
+	  <MauiImage Include="Resources\Images\Icons\filter.png" />
 	  <MauiImage Include="Resources\Images\Icons\logouticon.png" />
 	</ItemGroup>
 
@@ -123,6 +125,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Popups\ErrorPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Popups\FilterPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Popups\ProjectsPopup.xaml">

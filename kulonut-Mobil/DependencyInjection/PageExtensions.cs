@@ -23,7 +23,8 @@ namespace kulonut_Mobil.DependencyInjection
 			.AddSingleton<UserDetailsPage>()
 			.AddSingleton<RegisterConfirmationPage>()
 			.AddTransient<ProjectsPopup>()
-			.AddTransient<UserEditPopup>();
+			.AddTransient<UserEditPopup>()
+			.AddTransient<FilterPopup>();
 			return services;
 		}
 	}
