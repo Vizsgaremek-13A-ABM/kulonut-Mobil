@@ -7,7 +7,7 @@
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              Color="Transparent">
 
-    <Border WidthRequest="300" HeightRequest="600" Padding="20" StrokeShape="RoundRectangle 30" BackgroundColor="White">
+    <Border WidthRequest="300" HeightRequest="600" Style="{StaticResource PopupBorder}">
         <Grid RowDefinitions="Auto,*,Auto">
             <Label Grid.Row="0" Text="Projektek az adott polygonhoz" HorizontalOptions="Center" FontSize="22" FontAttributes="Bold"/>
             <CollectionView Grid.Row="1" ItemsSource="{Binding ProjectsByPolygon.projects}">

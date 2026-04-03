@@ -11,7 +11,8 @@ namespace kulonut_Mobil.ViewModels
 	public partial class PopupViewModelBase : BaseViewModel
 	{
 		public event CloseHandler<bool>? OnClose;
-		public async Task CloseAsync()
+		[RelayCommand]
+		protected async Task ClosePopup()
 		{
 			if(OnClose != null)
 				await OnClose.Invoke(true);

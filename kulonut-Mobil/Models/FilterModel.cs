@@ -8,5 +8,8 @@ namespace kulonut_Mobil.Models
 {
 	public class FilterModel
 	{
+		public string? name { get; set; }
+		public DateTime? before { get; set; }
+		public DateTime? after { get; set; }
 	}
 }

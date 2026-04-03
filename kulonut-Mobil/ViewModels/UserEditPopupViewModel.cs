@@ -56,13 +56,7 @@ namespace kulonut_Mobil.ViewModels
 				ErrorText = $"Nem módosítható felhasználó {user.id} id-vel";
 				return;
 			}
-			await CloseAsync();
-		}
-		[RelayCommand]
-		private async Task Cancel()
-		{
-			PropValue = string.Empty;
-			await CloseAsync();
+			await ClosePopup();
 		}
 		private Dictionary<string, string> requestBody => 
 			string.IsNullOrEmpty(PropValue) ||

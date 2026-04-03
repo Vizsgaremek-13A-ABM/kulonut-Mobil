@@ -37,13 +37,13 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
 			if(polygons == null || polygons.data == null || polygons.data.Count == 0)
+				await popupService.ShowErrorAsync("Nem találtunk ilyen területet");
+
+			if (polygons != null && polygons.data != null)
 			{
-				await popupService.ShowErrorAsync("Nem találtunk polygont");
-				IsLoading = false;
-				return;
+				mapHandler.ShowPolygons(polygons.data);
+				Debug.WriteLine(polygons.data.Count);
 			}
-			Debug.WriteLine(polygons.data.Count);
-			mapHandler.ShowPolygons(polygons.data);
 			IsLoading = false;
 		}
 		[RelayCommand]

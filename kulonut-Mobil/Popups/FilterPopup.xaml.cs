@@ -5,9 +5,12 @@ namespace kulonut_Mobil.Popups;
 
 public partial class FilterPopup : Popup
 {
-	public FilterPopup(FilterPopupViewModel vm)
+	private readonly FilterPopupViewModel filterPopupViewModel;
+	public FilterPopup(FilterPopupViewModel _filterPopupViewModel)
 	{
 		InitializeComponent();
-		BindingContext = vm;
+		filterPopupViewModel = _filterPopupViewModel;
+		BindingContext = filterPopupViewModel;
+		filterPopupViewModel.OnClose += async result => await CloseAsync(result, CancellationToken.None);
 	}
 }
