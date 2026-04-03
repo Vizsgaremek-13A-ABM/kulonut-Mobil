@@ -14,7 +14,7 @@
                 <Grid>
                     <Grid ColumnDefinitions="*, Auto">
                         <DatePicker Grid.Column="0" Date="{Binding FilterModel.After}" Style="{StaticResource FilterDate}"/>
-                        <ImageButton Grid.Column="1" Source="edit.png" WidthRequest="25" HeightRequest="25" Command="{Binding ClearAfterCommand}"
+                        <ImageButton Grid.Column="1" Source="close" WidthRequest="25" HeightRequest="25" Command="{Binding ClearAfterCommand}"
                                 IsVisible="{Binding FilterModel.After, Converter={tool:IsNotNullConverter}}" HorizontalOptions="End"/>
                     </Grid>
                     <Label Style="{StaticResource FilterHideLabel}" IsVisible="{Binding FilterModel.After, Converter={tool:IsNullConverter}}" />
@@ -25,7 +25,7 @@
                 <Grid>
                     <Grid ColumnDefinitions="*, Auto">
                         <DatePicker Grid.Column="0" Date="{Binding FilterModel.Before}" Style="{StaticResource FilterDate}"/>
-                        <ImageButton Grid.Column="1" Source="edit.png" WidthRequest="25" HeightRequest="25" Command="{Binding ClearBeforeCommand}"
+                        <ImageButton Grid.Column="1" Source="close" WidthRequest="25" HeightRequest="25" Command="{Binding ClearBeforeCommand}"
                                      IsVisible="{Binding FilterModel.Before, Converter={tool:IsNotNullConverter}}" HorizontalOptions="End"/>
                     </Grid>
                     <Label Style="{StaticResource FilterHideLabel}" IsVisible="{Binding FilterModel.Before, Converter={tool:IsNullConverter}}" />

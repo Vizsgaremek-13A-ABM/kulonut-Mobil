@@ -56,6 +56,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\Icons\close.png" />
 	  <None Remove="Resources\Images\Icons\faceidicon.png" />
 	  <None Remove="Resources\Images\Icons\Filter.png" />
 	  <None Remove="Resources\Images\Icons\mapicon.png" />
@@ -63,6 +64,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiImage Include="Resources\Images\Icons\close.png" />
 	  <MauiImage Include="Resources\Images\Icons\edit.png" />
 	  <MauiImage Include="Resources\Images\Icons\faceidicon.png" />
 	  <MauiImage Include="Resources\Images\Icons\filter.png" />

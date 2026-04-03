@@ -32,21 +32,6 @@ namespace kulonut_Mobil.ViewModels
 			await HandleMapLoading();
 		}
 		[RelayCommand]
-		private async Task HandleMapLoading()
-		{
-			IsLoading = true;
-			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
-			if(polygons == null || polygons.data == null || polygons.data.Count == 0)
-				await popupService.ShowErrorAsync("Nem találtunk ilyen területet");
-
-			if (polygons != null && polygons.data != null)
-			{
-				mapHandler.ShowPolygons(polygons.data);
-				Debug.WriteLine(polygons.data.Count);
-			}
-			IsLoading = false;
-		}
-		[RelayCommand]
 		private async Task PolygonClicked(PolygonFeature polygonFeature)
 		{
 			IsLoading = true;
@@ -60,5 +45,26 @@ namespace kulonut_Mobil.ViewModels
 			await popupService.ShowPolygonAsync(response.data);
 			IsLoading = false;
         }
+		[RelayCommand]
+		private async Task RemoveFilter()
+		{
+			dataService.FilterModel = null;
+			await HandleMapLoading();
+		}
+		[RelayCommand]
+		private async Task HandleMapLoading()
+		{
+			IsLoading = true;
+			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
+			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
+				await popupService.ShowErrorAsync("Nem találtunk ilyen területet");
+
+			if (polygons != null && polygons.data != null)
+			{
+				mapHandler.ShowPolygons(polygons.data);
+				Debug.WriteLine(polygons.data.Count);
+			}
+			IsLoading = false;
+		}
 	}
 }

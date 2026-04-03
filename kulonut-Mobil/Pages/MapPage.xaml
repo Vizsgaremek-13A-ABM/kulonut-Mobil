@@ -24,7 +24,10 @@
                         Command="{Binding PolygonClickedCommand}"/>
                 </mapsui:MapControl.Behaviors>
             </mapsui:MapControl>
-            <ImageButton WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" VerticalOptions="Start" Source="filter" Command="{Binding OpenFilterCommand}"/>
+            <HorizontalStackLayout Spacing="30" Margin="20" HorizontalOptions="End" VerticalOptions="Start">
+                <ImageButton WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" Source="close" Command="{Binding RemoveFilterCommand}" />
+                <ImageButton WidthRequest="50" HeightRequest="50"  Source="filter" Command="{Binding OpenFilterCommand}"/>
+            </HorizontalStackLayout>
         </Grid>
         <views:Loader IsLoading="{Binding IsLoading}"/>
     </Grid>
