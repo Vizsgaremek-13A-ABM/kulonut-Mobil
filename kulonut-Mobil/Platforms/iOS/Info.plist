@@ -25,5 +25,11 @@
 	</array>
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/appicon.appiconset</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Szükségünk van a helyzetedre a térkép megjelenítéséhez.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Szükségünk van a biometrikus azonosításra.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Szükségünk van a fényképeinek elérésére.</string>
 </dict>
 </plist>

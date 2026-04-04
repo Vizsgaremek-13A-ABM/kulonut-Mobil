@@ -59,6 +59,7 @@
 	  <None Remove="Resources\Images\Icons\close.png" />
 	  <None Remove="Resources\Images\Icons\faceidicon.png" />
 	  <None Remove="Resources\Images\Icons\Filter.png" />
+	  <None Remove="Resources\Images\Icons\locator.png" />
 	  <None Remove="Resources\Images\Icons\mapicon.png" />
 	  <None Remove="Resources\Images\Icons\tableicon.png" />
 	</ItemGroup>
@@ -87,6 +88,10 @@
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Icons\mapicon.png" />
 	  <MauiImage Include="Resources\Images\Icons\tableicon.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiImage Include="Resources\Images\Icons\locator.png" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -6,6 +6,7 @@ using Mapsui.Nts.Extensions;
 using Mapsui.Projections;
 using Mapsui.Styles;
 using Mapsui.Tiling;
+using System.Threading.Tasks;
 using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.MapFeatures
@@ -13,7 +14,8 @@ namespace kulonut_Mobil.MapFeatures
 	public class MapHandler : IMapHandler
 	{
 		private readonly Map map;
-		private MemoryLayer polyLayer;
+		private MemoryLayer? polyLayer;
+		private MyLocationLayer? locationLayer;
 
 		public MapHandler(Map _map)
 		{
@@ -23,17 +25,40 @@ namespace kulonut_Mobil.MapFeatures
 		public void CreateMap()
 		{
 			map.Layers.Add(OpenStreetMap.CreateTileLayer());
+			locationLayer = new MyLocationLayer(map)
+			{
+				Enabled = true,
+				Opacity = 1f,
+			};
+			map.Layers.Add(locationLayer);
 			polyLayer = new MemoryLayer { Name="PolygonLayer", Style = CreatePolyStyle(), IsMapInfoLayer = true };
 			map.Layers.Add(polyLayer);
 			var gyor = SphericalMercator.FromLonLat(17.6504, 47.6875);
-			map.Home = n => n.CenterOnAndZoomTo(gyor.ToMPoint(), 3.0);
+			map.Home = n => n.CenterOnAndZoomTo(gyor.ToMPoint(), 15, 500, Mapsui.Animations.Easing.CubicOut);
 		}
 
 		public void ShowPolygons(List<PolygonModel> polygons)
 		{
-			polyLayer.Features = new List<IFeature>();
+			polyLayer!.Features = new List<IFeature>();
 			polygons.ForEach(AddPolygon);
 			polyLayer.DataHasChanged();
+		}
+		public async Task Locate()
+		{
+			PermissionStatus status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+			if (status != PermissionStatus.Granted)
+				status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+			
+			if (status != PermissionStatus.Granted)
+				throw new UnauthorizedAccessException("Location permission was denied.");
+
+			GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+			Location? location = await Geolocation.Default.GetLocationAsync(request);
+			if (location == null)
+				throw new InvalidOperationException("Unable to retrieve location.");
+			MPoint userPos = SphericalMercator.FromLonLat(location.Longitude, location.Latitude).ToMPoint();
+			locationLayer!.UpdateMyLocation(userPos);
+			map.Navigator.CenterOnAndZoomTo(userPos, 15, 500, Mapsui.Animations.Easing.CubicOut);				
 		}
 		private void AddPolygon(PolygonModel polygonModel)
 		{
@@ -49,7 +74,7 @@ namespace kulonut_Mobil.MapFeatures
 			
 			var ntsPolygon = coords.ToPolygon();
 			var feature = new PolygonFeature(ntsPolygon, polygonModel.polygon_id);
-			polyLayer.Features = polyLayer.Features.Append(feature).ToList();
+			polyLayer!.Features = polyLayer.Features.Append(feature).ToList();
 		}
 		private IStyle CreatePolyStyle() => new VectorStyle
 		{
