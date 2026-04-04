@@ -9,51 +9,64 @@ namespace kulonut_Mobil.Validation
 {
     public static class InputValidator
     {
-        public static string? ValidateEmail(string? email)
-        {
-            if (string.IsNullOrWhiteSpace(email))
-                return "Email is required.";
+		public static string? ValidateEmail(string? email)
+		{
+			if (string.IsNullOrWhiteSpace(email))
+				return "Az e-mail cím megadása kötelező.";
 
-            email = email.Trim();
-            var pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
-            if (!Regex.IsMatch(email, pattern))
-                return "Invalid email format.";
+			email = email.Trim();
+			var pattern = @"^[^@\s]+@[^@\s]+\.[^@\s]+$";
 
-            return null;
-        }
-        public static string? ValidateName(string? name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-                return "Name is required.";
+			if (!Regex.IsMatch(email, pattern))
+				return "Érvénytelen e-mail formátum.";
 
-            name = name.Trim();
+			return null;
+		}
+		public static string? ValidateName(string? name)
+		{
+			if (string.IsNullOrWhiteSpace(name))
+				return "A név megadása kötelező.";
 
-            if (name.Length < 2)
-                return "Name must be at least 2 characters long.";
+			name = name.Trim();
 
-            if (!Regex.IsMatch(name, @"^[a-zA-Z\s]+$"))
-                return "Name can only contain letters and spaces.";
+			if (name.Length < 2)
+				return "A névnek legalább 2 karakter hosszúnak kell lennie.";
 
-            return null;
-        }
-        public static string? ValidatePassword(string? password)
-        {
-            if (string.IsNullOrWhiteSpace(password))
-                return "Password is required.";
+			if (!Regex.IsMatch(name, @"^[\p{L}\s]+$"))
+				return "A név csak betűket és szóközt tartalmazhat.";
 
-            if (password.Length < 4)
-                return "Password must be at least 4 characters.";
+			return null;
+		}
+		public static string? ValidatePassword(string? password)
+		{
+			if (string.IsNullOrWhiteSpace(password))
+				return "A jelszó megadása kötelező.";
 
-            //if (!Regex.IsMatch(password, @"[A-Z]"))
-            //    return "Must contain an uppercase letter.";
+			if (password.Length < 8)
+				return "A jelszónak legalább 8 karakter hosszúnak kell lennie.";
 
-            if (!Regex.IsMatch(password, @"[a-z]"))
-                return "Must contain a lowercase letter.";
+			if (!Regex.IsMatch(password, @"[a-z]"))
+				return "A jelszónak tartalmaznia kell legalább egy kisbetűt.";
 
-            //if (!Regex.IsMatch(password, @"\d"))
-            //    return "Must contain a number.";
+			if (!Regex.IsMatch(password, @"[A-Z]"))
+				return "A jelszónak tartalmaznia kell legalább egy nagybetűt.";
 
-            return null;
-        }
-    }
+			if (!Regex.IsMatch(password, @"\d"))
+				return "A jelszónak tartalmaznia kell legalább egy számot.";
+
+			if (!Regex.IsMatch(password, @"[^A-Za-z\d\.]"))
+				return "A jelszónak tartalmaznia kell legalább egy speciális karaktert.";
+
+			return null;
+		}
+		public static string? ValidateDateInterval(DateTime? startDate, DateTime? endDate)
+		{
+			if (startDate != null && startDate.Value < DateTime.Now)
+				return "A kezdő dátum nem lehet a múltban.";
+			if (startDate != null && endDate != null && startDate > endDate)
+				return "A kezdő dátum nem lehet későbbi, mint a befejező dátum.";
+
+			return null;
+		}
+	}
 }

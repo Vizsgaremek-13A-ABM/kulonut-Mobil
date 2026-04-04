@@ -50,6 +50,8 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task Submit()
 		{
+			if (!InputCheck())
+				return;
 			UserModel? updatedUser = await userService.UpdateCurrentUserAsync(requestBody);
 			if(updatedUser == null)
 			{
@@ -57,6 +59,33 @@ namespace kulonut_Mobil.ViewModels
 				return;
 			}
 			await ClosePopup();
+		}
+		private bool InputCheck()
+		{
+			if (string.IsNullOrWhiteSpace(PropValue))
+			{
+				ErrorText = $"{PropName} megadása kötelező.";
+				return false;
+			}
+			string? error = GetError();
+
+			if (error != null)
+			{
+				ErrorText = error;
+				return false;
+			}
+			ErrorText = null;
+			return true;
+		}
+		private string? GetError()
+		{
+			return PropName switch
+			{
+				"Email Cím" => Validation.InputValidator.ValidateEmail(PropValue),
+				"Név" => Validation.InputValidator.ValidateName(PropValue),
+				"Felhasználónév" => Validation.InputValidator.ValidateName(PropValue),
+				_ => null
+			};
 		}
 		private Dictionary<string, string> requestBody => 
 			string.IsNullOrEmpty(PropValue) ||
