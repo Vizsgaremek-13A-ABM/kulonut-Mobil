@@ -4,6 +4,7 @@ using kulonut_Mobil.Models;
 using kulonut_Mobil.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,14 +22,15 @@ namespace kulonut_Mobil.ViewModels
 		public FilterPopupViewModel(IDataService _dataService)
 		{
 			dataService = _dataService;
-			if (isPolygonFilter && dataService.PolygonFilterModel != null)
-				FilterModel = dataService.PolygonFilterModel;
-			else if(!isPolygonFilter && dataService.ProjectFilterModel != null) 
-				FilterModel = dataService.ProjectFilterModel;
+			
 		}
 		public void Initialize(bool _isPolygonFilter)
 		{
 			isPolygonFilter = _isPolygonFilter;
+			if (isPolygonFilter && dataService.PolygonFilterModel != null)
+				FilterModel = dataService.PolygonFilterModel;
+			else if (!isPolygonFilter && dataService.ProjectFilterModel != null)
+				FilterModel = dataService.ProjectFilterModel;
 		}
 		[RelayCommand]
 		private async Task Filter()
