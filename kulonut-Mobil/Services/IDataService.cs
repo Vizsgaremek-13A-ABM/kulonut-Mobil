@@ -10,6 +10,8 @@ namespace kulonut_Mobil.Services
 {
 	public interface IDataService
 	{
+		public FilterModel? ProjectFilterModel { get; set; }
+		public FilterModel? PolygonFilterModel { get; set; }
 		public Task<ProjectsResponseDTO?> GetProjects();
 		public Task<ProjectsByPolygonResponseDTO?> GetProjectsByPolygonId(int polygonId);
 		public Task<ProjectResponseDTO?> GetProjectById(int projectId);

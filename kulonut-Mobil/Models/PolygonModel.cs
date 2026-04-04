@@ -11,6 +11,7 @@ namespace kulonut_Mobil.Models
 		public int polygon_id { get; set; }
 		public string? name { get; set; }
 		public Coordinate[]? coordinates { get; set; }
+		public ProjectMapModel[]? projects { get; set; }
 	}
 	public class Coordinate
 	{

@@ -26,13 +26,28 @@ namespace kulonut_Mobil.ViewModels
 			popupService = _popupService;
 		}
 		[RelayCommand]
+		private async Task OpenFilter()
+		{
+			await popupService.ShowFilterAsync(false);
+			await HandleProjectLoad();
+		}
+		[RelayCommand]
+		private async Task RemoveFilter() 
+		{
+			dataService.ProjectFilterModel = null;
+			await HandleProjectLoad();
+		}
+		[RelayCommand]
 		private async Task HandleProjectLoad()
 		{
 			IsLoading = true;
 			ProjectsResponseDTO? projects_response = await dataService.GetProjects();
-			if (projects_response == null || projects_response.data == null)
+			if (projects_response == null || projects_response.data == null || projects_response.data.Count == 0)
 			{
-				await popupService.ShowErrorAsync("Nem sikerult betölteni a projekteket");
+				if(projects_response == null || projects_response.data == null)
+					await popupService.ShowErrorAsync("Nem sikerult betölteni a projekteket");
+				else
+					await popupService.ShowErrorAsync("Nincs ilyen projekt");
 				IsLoading = false;
 				return;
 			}

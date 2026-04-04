@@ -5,7 +5,7 @@ using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using System.Diagnostics;
-
+using System.Threading.Tasks;
 using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.ViewModels
@@ -16,33 +16,20 @@ namespace kulonut_Mobil.ViewModels
 		private readonly IDataService dataService;
 		private readonly IPopupService popupService;
 		private readonly IMapHandler mapHandler;
-		private readonly IAuthService authService;
 		public Map Map { get; } = new Map();
     
-		public MapViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService, IAuthService authService) : base(userService)
+		public MapViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService) : base(userService)
 		{
 			dataService = _dataService;
 			popupService = _popupService;
 			mapHandler = new MapHandler(Map);
 			mapHandler.CreateMap();
-			this.authService = authService;
 		}
-
-
 		[RelayCommand]
-		private async Task HandleMapLoading()
+		private async Task OpenFilter()
 		{
-			IsLoading = true;
-			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
-			if(polygons == null || polygons.data == null || polygons.data.Count == 0)
-			{
-				await popupService.ShowErrorAsync("Nem találtunk polygont");
-				IsLoading = false;
-				return;
-			}
-			Debug.WriteLine(polygons.data.Count);
-			mapHandler.ShowPolygons(polygons.data);
-			IsLoading = false;
+			await popupService.ShowFilterAsync(true);
+			await HandleMapLoading();
 		}
 		[RelayCommand]
 		private async Task PolygonClicked(PolygonFeature polygonFeature)
@@ -58,5 +45,26 @@ namespace kulonut_Mobil.ViewModels
 			await popupService.ShowPolygonAsync(response.data);
 			IsLoading = false;
         }
+		[RelayCommand]
+		private async Task RemoveFilter()
+		{
+			dataService.PolygonFilterModel = null;
+			await HandleMapLoading();
+		}
+		[RelayCommand]
+		private async Task HandleMapLoading()
+		{
+			IsLoading = true;
+			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
+			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
+				await popupService.ShowErrorAsync("Nem találtunk ilyen területet");
+
+			if (polygons != null && polygons.data != null)
+			{
+				mapHandler.ShowPolygons(polygons.data);
+				Debug.WriteLine(polygons.data.Count);
+			}
+			IsLoading = false;
+		}
 	}
 }

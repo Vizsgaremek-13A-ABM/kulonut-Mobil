@@ -35,5 +35,11 @@ namespace kulonut_Mobil.Services
 			popup.Initialize(propname);
 			await Application.Current!.MainPage!.ShowPopupAsync(popup);
 		}
+		public async Task ShowFilterAsync(bool isPolygonFilter)
+		{
+			FilterPopup filterPopup = _serviceProvider.GetRequiredService<FilterPopup>();
+			filterPopup.Initialize(isPolygonFilter);
+			await Application.Current!.MainPage!.ShowPopupAsync(filterPopup);
+		}
 	}
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tool:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tool="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:view="clr-namespace:kulonut_Mobil.Views"
+            x:Class="kulonut_Mobil.Popups.FilterPopup"
+            Color="Transparent">
+    <Border Style="{StaticResource PopupBorder}">
+        <Grid Margin="5" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
+            <Label Margin="2, 0" Grid.Row="0" Text="Szűrők" FontSize="26" FontAttributes="Bold"/>
+            <view:AuthEntry Margin="0, 20, 0, 0" Grid.Row="1" LabelText="Projektnév" Text="{Binding FilterModel.name}"/>
+            <Label Grid.Row="2" Style="{StaticResource FilterLabel}" Text="Tervkiadás dátuma ezután"/>
+            <Border Style="{StaticResource AuthBorder}" Grid.Row="3">
+                <Grid>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <DatePicker Grid.Column="0" Date="{Binding FilterModel.After}" Style="{StaticResource FilterDate}"/>
+                        <ImageButton Grid.Column="1" Source="close" WidthRequest="25" HeightRequest="25" Command="{Binding ClearAfterCommand}"
+                                IsVisible="{Binding FilterModel.After, Converter={tool:IsNotNullConverter}}" HorizontalOptions="End"/>
+                    </Grid>
+                    <Label Style="{StaticResource FilterHideLabel}" IsVisible="{Binding FilterModel.After, Converter={tool:IsNullConverter}}" />
+                </Grid>
+            </Border>
+            <Label Grid.Row="4" Style="{StaticResource FilterLabel}" Text="~ ezelőtt"/>
+            <Border Style="{StaticResource AuthBorder}" Grid.Row="5">
+                <Grid>
+                    <Grid ColumnDefinitions="*, Auto">
+                        <DatePicker Grid.Column="0" Date="{Binding FilterModel.Before}" Style="{StaticResource FilterDate}"/>
+                        <ImageButton Grid.Column="1" Source="close" WidthRequest="25" HeightRequest="25" Command="{Binding ClearBeforeCommand}"
+                                     IsVisible="{Binding FilterModel.Before, Converter={tool:IsNotNullConverter}}" HorizontalOptions="End"/>
+                    </Grid>
+                    <Label Style="{StaticResource FilterHideLabel}" IsVisible="{Binding FilterModel.Before, Converter={tool:IsNullConverter}}" />
+                </Grid>
+            </Border>
+            <Label Text="{Binding Error}" IsVisible="{Binding Error, Converter={tool:IsStringNotNullOrEmptyConverter}}" Grid.Row="6" Style="{StaticResource ErrorLabel}"/>
+            <HorizontalStackLayout Margin="0, 15, 0, 0" Spacing="10" Grid.Row="7">
+                <Button Style="{StaticResource PopupButton}" Text="Szűrés" Command="{Binding FilterCommand}"/>
+                <Button Style="{StaticResource PopupButton}" Text="Bezárás" BackgroundColor="{StaticResource Secondary}" Command="{Binding ClosePopupCommand}"/>
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+</tool:Popup>

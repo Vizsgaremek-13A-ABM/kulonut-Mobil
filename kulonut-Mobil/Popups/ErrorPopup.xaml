@@ -4,11 +4,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Popups.ErrorPopup"
              Color="Transparent">
-    <Border Padding="20" WidthRequest="350" StrokeShape="RoundRectangle 30" BackgroundColor="White">
+    <Border Style="{StaticResource PopupBorder}">
         <Grid Margin="5" RowDefinitions="Auto, Auto, *">
             <Label Grid.Row="0" Text="{Binding TitleHead}" FontSize="26" FontAttributes="Bold"/>
             <Label Grid.Row="1" Margin="0, 25" Text="{Binding Description}" FontSize="18"/>
-            <Button Grid.Row="2" x:Name="CloseBTN" Clicked="CloseBTN_Clicked" Style="{StaticResource ErrorPopupButton}" Text="Bezárás"/>
+            <Button Grid.Row="2" x:Name="CloseBTN" Clicked="CloseBTN_Clicked" Style="{StaticResource PopupButton}" Text="Bezárás"/>
         </Grid>
     </Border>
 </tool:Popup>

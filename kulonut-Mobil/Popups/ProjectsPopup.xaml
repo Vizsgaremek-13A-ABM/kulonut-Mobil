@@ -7,9 +7,9 @@
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              Color="Transparent">
 
-    <Border WidthRequest="300" HeightRequest="600" Padding="20" StrokeShape="RoundRectangle 30" BackgroundColor="White">
+    <Border WidthRequest="300" HeightRequest="600" Style="{StaticResource PopupBorder}">
         <Grid RowDefinitions="Auto,*,Auto">
-            <Label Grid.Row="0" Text="Projektek az adott polygonhoz" HorizontalOptions="Center" FontSize="22" FontAttributes="Bold"/>
+            <Label Grid.Row="0" Text="Projektek az adott területhez" HorizontalOptions="Center" FontSize="22" FontAttributes="Bold"/>
             <CollectionView Grid.Row="1" ItemsSource="{Binding ProjectsByPolygon.projects}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -20,7 +20,7 @@
                                         CommandParameter="{Binding project_id}" />
                             </Border.GestureRecognizers>
                             <VerticalStackLayout Spacing="5">
-                                <views:DetailsLabel BodyFontSize="16" HeaderFontSize="20" HeaderText="Projekt Címe" BodyText="{Binding name}" Margin="0, 0, 0, 10"/>
+                                <views:DetailsLabel BodyFontSize="16" HeaderFontSize="20" HeaderText="Projekt Neve" BodyText="{Binding name}" Margin="0, 0, 0, 10"/>
                                 <views:DetailsLabel BodyFontSize="16" HeaderText="Kiadás Dátuma" HeaderFontSize="20" BodyText="{Binding plan_issue_date, StringFormat='{0:yyyy.MM.dd}'}"/>
                             </VerticalStackLayout>
                         </Border>

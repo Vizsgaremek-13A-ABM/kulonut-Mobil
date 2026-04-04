@@ -1,4 +1,5 @@
 ﻿using kulonut_Mobil.Models;
+using Mapsui;
 using Mapsui.Extensions;
 using Mapsui.Layers;
 using Mapsui.Nts.Extensions;
@@ -30,6 +31,7 @@ namespace kulonut_Mobil.MapFeatures
 
 		public void ShowPolygons(List<PolygonModel> polygons)
 		{
+			polyLayer.Features = new List<IFeature>();
 			polygons.ForEach(AddPolygon);
 			polyLayer.DataHasChanged();
 		}

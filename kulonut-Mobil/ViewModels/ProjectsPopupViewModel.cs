@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-    public partial class ProjectsPopupViewModel : PopupViewModel
+    public partial class ProjectsPopupViewModel : PopupViewModelBase
     {
         [ObservableProperty]
         private ProjectsByPolygonModel? projectsByPolygon;
@@ -24,7 +24,7 @@ namespace kulonut_Mobil.ViewModels
         [RelayCommand]
         private async Task NavigateToDetails(int project_id)
         {
-            await CloseAsync();
+            await ClosePopup();
             await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(MapPage)}&{ProjectDetailsViewModel.ID_URL}={project_id}");
         }
 

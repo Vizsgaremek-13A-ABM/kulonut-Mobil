@@ -12,6 +12,7 @@
     <Color x:Key="Secondary">#e67b11</Color>
     <Color x:Key="SecondaryDarkText">#c45900</Color>
     <Color x:Key="Tertiary">#351512</Color>
+    <Color x:Key="ErrorColor">#e21</Color>
 
     <Color x:Key="LightestGray">#C8C8C8</Color>
     <Color x:Key="LightGray">#999999</Color>

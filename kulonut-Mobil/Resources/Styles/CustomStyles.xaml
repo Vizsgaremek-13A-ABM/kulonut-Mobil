@@ -20,11 +20,27 @@
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
+    <Style TargetType="Label" x:Key="ErrorLabel">
+        <Setter Property="TextColor" Value="{StaticResource ErrorColor}"/>
+        <Setter Property="Margin" Value="0, 5"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+    <Style TargetType="Label" x:Key="FilterHideLabel">
+        <Setter Property="Text" Value="Válassz dátumot"/>
+        <Setter Property="TextColor" Value="{StaticResource LightestGray}"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalTextAlignment" Value="Center"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
+    <Style TargetType="Label" x:Key="FilterLabel" BaseResourceKey="AuthLabel">
+        <Setter Property="Margin" Value="0, 15, 0, 0"/>
+    </Style>
     <Style TargetType="Button" x:Key="AuthButton">
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="FontSize" Value="20"/>
     </Style>
-    <Style TargetType="Button" x:Key="ErrorPopupButton">
+    <Style TargetType="Button" x:Key="PopupButton">
         <Setter Property="WidthRequest" Value="100"/>
         <Setter Property="HeightRequest" Value="40"/>
         <Setter Property="HorizontalOptions" Value="Start"/>
@@ -70,6 +86,16 @@
         <Setter Property="StrokeThickness" Value="0"/>
         <Setter Property="WidthRequest" Value="200"/>
         <Setter Property="HeightRequest" Value="200"/>
+    </Style>
+    <Style TargetType="Border" x:Key="PopupBorder">
+        <Setter Property="WidthRequest" Value="350"/>
+        <Setter Property="Padding" Value="20"/>
+        <Setter Property="StrokeShape" Value="RoundRectangle 30"/>
+        <Setter Property="BackgroundColor" Value="White"/>
+    </Style>
+    <Style TargetType="DatePicker" x:Key="FilterDate">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Format" Value="yyyy/MM/dd"/>
     </Style>
     <Style TargetType="Entry" x:Key="AuthEntry">
         <Setter Property="FontSize" Value="16"/> 
