@@ -1,3 +1,4 @@
+using CommunityToolkit.Maui.Core;
 using kulonut_Mobil.ViewModels;
 
 namespace kulonut_Mobil.Pages;

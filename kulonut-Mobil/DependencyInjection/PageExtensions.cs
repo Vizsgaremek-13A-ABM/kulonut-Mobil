@@ -18,7 +18,7 @@ namespace kulonut_Mobil.DependencyInjection
 			.AddSingleton<MapPage>()
 			.AddSingleton<TablePage>()
 			.AddSingleton<PasswordChangePage>()
-			.AddSingleton<ProjectDetailsPage>()
+			.AddTransient<ProjectDetailsPage>()
 			.AddSingleton<PasswordResetPage>()
 			.AddSingleton<UserDetailsPage>()
 			.AddSingleton<RegisterConfirmationPage>()

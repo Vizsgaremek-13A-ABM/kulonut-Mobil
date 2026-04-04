@@ -11,26 +11,18 @@ namespace kulonut_Mobil.ViewModels
 {
 	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
 	[QueryProperty(nameof(Id), ID_URL)]
-	public partial class ProjectDetailsViewModel : UserViewModelBase
+	public partial class ProjectDetailsViewModel : MapViewModelBase
 	{
-		private readonly IDataService dataService;
-		private readonly IPopupService popupService;
-		private readonly IMapHandler mapHandler;
 
 		public const string NAV_URL = "navigatedFrom";
 		public const string ID_URL = "id";
 		public string? NavigatedFrom { get; set; }
 		public int Id { get; set; }
-		public Map Map { get; } = new Map();
 
 		[ObservableProperty]
 		private ProjectModel? currentProject;
-		public ProjectDetailsViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService) : base(userService)
+		public ProjectDetailsViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService) : base(userService, _dataService, _popupService)
 		{
-			dataService = _dataService;
-			popupService = _popupService;
-			mapHandler = new MapHandler(Map);
-			mapHandler.CreateMap();
 		}
 
 		[RelayCommand]
@@ -46,7 +38,6 @@ namespace kulonut_Mobil.ViewModels
 				await HandleMapLoading();
 			}
 			IsLoading = false;
-
 		}
 		public override bool OnBackButtonPressed()
 		{
@@ -63,7 +54,20 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowErrorAsync("Nem találtunk területet az adott polygonhoz");
 
 			if (polygons != null && polygons.data != null)
+			{
 				mapHandler.ShowPolygons(polygons.data);
+				NavigateCenter(polygons.data);
+			}
+		}
+		private void NavigateCenter(List<PolygonModel> polygons)
+		{
+			List<PolygonModel> validPolygons = polygons.Where(p => p.coordinates != null && p.coordinates.Any()).ToList();
+			if (validPolygons.Any())
+			{
+				double lat_center = validPolygons.Average(x => x.coordinates!.Average(y => y.latitude));
+				double lon_center = validPolygons.Average(x => x.coordinates!.Average(y => y.longitude));
+				mapHandler.ZoomTo(lon_center, lat_center);
+			}
 		}
 	}
 }

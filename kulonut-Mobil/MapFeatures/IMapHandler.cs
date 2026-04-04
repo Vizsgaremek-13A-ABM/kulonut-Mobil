@@ -12,5 +12,6 @@ namespace kulonut_Mobil.MapFeatures
 		public void CreateMap();
 		public void ShowPolygons(List<PolygonModel> polygons);
 		public Task Locate();
+		public void ZoomTo(double lon, double lat, double resolution = 15);
 	}
 }

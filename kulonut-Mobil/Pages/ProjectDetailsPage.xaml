@@ -19,7 +19,7 @@
         <Border Grid.Row="0" Margin="0, 30" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
             <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Neve" BodyText="{Binding CurrentProject.project_name}" />
         </Border>
-        <ScrollView Grid.Row="1" >
+        <ScrollView x:Name="MainScrollView" Grid.Row="1" >
             <VerticalStackLayout Spacing="30" Margin="0,0,0,20">
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
@@ -67,11 +67,8 @@
                 </Border>
                 <Grid Margin="20" HeightRequest="600" WidthRequest="400">
                     <mapsui:MapControl Map="{Binding Map}"/>
-                    <HorizontalStackLayout Spacing="30" Margin="20" HorizontalOptions="End" VerticalOptions="Start" >
-                        <ImageButton WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" Source="close" Command="{Binding RemoveFilterCommand}" />
-                        <ImageButton WidthRequest="50" HeightRequest="50"  Source="filter" Command="{Binding OpenFilterCommand}"/>
-                        <ImageButton WidthRequest="50" HeightRequest="50"  Source="locator" Command="{Binding LocateCommand}"/>
-                    </HorizontalStackLayout>
+                     <ImageButton Margin="20" WidthRequest="50" HeightRequest="50"  Source="locator" Command="{Binding LocateCommand}"
+                                  HorizontalOptions="End" VerticalOptions="Start"/>
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>

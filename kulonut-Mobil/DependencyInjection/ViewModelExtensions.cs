@@ -17,7 +17,7 @@ namespace kulonut_Mobil.DependencyInjection
 			.AddSingleton<MapViewModel>()
 			.AddSingleton<TableViewModel>()
 			.AddSingleton<PasswordChangeViewModel>()
-			.AddSingleton<ProjectDetailsViewModel>()
+			.AddTransient<ProjectDetailsViewModel>()
 			.AddSingleton<PasswordResetViewModel>()
 			.AddSingleton<UserDetailsViewModel>()
 			.AddTransient<ProjectsPopupViewModel>()
