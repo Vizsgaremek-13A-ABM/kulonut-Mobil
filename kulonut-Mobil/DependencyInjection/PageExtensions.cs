@@ -12,14 +12,14 @@ namespace kulonut_Mobil.DependencyInjection
     {
 		public static IServiceCollection AddPages(this IServiceCollection services)
 		{
-			services.AddSingleton<MainPage>()
+			services.AddTransient<MainPage>()
 			.AddTransient<AppShell>()
-			.AddSingleton<RegisterPage>()
+			.AddTransient<RegisterPage>()
 			.AddSingleton<MapPage>()
 			.AddSingleton<TablePage>()
-			.AddSingleton<PasswordChangePage>()
+			.AddTransient<PasswordChangePage>()
 			.AddTransient<ProjectDetailsPage>()
-			.AddSingleton<PasswordResetPage>()
+			.AddTransient<PasswordResetPage>()
 			.AddSingleton<UserDetailsPage>()
 			.AddSingleton<RegisterConfirmationPage>()
 			.AddTransient<ProjectsPopup>()

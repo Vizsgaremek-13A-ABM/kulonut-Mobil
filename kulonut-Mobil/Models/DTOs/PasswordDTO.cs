@@ -9,7 +9,8 @@ namespace kulonut_Mobil.Models.DTOs
 	public class ChangePasswordRequestDTO
 	{
 		public string? current_password { get; set; }
-		public string? new_password { get; set; }
+		public string? password { get; set; }
+		public string? password_confirmation { get; set; }
 	}
 	public class ForgotPasswordRequestDTO
 	{

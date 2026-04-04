@@ -1,4 +1,8 @@
-﻿using kulonut_Mobil.Pages;
+﻿using CommunityToolkit.Mvvm.Input;
+using kulonut_Mobil.Models.DTOs;
+using kulonut_Mobil.Pages;
+using kulonut_Mobil.Services;
+using kulonut_Mobil.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +16,14 @@ namespace kulonut_Mobil.ViewModels
 	{
 		public const string NAV_URL = "navigatedFrom";
 		public string? NavigatedFrom { get; set; }
+		public ForgotPasswordRequestDTO ForgotPasswordRequest { get; set; } = new ForgotPasswordRequestDTO();
+		private readonly IAuthService authService;
+		private readonly IPopupService popupService;
+		public PasswordResetViewModel(IAuthService _authService, IPopupService _popupService)
+		{
+			authService = _authService;
+			popupService = _popupService;
+		}
 		public override bool OnBackButtonPressed()
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>
@@ -21,6 +33,24 @@ namespace kulonut_Mobil.ViewModels
 				else
 					await Shell.Current.GoToAsync($"//{NavigatedFrom}");
 			});
+			return true;
+		}
+		[RelayCommand]
+		private async Task Reset()
+		{
+			bool check_result = await InputCheck();
+			if (!check_result) return;
+			await authService.RequestPasswordResetAsync(ForgotPasswordRequest);
+			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+		}
+		private async Task<bool> InputCheck()
+		{
+			string? email_valid = InputValidator.ValidateEmail(ForgotPasswordRequest.email);
+			if (email_valid != null)
+			{
+				await popupService.ShowErrorAsync(email_valid);
+				return false;
+			}
 			return true;
 		}
 	}

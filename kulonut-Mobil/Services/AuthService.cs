@@ -43,7 +43,7 @@ namespace kulonut_Mobil.Services
 		}
 		public async Task LogoutAsync()
 		{
-			await apiClient.PostAsync<LogoutResponseDTO?, object?>("auth/logout", null);
+			await apiClient.PostAsync<MessageResponseDTO?, object?>("auth/logout", null);
 			SecureStorage.Remove(TOKEN_KEY);
 			token = null;
 		}
@@ -80,13 +80,13 @@ namespace kulonut_Mobil.Services
 				return false;
 			}
 		}
-		public Task RequestPasswordResetAsync(ForgotPasswordRequestDTO request)
+		public async Task RequestPasswordResetAsync(ForgotPasswordRequestDTO request)
 		{
-			throw new NotImplementedException();
+			await apiClient.PostAsync<MessageResponseDTO?, ForgotPasswordRequestDTO>("auth/update-password", request);
 		}
-		public Task ChangePasswordAsync(ChangePasswordRequestDTO request)
+		public async Task ChangePasswordAsync(ChangePasswordRequestDTO request)
 		{
-			throw new NotImplementedException();
+			await apiClient.PostAsync<MessageResponseDTO?, ChangePasswordRequestDTO>("auth/update-password", request);
 		}
 	}
 }
