@@ -8,6 +8,7 @@ using Mapsui.Styles;
 using Mapsui.Tiling;
 using System.Threading.Tasks;
 using Map = Mapsui.Map;
+using Polygon = NetTopologySuite.Geometries.Polygon;
 
 namespace kulonut_Mobil.MapFeatures
 {
@@ -16,6 +17,10 @@ namespace kulonut_Mobil.MapFeatures
 		private readonly Map map;
 		private MemoryLayer? polyLayer;
 		private MyLocationLayer? locationLayer;
+
+		public const double DEFAULT_RESOLUTION = 15;
+		public const int DEFAULT_ANIM_TIME = 500;
+
 
 		public MapHandler(Map _map)
 		{
@@ -56,9 +61,13 @@ namespace kulonut_Mobil.MapFeatures
 			Location? location = await Geolocation.Default.GetLocationAsync(request);
 			if (location == null)
 				throw new InvalidOperationException("Unable to retrieve location.");
-			MPoint userPos = SphericalMercator.FromLonLat(location.Longitude, location.Latitude).ToMPoint();
+			ZoomTo(location.Longitude, location.Latitude);
+		}
+		public void ZoomTo(double lon, double lat, double resolution = DEFAULT_RESOLUTION)
+		{
+			MPoint userPos = SphericalMercator.FromLonLat(lon, lat).ToMPoint();
 			locationLayer!.UpdateMyLocation(userPos);
-			map.Navigator.CenterOnAndZoomTo(userPos, 15, 500, Mapsui.Animations.Easing.CubicOut);				
+			map.Navigator.CenterOnAndZoomTo(userPos, resolution, DEFAULT_ANIM_TIME, Mapsui.Animations.Easing.CubicOut);
 		}
 		private void AddPolygon(PolygonModel polygonModel)
 		{
@@ -71,14 +80,14 @@ namespace kulonut_Mobil.MapFeatures
 
 			if (!coords.First().Equals2D(coords.Last()))
 				coords.Add(coords.First());
-			
-			var ntsPolygon = coords.ToPolygon();
-			var feature = new PolygonFeature(ntsPolygon, polygonModel.polygon_id);
+
+			Polygon ntsPolygon = coords.ToPolygon();
+			PolygonFeature feature = new PolygonFeature(ntsPolygon, polygonModel.polygon_id);
 			polyLayer!.Features = polyLayer.Features.Append(feature).ToList();
 		}
 		private IStyle CreatePolyStyle() => new VectorStyle
 		{
-			Fill = new Mapsui.Styles.Brush(Mapsui.Styles.Color.FromArgb(80, 255, 165, 0)),
+			Fill = new Mapsui.Styles.Brush(Mapsui.Styles.Color.FromArgb(120, 255, 165, 0)),
 			Outline = new Pen(Mapsui.Styles.Color.Orange, 2)
 		};
 	}

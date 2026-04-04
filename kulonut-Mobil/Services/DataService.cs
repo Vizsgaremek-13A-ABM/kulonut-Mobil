@@ -52,9 +52,9 @@ namespace kulonut_Mobil.Services
 				dto.data = dto.data.Where(polygon => polygon.projects!.Any(polygonFilterFunc)).ToList();
 			return dto;
 		}
-		public async Task<List<PolygonModel>?> GetPolygonsByProject(int projectId)
+		public async Task<PolygonsResponseDTO?> GetPolygonsByProject(int projectId)
 		{
-			return await apiclient.GetWithCachingAsync<List<PolygonModel>>($"projects/{projectId}/polygons", $"ProjectPoly{projectId}");
+			return await apiclient.GetWithCachingAsync<PolygonsResponseDTO?>($"projects/{projectId}/polygons", $"ProjectPoly{projectId}");
 		}
 		private bool polygonFilterFunc(ProjectMapModel project)
 		{

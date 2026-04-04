@@ -1,44 +1,43 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using kulonut_Mobil.MapFeatures;
 using kulonut_Mobil.Models;
-using kulonut_Mobil.Pages;
+using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Services;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Map = Mapsui.Map;
+
 
 namespace kulonut_Mobil.ViewModels
 {
 	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
 	[QueryProperty(nameof(Id), ID_URL)]
-	public partial class ProjectDetailsViewModel : UserViewModelBase
+	public partial class ProjectDetailsViewModel : MapViewModelBase
 	{
+
 		public const string NAV_URL = "navigatedFrom";
 		public const string ID_URL = "id";
 		public string? NavigatedFrom { get; set; }
 		public int Id { get; set; }
-		private readonly IDataService dataService;
-		private readonly IPopupService popupService;
 
 		[ObservableProperty]
 		private ProjectModel? currentProject;
-		public ProjectDetailsViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService) : base(userService)
+		public ProjectDetailsViewModel(IUserService userService, IDataService _dataService, IPopupService _popupService) : base(userService, _dataService, _popupService)
 		{
-			dataService = _dataService;
-			popupService = _popupService;
 		}
 
 		[RelayCommand]
 		private async Task HandleProjectLoad()
 		{
-			var current_project = await dataService.GetProjectById(Id);
+			IsLoading = true;
+			ProjectResponseDTO? current_project = await dataService.GetProjectById(Id);
 			if (current_project == null || current_project.data == null)
 				await popupService.ShowErrorAsync($"Nincs ilyen projekt");
 			else
+			{
 				CurrentProject = current_project.data;
+				await HandleMapLoading();
+			}
+			IsLoading = false;
 		}
 		public override bool OnBackButtonPressed()
 		{
@@ -47,6 +46,28 @@ namespace kulonut_Mobil.ViewModels
 				await Shell.Current.GoToAsync($"//{NavigatedFrom}");
 			});
 			return true;
+		}
+		private async Task HandleMapLoading()
+		{
+			PolygonsResponseDTO? polygons = await dataService.GetPolygonsByProject(CurrentProject!.id);
+			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
+				await popupService.ShowErrorAsync("Nem találtunk területet az adott polygonhoz");
+
+			if (polygons != null && polygons.data != null)
+			{
+				mapHandler.ShowPolygons(polygons.data);
+				NavigateCenter(polygons.data);
+			}
+		}
+		private void NavigateCenter(List<PolygonModel> polygons)
+		{
+			List<PolygonModel> validPolygons = polygons.Where(p => p.coordinates != null && p.coordinates.Any()).ToList();
+			if (validPolygons.Any())
+			{
+				double lat_center = validPolygons.Average(x => x.coordinates!.Average(y => y.latitude));
+				double lon_center = validPolygons.Average(x => x.coordinates!.Average(y => y.longitude));
+				mapHandler.ZoomTo(lon_center, lat_center);
+			}
 		}
 	}
 }
