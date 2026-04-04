@@ -9,6 +9,7 @@ namespace kulonut_Mobil.Services
 {
     public interface IUserService
     {
+		public event EventHandler? CurrentUserChanged;
 		public Task<UserModel?> GetCurrentUserAsync(bool setCurrent = true);
 		public UserModel? GetCurrentUser();
 		public Task<UserModel?> GetCurrentUserFromStorageAsync(bool setCurrent = true);

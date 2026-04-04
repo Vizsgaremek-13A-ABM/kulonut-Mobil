@@ -21,6 +21,7 @@ namespace kulonut_Mobil.ViewModels
 		public AppShellViewModel(IAuthService _authService, IUserService userService) : base(userService)
 		{
 			authService = _authService;
+			userService.CurrentUserChanged += OnCurrentUserChanged;
 		}
 		[RelayCommand]
 		private async Task Logout()
@@ -29,9 +30,14 @@ namespace kulonut_Mobil.ViewModels
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
+		private async void OnCurrentUserChanged(object? sender, EventArgs e)
+		{
+			await HandleUserLoad();
+		}
 		public override bool OnBackButtonPressed()
 		{
 			return true;
 		}
+
 	}
 }

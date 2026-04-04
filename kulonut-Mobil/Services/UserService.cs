@@ -18,6 +18,7 @@ namespace kulonut_Mobil.Services
 		private IApiClient apiClient;
 		public const string USER_KEY = "user";
 		public const string ICON_NAME = "profile_icon";
+		public event EventHandler? CurrentUserChanged;
 		public UserService(IApiClient _apiClient)
 		{
 			apiClient = _apiClient;
@@ -57,6 +58,7 @@ namespace kulonut_Mobil.Services
 			if (response != null && response.data != null)
 			{
 				await SetCurrentUser(response.data);
+				OnCurrentUserChanged();
 				return response.data;
 			}
 
@@ -73,6 +75,7 @@ namespace kulonut_Mobil.Services
 			if(response != null && response.data != null)
 			{
 				await SetCurrentUser(response.data);
+				OnCurrentUserChanged();
 				return response.data;
 			}
 			Debug.WriteLine($"No User With Id {user!.id} found");
@@ -89,6 +92,10 @@ namespace kulonut_Mobil.Services
 		{
 			user = null;
 			SecureStorage.Remove(USER_KEY);
+		}
+		protected virtual void OnCurrentUserChanged()
+		{
+			CurrentUserChanged?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }
