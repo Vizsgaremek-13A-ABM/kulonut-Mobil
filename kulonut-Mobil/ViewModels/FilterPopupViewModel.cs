@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Services;
+using kulonut_Mobil.Validation;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -35,7 +36,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task Filter()
 		{
-			if (!inputCheck())
+			if (!InputCheck())
 				return;
 			Error = "";
 			if(isPolygonFilter)
@@ -54,13 +55,20 @@ namespace kulonut_Mobil.ViewModels
 		{
 			FilterModel.After = null;
 		}
-		private bool inputCheck()
+		private bool InputCheck()
 		{
 			if(FilterModel.Before == null && FilterModel.After == null && string.IsNullOrEmpty(FilterModel.name))
 			{
 				Error = "Valamelyik mezőt muszáj kitölteni";
 				return false;
 			}
+			string? date_error = InputValidator.ValidateDateInterval(FilterModel.After, FilterModel.Before);
+			if (date_error != null)
+			{
+				Error = date_error;
+				return false;
+			}
+			Error = string.Empty;
 			return true;
 		}
 

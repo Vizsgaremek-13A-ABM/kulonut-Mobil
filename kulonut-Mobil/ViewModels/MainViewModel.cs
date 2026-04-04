@@ -18,7 +18,7 @@ namespace kulonut_Mobil.ViewModels
 	{
 
 		[ObservableProperty]
-		private LoginRequestDTO loginRequestDTO;
+		private LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
 
 		[ObservableProperty]
 		private bool rememberLogin = false;
@@ -61,6 +61,8 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task Login()
 		{
+			bool check_result = await InputCheck();
+			if (!check_result) return;
 			IsLoading = true;
 			await HandleLogin();
 			IsLoading = false;
@@ -107,7 +109,7 @@ namespace kulonut_Mobil.ViewModels
 			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
 			if (user != null)
 			{
-				await Login();
+				await HandleLogin();
 				return;
 			}
 			await popupService.ShowErrorAsync("Nem található a megadott felhasználó");
@@ -132,8 +134,7 @@ namespace kulonut_Mobil.ViewModels
 		}
 		private async Task HandleLogin()
 		{
-			bool check_result = await InputCheck();
-			if (!check_result) return;
+			
 			UserModel? response = await authService.LoginAsync(LoginRequestDTO, RememberLogin);
 			if (response == null)
 			{

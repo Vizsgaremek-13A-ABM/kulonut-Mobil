@@ -55,7 +55,16 @@ namespace kulonut_Mobil.Validation
 				return "A jelszónak tartalmaznia kell legalább egy számot.";
 
 			if (!Regex.IsMatch(password, @"[^A-Za-z\d\.]"))
-				return "A jelszónak tartalmaznia kell legalább egy speciális karaktert (a pont nem számít annak).";
+				return "A jelszónak tartalmaznia kell legalább egy speciális karaktert.";
+
+			return null;
+		}
+		public static string? ValidateDateInterval(DateTime? startDate, DateTime? endDate)
+		{
+			if (startDate != null && startDate.Value < DateTime.Now)
+				return "A kezdő dátum nem lehet a múltban.";
+			if (startDate != null && endDate != null && startDate > endDate)
+				return "A kezdő dátum nem lehet későbbi, mint a befejező dátum.";
 
 			return null;
 		}
