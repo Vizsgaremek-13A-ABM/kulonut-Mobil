@@ -11,14 +11,14 @@ namespace kulonut_Mobil.DependencyInjection
     {
 		public static IServiceCollection AddViewModels(this IServiceCollection services)
 		{
-			services.AddSingleton<MainViewModel>()
+			services.AddTransient<MainViewModel>()
 			.AddSingleton<AppShellViewModel>()
-			.AddSingleton<RegisterViewModel>()
+			.AddTransient<RegisterViewModel>()
 			.AddSingleton<MapViewModel>()
 			.AddSingleton<TableViewModel>()
-			.AddSingleton<PasswordChangeViewModel>()
+			.AddTransient<PasswordChangeViewModel>()
 			.AddTransient<ProjectDetailsViewModel>()
-			.AddSingleton<PasswordResetViewModel>()
+			.AddTransient<PasswordResetViewModel>()
 			.AddSingleton<UserDetailsViewModel>()
 			.AddTransient<ProjectsPopupViewModel>()
 			.AddTransient<UserEditPopupViewModel>()

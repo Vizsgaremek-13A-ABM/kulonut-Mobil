@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.Models.DTOs
 {
-    public class LogoutResponseDTO
+    public class MessageResponseDTO
     {
         public string? message { get; set; }
     }

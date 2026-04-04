@@ -18,7 +18,7 @@ namespace kulonut_Mobil.ViewModels
 	{
 
 		[ObservableProperty]
-		private LoginRequestDTO loginRequestDTO = new LoginRequestDTO();
+		private LoginRequestDTO loginRequestDTO;
 
 		[ObservableProperty]
 		private bool rememberLogin = false;
@@ -32,6 +32,7 @@ namespace kulonut_Mobil.ViewModels
 			authService = _authService;
 			popupService = _popupService;
 			userService = _userService;
+			
 		}
 		[RelayCommand]
 		private async Task BiometricAuth()
@@ -54,6 +55,7 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			await Remember();
 			IsLoading = false;
+			LoginRequestDTO = new LoginRequestDTO();
 		}
 		
 		[RelayCommand]
@@ -144,13 +146,13 @@ namespace kulonut_Mobil.ViewModels
 		}
 		private async Task<bool> InputCheck()
 		{
-			string? email_valid = InputValidator.ValidateEmail(LoginRequestDTO.Email);
+			string? email_valid = InputValidator.ValidateEmail(LoginRequestDTO.email);
             if(email_valid != null)
 			{
 				await popupService.ShowErrorAsync(email_valid);
 				return false;
 			}
-            string? user_password = InputValidator.ValidatePassword(LoginRequestDTO.Password);
+            string? user_password = InputValidator.ValidatePassword(LoginRequestDTO.password);
             if (user_password != null)
             {
                 await popupService.ShowErrorAsync(user_password);
