@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<tool:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="kulonut_Mobil.Popups.QuitPopup"
+             xmlns:tool="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Color="Transparent">
+    <Border Style="{StaticResource PopupBorder}">
+        <Grid Margin="5" RowDefinitions="Auto, Auto, *">
+            <Label Grid.Row="0" Text="Biztosan ki Akar lépni?" FontSize="22" FontAttributes="Bold"/>
+            <HorizontalStackLayout Margin="0, 15, 0, 0" Spacing="15" Grid.Row="1">
+                <Button x:Name="CloseBTN" Clicked="CloseBTN_Clicked" Style="{StaticResource QuitPopupButton}" Text="Nem"/>
+                <Button x:Name="QuitBTN" Clicked="QuitBTN_Clicked" Text="Igen"  Style="{StaticResource QuitPopupButton}" BackgroundColor="{StaticResource ErrorColor}" />
+            </HorizontalStackLayout>
+        </Grid>
+    </Border>
+</tool:Popup>

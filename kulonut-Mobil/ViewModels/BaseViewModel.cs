@@ -1,4 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Core;
+using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.ComponentModel;
+using kulonut_Mobil.Popups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +16,9 @@ namespace kulonut_Mobil.ViewModels
 		private bool isLoading = false;
 		public virtual bool OnBackButtonPressed()
 		{
-			MainThread.BeginInvokeOnMainThread(async () =>
-			{
-				bool shouldExit = await Application.Current!.MainPage!.DisplayAlert("Kilépés", "Ki akarsz lépni az applikációból", "Igen", "Nem");
-				if (shouldExit) CloseApp();
-			});
+			var popup = new QuitPopup();
+			Application.Current!.MainPage!.ShowPopup(popup);
 			return true;
-		}
-		protected void CloseApp()
-		{
-			#if ANDROID
-					Microsoft.Maui.ApplicationModel.Platform.CurrentActivity?.FinishAffinity();
-			#elif WINDOWS
-					Microsoft.UI.Xaml.Application.Current.Exit();
-			#elif IOS
-					System.Environment.Exit(0);
-			#endif
 		}
 	}
 }

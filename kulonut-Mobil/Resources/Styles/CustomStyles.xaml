@@ -33,14 +33,16 @@
         <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="Background" Value="White"/>
     </Style>
-    <Style TargetType="Label" x:Key="FilterLabel" BaseResourceKey="AuthLabel">
+    <Style TargetType="Label" x:Key="FilterLabel" BasedOn="{StaticResource AuthLabel}">
         <Setter Property="Margin" Value="0, 15, 0, 0"/>
     </Style>
     <Style TargetType="Button" x:Key="AuthButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDark}"/>
         <Setter Property="HeightRequest" Value="50"/>
         <Setter Property="FontSize" Value="20"/>
     </Style>
     <Style TargetType="Button" x:Key="PopupButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryDark}"/>
         <Setter Property="WidthRequest" Value="100"/>
         <Setter Property="HeightRequest" Value="40"/>
         <Setter Property="HorizontalOptions" Value="Start"/>
@@ -48,6 +50,10 @@
         <Setter Property="Padding" Value="5"/>
         <Setter Property="FontAttributes" Value="Bold"/>
         <Setter Property="FontSize" Value="18"/>
+    </Style>
+    <Style TargetType="Button" BasedOn="{StaticResource PopupButton}" x:Key="QuitPopupButton">
+        <Setter Property="WidthRequest" Value="80"/>
+        <Setter Property="HeightRequest" Value="35"/>
     </Style>
     <Style TargetType="ImageButton" x:Key="UserEditButton">
         <Setter Property="TranslationY" Value="3"/>
