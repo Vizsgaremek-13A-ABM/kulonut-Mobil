@@ -2,6 +2,7 @@
 <pages:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
+             xmlns:mapsui="clr-namespace:Mapsui.UI.Maui;assembly=Mapsui.UI.Maui"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="kulonut_Mobil.Pages.ProjectDetailsPage"
@@ -64,7 +65,16 @@
                                             BodyText="{Binding CurrentProject.notes, TargetNullValue='Nincs'}"/>
                     </VerticalStackLayout>
                 </Border>
+                <Grid Margin="20" HeightRequest="600" WidthRequest="400">
+                    <mapsui:MapControl Map="{Binding Map}"/>
+                    <HorizontalStackLayout Spacing="30" Margin="20" HorizontalOptions="End" VerticalOptions="Start" >
+                        <ImageButton WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" Source="close" Command="{Binding RemoveFilterCommand}" />
+                        <ImageButton WidthRequest="50" HeightRequest="50"  Source="filter" Command="{Binding OpenFilterCommand}"/>
+                        <ImageButton WidthRequest="50" HeightRequest="50"  Source="locator" Command="{Binding LocateCommand}"/>
+                    </HorizontalStackLayout>
+                </Grid>
             </VerticalStackLayout>
         </ScrollView>
+        <views:Loader IsLoading="{Binding IsLoading}"/>
     </Grid>
 </pages:BasePage>

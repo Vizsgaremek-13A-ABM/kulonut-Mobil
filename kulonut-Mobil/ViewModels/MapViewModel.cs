@@ -1,11 +1,8 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.MapFeatures;
 using kulonut_Mobil.Models.DTOs;
-using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.ViewModels
