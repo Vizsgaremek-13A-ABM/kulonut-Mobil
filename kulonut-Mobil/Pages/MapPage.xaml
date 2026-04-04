@@ -27,6 +27,7 @@
             <HorizontalStackLayout Spacing="30" Margin="20" HorizontalOptions="End" VerticalOptions="Start">
                 <ImageButton WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" Source="close" Command="{Binding RemoveFilterCommand}" />
                 <ImageButton WidthRequest="50" HeightRequest="50"  Source="filter" Command="{Binding OpenFilterCommand}"/>
+                <ImageButton WidthRequest="50" HeightRequest="50"  Source="locator" Command="{Binding LocateCommand}"/>
             </HorizontalStackLayout>
         </Grid>
         <views:Loader IsLoading="{Binding IsLoading}"/>

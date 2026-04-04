@@ -66,5 +66,10 @@ namespace kulonut_Mobil.ViewModels
 			}
 			IsLoading = false;
 		}
+		[RelayCommand]
+		private async Task Locate()
+		{
+			await mapHandler.Locate();
+		}
 	}
 }
