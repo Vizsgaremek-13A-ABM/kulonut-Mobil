@@ -50,12 +50,12 @@ namespace kulonut_Mobil.MapFeatures
 				status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
 			
 			if (status != PermissionStatus.Granted)
-				throw new Exception("No permission");
-			
+				throw new UnauthorizedAccessException("Location permission was denied.");
+
 			GeolocationRequest request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
 			Location? location = await Geolocation.Default.GetLocationAsync(request);
 			if (location == null)
-				throw new Exception("GeoLocator not working");
+				throw new InvalidOperationException("Unable to retrieve location.");
 			MPoint userPos = SphericalMercator.FromLonLat(location.Longitude, location.Latitude).ToMPoint();
 			locationLayer!.UpdateMyLocation(userPos);
 			map.Navigator.CenterOnAndZoomTo(userPos, 15, 500, Mapsui.Animations.Easing.CubicOut);				

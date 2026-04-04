@@ -69,7 +69,23 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task Locate()
 		{
-			await mapHandler.Locate();
+			try
+			{
+				await mapHandler.Locate();
+			}
+			catch (UnauthorizedAccessException)
+			{
+				await popupService.ShowErrorAsync("A helymeghatározási engedély nincs megadva.");
+			}
+			catch (InvalidOperationException)
+			{
+				await popupService.ShowErrorAsync("Nem sikerült meghatározni a tartózkodási helyet.");
+			}
+			catch (Exception)
+			{
+				await popupService.ShowErrorAsync("Ismeretlen hiba történt a helymeghatározás során.");
+			}
 		}
+
 	}
 }
