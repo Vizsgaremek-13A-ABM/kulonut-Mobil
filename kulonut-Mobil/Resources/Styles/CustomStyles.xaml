@@ -15,6 +15,14 @@
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Margin" Value="5, 0, 0, 3"/>
     </Style>
+    <Style TargetType="Label" x:Key="HeaderLine2" BasedOn="{StaticResource AuthHeader1}">
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="Margin" Value="0, 0, 0, 30"/>
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource AuthLabel}" x:Key="ForgotPasswordLabel"
+        <Setter Property="Text" Value="Elfelejtett jelszó"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+    </Style>
     <Style TargetType="Label" x:Key="CheckboxLabel">
         <Setter Property="VerticalOptions" Value="Center"/>
         <Setter Property="FontSize" Value="20"/>
@@ -63,6 +71,15 @@
         <Setter Property="WidthRequest" Value="20"/>
         <Setter Property="HeightRequest" Value="20"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+    <Style TargetType="ImageButton" x:Key="MapIconButton">
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
+    </Style>
+    <Style TargetType="ImageButton" x:Key="LocatorIconButton" BasedOn="{StaticResource MapIconButton}">
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
     </Style>
     <Style TargetType="Border" x:Key="BlockBorder">
         <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
@@ -116,5 +133,10 @@
     <Style TargetType="views:AuthEntry">
         <Setter Property="FocusColor" Value="{StaticResource Primary}"/>
         <Setter Property="UnFocusColor" Value="{StaticResource LightestGray}"/>
+    </Style>
+    <Style TargetType="views:DetailsLabel" x:Key="DetailsNoteLabel">
+        <Setter Property="HeaderText" Value="Megjegyzés"/>
+        <Setter Property="Spacing" Value="10"/>
+        <Setter Property="BodyFontSize" Value="14"/>
     </Style>
 </ResourceDictionary>

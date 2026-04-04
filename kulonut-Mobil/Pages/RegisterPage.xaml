@@ -9,7 +9,7 @@
         <Grid>
             <Grid RowDefinitions="*, *, 5*, 0.5*">
                 <Label Grid.Row="0" Text="Különút KFT" Style="{StaticResource AuthHeader1}"/>
-                <Label Grid.Row="1" VerticalOptions="End" Margin="0, 0, 0, 30" Text="Regisztáció" Style="{StaticResource AuthHeader1}"/>
+                <Label Grid.Row="1" Text="Regisztáció" Style="{StaticResource HeaderLine2}"/>
                 <Border Style="{StaticResource BlockBorder}" Grid.Row="2">
                     <Grid RowDefinitions="1.5*, 1.5*, 1.5*, 1.5*, 0.7*">
                         <views:AuthEntry Grid.Row="0" LabelText="Felhasználónév" Text="{Binding RegisterRequestDTO.name}" Placeholder="Béla"/>
