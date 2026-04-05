@@ -15,6 +15,14 @@
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Margin" Value="5, 0, 0, 3"/>
     </Style>
+    <Style TargetType="Label" x:Key="HeaderLine2" BasedOn="{StaticResource AuthHeader1}">
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="Margin" Value="0, 0, 0, 30"/>
+    </Style>
+    <Style TargetType="Label" BasedOn="{StaticResource AuthLabel}" x:Key="ForgotPasswordLabel">
+        <Setter Property="Text" Value="Elfelejtett jelszó"/>
+        <Setter Property="TextDecorations" Value="Underline"/>
+    </Style>
     <Style TargetType="Label" x:Key="CheckboxLabel">
         <Setter Property="VerticalOptions" Value="Center"/>
         <Setter Property="FontSize" Value="20"/>
@@ -32,6 +40,15 @@
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="Background" Value="White"/>
+    </Style>
+    <Style TargetType="Label" x:Key="PopupHeaderLabel">
+        <Setter Property="FontSize" Value="26"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+    </Style>
+    <Style TargetType="Label" x:Key="MenuLabel">
+        <Setter Property="Padding" Value="25"/>
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="Grid.Column" Value="1"/>
     </Style>
     <Style TargetType="Label" x:Key="FilterLabel" BasedOn="{StaticResource AuthLabel}">
         <Setter Property="Margin" Value="0, 15, 0, 0"/>
@@ -63,6 +80,22 @@
         <Setter Property="WidthRequest" Value="20"/>
         <Setter Property="HeightRequest" Value="20"/>
         <Setter Property="BackgroundColor" Value="Transparent"/>
+    </Style>
+    <Style TargetType="ImageButton" x:Key="FilterDeleteButton">
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="Grid.Column" Value="1"/>
+        <Setter Property="Source" Value="close"/>
+        <Setter Property="WidthRequest" Value="25"/>
+        <Setter Property="HeightRequest" Value="25"/>
+    </Style>
+    <Style TargetType="ImageButton" x:Key="MapIconButton">
+        <Setter Property="WidthRequest" Value="50"/>
+        <Setter Property="HeightRequest" Value="50"/>
+    </Style>
+    <Style TargetType="ImageButton" x:Key="LocatorIconButton" BasedOn="{StaticResource MapIconButton}">
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="VerticalOptions" Value="Start"/>
     </Style>
     <Style TargetType="Border" x:Key="BlockBorder">
         <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
@@ -113,8 +146,14 @@
         <Setter Property="Color" Value="{StaticResource DarkGray}"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
+    <Style TargetType="Line" x:Key="MenuLine">
+        <Setter Property="Stroke" Value="White"/>
+        <Setter Property="X2" Value="1000"/>
+        <Setter Property="Grid.ColumnSpan" Value="2"/>
+    </Style>
     <Style TargetType="views:AuthEntry">
         <Setter Property="FocusColor" Value="{StaticResource Primary}"/>
         <Setter Property="UnFocusColor" Value="{StaticResource LightestGray}"/>
     </Style>
+
 </ResourceDictionary>

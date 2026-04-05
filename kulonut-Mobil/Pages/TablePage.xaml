@@ -15,8 +15,8 @@
     </ContentPage.Behaviors>
     <Grid RowDefinitions="Auto, *" Margin="20, 0">
         <HorizontalStackLayout  Grid.Row="0" Spacing="30" HorizontalOptions="End" VerticalOptions="End">
-            <ImageButton WidthRequest="50" HeightRequest="50" HorizontalOptions="Start" Source="close" Command="{Binding RemoveFilterCommand}" />
-            <ImageButton WidthRequest="50" HeightRequest="50"  Source="filter" Command="{Binding OpenFilterCommand}"/>
+            <ImageButton Style="{StaticResource MapIconButton}" Source="close" Command="{Binding RemoveFilterCommand}" />
+            <ImageButton Style="{StaticResource MapIconButton}" Source="filter" Command="{Binding OpenFilterCommand}"/>
         </HorizontalStackLayout>
         <CollectionView Grid.Row="1" VerticalOptions="Start" ItemsSource="{Binding Projects}">
             <CollectionView.ItemTemplate>

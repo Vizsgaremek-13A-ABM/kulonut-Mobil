@@ -7,15 +7,15 @@
             Color="Transparent">
     <Border Style="{StaticResource PopupBorder}">
         <Grid Margin="5" RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, Auto, Auto">
-            <Label Margin="2, 0" Grid.Row="0" Text="Szűrők" FontSize="26" FontAttributes="Bold"/>
+            <Label Margin="2, 0" Grid.Row="0" Text="Szűrők" Style="{StaticResource PopupHeaderLabel}"/>
             <view:AuthEntry Margin="0, 20, 0, 0" Grid.Row="1" LabelText="Projektnév" Text="{Binding FilterModel.name}"/>
             <Label Grid.Row="2" Style="{StaticResource FilterLabel}" Text="Tervkiadás dátuma ezután"/>
             <Border Style="{StaticResource AuthBorder}" Grid.Row="3">
                 <Grid>
                     <Grid ColumnDefinitions="*, Auto">
                         <DatePicker Grid.Column="0" Date="{Binding FilterModel.After}" Style="{StaticResource FilterDate}"/>
-                        <ImageButton Grid.Column="1" Source="close" WidthRequest="25" HeightRequest="25" Command="{Binding ClearAfterCommand}"
-                                IsVisible="{Binding FilterModel.After, Converter={tool:IsNotNullConverter}}" HorizontalOptions="End"/>
+                        <ImageButton Style="{StaticResource FilterDeleteButton}" Command="{Binding ClearAfterCommand}"
+                                IsVisible="{Binding FilterModel.After, Converter={tool:IsNotNullConverter}}" />
                     </Grid>
                     <Label Style="{StaticResource FilterHideLabel}" IsVisible="{Binding FilterModel.After, Converter={tool:IsNullConverter}}" />
                 </Grid>
@@ -25,8 +25,8 @@
                 <Grid>
                     <Grid ColumnDefinitions="*, Auto">
                         <DatePicker Grid.Column="0" Date="{Binding FilterModel.Before}" Style="{StaticResource FilterDate}"/>
-                        <ImageButton Grid.Column="1" Source="close" WidthRequest="25" HeightRequest="25" Command="{Binding ClearBeforeCommand}"
-                                     IsVisible="{Binding FilterModel.Before, Converter={tool:IsNotNullConverter}}" HorizontalOptions="End"/>
+                        <ImageButton Style="{StaticResource FilterDeleteButton}" Command="{Binding ClearBeforeCommand}"
+                                     IsVisible="{Binding FilterModel.Before, Converter={tool:IsNotNullConverter}}"/>
                     </Grid>
                     <Label Style="{StaticResource FilterHideLabel}" IsVisible="{Binding FilterModel.Before, Converter={tool:IsNullConverter}}" />
                 </Grid>
@@ -34,7 +34,7 @@
             <Label Text="{Binding Error}" IsVisible="{Binding Error, Converter={tool:IsStringNotNullOrEmptyConverter}}" Grid.Row="6" Style="{StaticResource ErrorLabel}"/>
             <HorizontalStackLayout Margin="0, 15, 0, 0" Spacing="10" Grid.Row="7">
                 <Button Style="{StaticResource PopupButton}" Text="Szűrés" Command="{Binding FilterCommand}"/>
-                <Button Style="{StaticResource PopupButton}" Text="Bezárás" BackgroundColor="{StaticResource Secondary}" Command="{Binding ClosePopupCommand}"/>
+                <Button Style="{StaticResource PopupButton}" Text="Bezárás" BackgroundColor="{StaticResource ErrorColor}" Command="{Binding ClosePopupCommand}"/>
             </HorizontalStackLayout>
         </Grid>
     </Border>

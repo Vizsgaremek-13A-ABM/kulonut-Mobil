@@ -16,18 +16,18 @@
     <Shell.ItemTemplate>
         <DataTemplate>
             <Grid ColumnDefinitions="Auto,*" Padding="25,0">
-                <Line Stroke="White" X2="1000" Grid.ColumnSpan="2"/>
+                <Line Style="{StaticResource MenuLine}" />
                 <Image Source="{Binding FlyoutIcon}" WidthRequest="25"/>
-                <Label Text="{Binding Title}" Grid.Column="1" Padding="25" FontAttributes="Bold"/>
+                <Label Text="{Binding Title}" Style="{StaticResource MenuLabel}"/>
             </Grid>
         </DataTemplate>
     </Shell.ItemTemplate>
     <Shell.MenuItemTemplate>
         <DataTemplate>
             <Grid ColumnDefinitions="Auto,*" Padding="25,0">
-                <Line Stroke="White" X2="1000" Grid.ColumnSpan="2"/>
+                <Line Style="{StaticResource MenuLine}"/>
                 <Image Source="{Binding Icon}" WidthRequest="25"/>
-                <Label Text="{Binding Text}" Grid.Column="1" Padding="25" FontAttributes="Bold"/>
+                <Label Text="{Binding Text}" Style="{StaticResource MenuLabel}"/>
             </Grid>
         </DataTemplate>
     </Shell.MenuItemTemplate>

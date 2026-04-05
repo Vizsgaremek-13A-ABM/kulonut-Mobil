@@ -14,7 +14,7 @@
         <ScrollView Margin="20">
             <Grid RowDefinitions="*, *, 5.5*, 0.5*">
                 <Label Grid.Row="0" Text="Különút KFT" Style="{StaticResource AuthHeader1}"/>
-                <Label Grid.Row="1" VerticalOptions="End" Margin="0, 0, 0, 30" Text="Bejelentkezés" Style="{StaticResource AuthHeader1}"/>
+                <Label Grid.Row="1"  Text="Bejelentkezés" Style="{StaticResource HeaderLine2}"/>
                 <Border Style="{StaticResource BlockBorder}" Grid.Row="2">
                     <Grid RowDefinitions="1.2*, 1.2*, *, *, 0.7*, 0.7*, Auto">
                         <views:AuthEntry Grid.Row="0" Text="{Binding LoginRequestDTO.email}" LabelText="Email Cím" Placeholder="Béla@gmail.com"/>
@@ -25,12 +25,12 @@
                             <Label VerticalOptions="Center" Text="Bejelentkezve Maradok" Style="{StaticResource AuthLabel}"/>
                             <CheckBox IsChecked="{Binding RememberLogin}" Style="{StaticResource DetailsCheckbox}"/>
                         </HorizontalStackLayout>
-                        <Label Grid.Row="5" HorizontalOptions="Start" VerticalOptions="Center" Text="Elfelejtett jelszó" Style="{StaticResource AuthLabel}" TextDecorations="Underline">
+                        <Label Grid.Row="5" VerticalOptions="Center" Style="{StaticResource ForgotPasswordLabel}" >
                             <Label.GestureRecognizers>
                                 <TapGestureRecognizer Command="{Binding PasswordResetCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
-                        <ImageButton WidthRequest="70" HeightRequest="70" Grid.Row="6" Source="faceidicon.png" Command="{Binding BiometricAuthCommand}"/>
+                        <ImageButton WidthRequest="70" HeightRequest="70" Grid.Row="6" Source="faceidicon" Command="{Binding BiometricAuthCommand}"/>
                     </Grid>
                 </Border>
             </Grid>
