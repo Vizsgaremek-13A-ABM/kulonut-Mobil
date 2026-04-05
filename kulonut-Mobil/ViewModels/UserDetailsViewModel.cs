@@ -5,20 +5,16 @@ using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
 	public partial class UserDetailsViewModel : UserViewModelBase
     {
 		private readonly IPopupService popupService;
-		public const string NAV_URL = "navigatedFrom";
-		public string? NavigatedFrom { get; set; }
-
-		
 		public UserDetailsViewModel(IUserService userService, IPopupService _popupService) : base(userService)
 		{
 			popupService = _popupService;
@@ -26,7 +22,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task UserSwipedRight()
 		{
-			await Shell.Current.GoToAsync($"//{NavigatedFrom}");
+			await Shell.Current.GoToAsync($"..");
 		}
 		[RelayCommand]
 		private async Task PasswordChange()
@@ -40,11 +36,7 @@ namespace kulonut_Mobil.ViewModels
 			{
 				FileResult? result = await MediaPicker.Default.PickPhotoAsync();
 				if (result == null)
-				{
 					return;
-					
-				}
-
 				using Stream stream = await result.OpenReadAsync();
 				UserModel? user = await userService.UploadUserImageAsync(stream, result.FileName);
 				if (user != null)
@@ -59,7 +51,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>
 			{
-				await Shell.Current.GoToAsync($"//{NavigatedFrom}");
+				await Shell.Current.GoToAsync($"..");
 			});
 			return true;
 		}

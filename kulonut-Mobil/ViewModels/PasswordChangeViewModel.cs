@@ -25,7 +25,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task ForgotPassword()
 		{
-			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}?{PasswordResetViewModel.NAV_URL}={nameof(PasswordChangePage)}");
+			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}");
 		}
 		[RelayCommand]
 		private async Task ChangePassword()
@@ -62,7 +62,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>
 			{
-				await Shell.Current.GoToAsync($"{nameof(UserDetailsPage)}");
+				await Shell.Current.GoToAsync($"..");
 			});
 			return true;
 		}

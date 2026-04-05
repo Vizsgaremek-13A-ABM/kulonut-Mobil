@@ -10,7 +10,7 @@
              xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              Title="Térkép Nézet">
     <Shell.TitleView>
-        <views:UserHeader Title="Térkép Nézet" User="{Binding User}" NavigatedFrom="MapPage" />
+        <views:UserHeader Title="Térkép Nézet" User="{Binding User}"/>
     </Shell.TitleView>
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleMapLoadingCommand}" EventName="Appearing"/>

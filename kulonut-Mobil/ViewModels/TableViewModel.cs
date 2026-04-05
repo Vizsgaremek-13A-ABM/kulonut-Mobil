@@ -60,15 +60,6 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(TablePage)}&{ProjectDetailsViewModel.ID_URL}={project_id}");
 			IsLoading = false;
-		}
-		public override bool OnBackButtonPressed()
-		{
-			MainThread.BeginInvokeOnMainThread(async () =>
-			{
-				await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
-			});
-			return true;
-		}
-		
+		}		
 	}
 }

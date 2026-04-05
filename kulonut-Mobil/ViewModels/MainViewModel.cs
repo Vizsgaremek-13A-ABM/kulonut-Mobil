@@ -76,7 +76,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task PasswordReset()
 		{
-			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}?{PasswordResetViewModel.NAV_URL}={nameof(MainPage)}");
+			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}");
 		}
 		private async Task Remember()
 		{

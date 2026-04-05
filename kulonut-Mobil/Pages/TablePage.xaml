@@ -7,7 +7,7 @@
              x:Class="kulonut_Mobil.Pages.TablePage"
              Title="Táblázat Nézet">
     <Shell.TitleView>
-        <views:UserHeader Title="Táblázat Nézet"  User="{Binding User}" NavigatedFrom="TablePage" />
+        <views:UserHeader Title="Táblázat Nézet"  User="{Binding User}"/>
     </Shell.TitleView>
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
