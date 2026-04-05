@@ -70,8 +70,6 @@ namespace kulonut_Mobil.Services
 			user = _user;
 			await SecureStorage.SetAsync(USER_KEY, JsonSerializer.Serialize(_user));
  		}
-		
-		
 		public void ClearCurrentUser()
 		{
 			user = null;

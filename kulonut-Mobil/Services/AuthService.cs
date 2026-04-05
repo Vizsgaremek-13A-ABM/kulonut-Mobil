@@ -94,8 +94,6 @@ namespace kulonut_Mobil.Services
 			var response = await apiClient.PostAsync<MessageResponseDTO?, ChangePasswordRequestDTO>("auth/update-password", request);
 			if (response == null)
 				throw new InvalidCredentialException("Rossz jelszó");
-
-
 		}
 	}
 }

@@ -1,9 +1,4 @@
 ﻿using kulonut_Mobil.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.DependencyInjection
 {
@@ -22,6 +17,7 @@ namespace kulonut_Mobil.DependencyInjection
 			.AddSingleton<UserDetailsViewModel>()
 			.AddTransient<ProjectsPopupViewModel>()
 			.AddTransient<UserEditPopupViewModel>()
+			.AddSingleton<RegisterConfirmationViewModel>()
 			.AddTransient<FilterPopupViewModel>();
 			return services;
 		}

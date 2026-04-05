@@ -50,6 +50,10 @@ namespace kulonut_Mobil.API
 				using HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, body).ConfigureAwait(false);
 				return await HandleResponse<T>(response, null);
 			}
+			catch (DuplicateNameException)
+			{
+				throw;
+			}
 			catch (Exception ex)
 			{
 				logger.LogError(ex, "Error in Post for URL {Url}", url);

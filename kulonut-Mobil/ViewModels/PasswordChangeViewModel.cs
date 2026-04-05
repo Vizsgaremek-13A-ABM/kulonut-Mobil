@@ -5,6 +5,7 @@ using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Authentication;
 using System.Text;
@@ -38,11 +39,16 @@ namespace kulonut_Mobil.ViewModels
 			{
 				await authService.ChangePasswordAsync(ChangePasswordRequest);
 				await authService.LogoutAsync();
+				await popupService.ShowErrorAsync("Sikeresen megváltoztattuk a jelszavát, most újra be kell jelentkeznie.", "Siker");
 				await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+			}
+			catch (DuplicateNameException)
+			{
+				await popupService.ShowErrorAsync("Nem lehet ugyanaz a régi és az új jelszó", "Információ");
 			}
 			catch (InvalidCredentialException)
 			{
-				await popupService.ShowErrorAsync("Helytelen jelszavat adott meg.");
+				await popupService.ShowErrorAsync("Helytelen jelszavat adott meg.", "Információ");
 			}
 		}
 		private async Task<bool> InputCheck()
@@ -57,6 +63,11 @@ namespace kulonut_Mobil.ViewModels
 			if (password_error != null)
 			{
 				await popupService.ShowErrorAsync(password_error);
+				return false;
+			}
+			if(ChangePasswordRequest?.password == ChangePasswordRequest?.current_password)
+			{
+				await popupService.ShowErrorAsync("Nem lehet ugyanaz a régi és az új jelszó");
 				return false;
 			}
 			if (ChangePasswordRequest?.password != ChangePasswordRequest?.password_confirmation)

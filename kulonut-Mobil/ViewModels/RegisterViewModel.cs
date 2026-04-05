@@ -4,6 +4,7 @@ using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
+using System.Data;
 using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
@@ -25,15 +26,34 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			bool input_check = await InputCheck();
 			if (!input_check)
-				return;
-			var response = await authService.RegisterAsync(RegisterRequestDTO);
-			if (response == null)
 			{
-				await popupService.ShowErrorAsync("Hiba történt a regisztrációban");
+				IsLoading = false;
 				return;
 			}
-			await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
-			IsLoading = false;
+			try
+			{
+				UserModel? response = await authService.RegisterAsync(RegisterRequestDTO);
+				if (response == null)
+				{
+					IsLoading = false;
+					await popupService.ShowErrorAsync("Hiba történt a regisztrációban");
+					return;
+				}
+				await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
+			}
+			catch (DuplicateNameException)
+			{
+				await popupService.ShowErrorAsync("Az email cím már foglalt", "Információ");
+			}
+			catch (Exception)
+			{
+				await popupService.ShowErrorAsync("Váratlan hiba lépett fel regisztráció közben");
+			}
+			finally
+			{
+				IsLoading = false;
+			}
+			
 		}
 		private async Task<bool> InputCheck()
 		{
@@ -60,6 +80,14 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowErrorAsync("Nem egyezik a két jelszó");
 				return false;
 			}
+			return true;
+		}
+		public override bool OnBackButtonPressed()
+		{
+			MainThread.BeginInvokeOnMainThread(async () =>
+			{
+				await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+			});
 			return true;
 		}
 	}
