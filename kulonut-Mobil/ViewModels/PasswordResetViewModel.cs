@@ -35,6 +35,8 @@ namespace kulonut_Mobil.ViewModels
 			bool check_result = await InputCheck();
 			if (!check_result) return;
 			await authService.RequestPasswordResetAsync(ForgotPasswordRequest);
+			await popupService.ShowErrorAsync("A Jelszó visszaállítása sikeresen megkezdődött. A visszaállítás menetét email-ben részletezzük.", "Üzenet");
+			await authService.LogoutAsync();
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
 		private async Task<bool> InputCheck()
