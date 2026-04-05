@@ -4,6 +4,7 @@ using kulonut_Mobil.Models;
 using kulonut_Mobil.Services;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.WebSockets;
@@ -52,13 +53,21 @@ namespace kulonut_Mobil.ViewModels
 		{
 			if (!InputCheck())
 				return;
-			UserModel? updatedUser = await userService.UpdateCurrentUserAsync(requestBody);
-			if(updatedUser == null)
+			try
 			{
-				ErrorText = $"Nem módosítható felhasználó {user.id} id-vel";
-				return;
+				UserModel? updatedUser = await userService.UpdateCurrentUserAsync(requestBody);
+				if (updatedUser == null)
+				{
+					ErrorText = $"Nem módosítható felhasználó {user.id} id-vel";
+					return;
+				}
+				await ClosePopup();
+
 			}
-			await ClosePopup();
+			catch (DuplicateNameException)
+			{
+				ErrorText = "Az adott email-cím már foglalt";
+			}
 		}
 		private bool InputCheck()
 		{

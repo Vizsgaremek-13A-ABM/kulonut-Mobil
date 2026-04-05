@@ -1,7 +1,9 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using System.Text.Json;
+﻿using Android.Content.PM;
+using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
+using System.Text.Json;
 
 namespace kulonut_Mobil.API
 {
@@ -9,10 +11,11 @@ namespace kulonut_Mobil.API
 	{
 		private readonly IMemoryCache memoryCache;
 		private readonly string localCachePath = FileSystem.CacheDirectory;
-
-		public DualLayerCacheService(IMemoryCache memoryCache)
+		private readonly ILogger<DualLayerCacheService> logger;
+		public DualLayerCacheService(IMemoryCache _memoryCache, ILogger<DualLayerCacheService> _logger)
 		{
-			this.memoryCache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
+			memoryCache = _memoryCache;
+			logger = _logger;
 		}
 
 		public async Task<T?> GetAsync<T>(string key)
@@ -34,9 +37,19 @@ namespace kulonut_Mobil.API
 				if (diskValue != null)
 					return memoryCache.Set(key, diskValue, TimeSpan.FromMinutes(10));
 			}
-			catch (Exception)
+			catch (JsonException ex)
 			{
-				Debug.WriteLine("Error parsing from file cache");
+				logger.LogWarning(ex, "Invalid JSON in cache file {FilePath}", filePath);
+				if (File.Exists(filePath))
+					File.Delete(filePath);
+			}
+			catch (IOException ex)
+			{
+				logger.LogWarning(ex, "I/O error reading cache file {FilePath}", filePath);
+			}
+			catch (Exception ex)
+			{
+				logger.LogError(ex, "Unexpected error reading cache file {FilePath}", filePath);
 			}
 			return default;
 		}

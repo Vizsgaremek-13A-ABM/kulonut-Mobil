@@ -4,7 +4,7 @@ namespace kulonut_Mobil.Pages;
 
 public partial class RegisterConfirmationPage : BasePage
 {
-	public RegisterConfirmationPage(MainViewModel vm)
+	public RegisterConfirmationPage(RegisterConfirmationViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

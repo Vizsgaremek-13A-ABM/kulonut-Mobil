@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -90,7 +91,9 @@ namespace kulonut_Mobil.Services
 		}
 		public async Task ChangePasswordAsync(ChangePasswordRequestDTO request)
 		{
-			await apiClient.PostAsync<MessageResponseDTO?, ChangePasswordRequestDTO>("auth/update-password", request);
+			var response = await apiClient.PostAsync<MessageResponseDTO?, ChangePasswordRequestDTO>("auth/update-password", request);
+			if (response == null)
+				throw new InvalidCredentialException("Rossz jelszó");
 		}
 	}
 }

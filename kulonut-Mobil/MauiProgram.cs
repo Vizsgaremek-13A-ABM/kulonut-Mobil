@@ -41,7 +41,7 @@ namespace kulonut_Mobil
 					});
 #endif
 				});
-
+			builder.Logging.ClearProviders();
 			builder.Services
                 .AddInfrastructure()
 				.AddServices()

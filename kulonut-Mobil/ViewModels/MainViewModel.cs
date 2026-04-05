@@ -9,6 +9,7 @@ using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
 using Plugin.Fingerprint;
 using Plugin.Fingerprint.Abstractions;
+using System.Data;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -130,16 +131,27 @@ namespace kulonut_Mobil.ViewModels
 		}
 		private async Task HandleLogin()
 		{
-			
-			UserModel? response = await authService.LoginAsync(LoginRequestDTO, RememberLogin);
-			if (response == null)
+			try
+			{
+				UserModel? response = await authService.LoginAsync(LoginRequestDTO, RememberLogin);
+				if (response == null)
+				{
+					await popupService.ShowErrorAsync("Helytelen Email-cím vagy jelszó");
+					return;
+				}
+				await userService.SetCurrentUser(response);
+				await SetUserAppshell();
+				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+			}
+			catch (DuplicateNameException)
 			{
 				await popupService.ShowErrorAsync("Helytelen Email-cím vagy jelszó");
-				return;
 			}
-			await userService.SetCurrentUser(response);
-			await SetUserAppshell();
-			await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+			catch (Exception)
+			{
+				await popupService.ShowErrorAsync("Váratlan hiba lépett fel a bejelentkezés közben");
+			}
+
 		}
 		private async Task<bool> InputCheck()
 		{

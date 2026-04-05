@@ -31,7 +31,7 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			ProjectResponseDTO? current_project = await dataService.GetProjectById(Id);
 			if (current_project == null || current_project.data == null)
-				await popupService.ShowErrorAsync($"Nincs ilyen projekt");
+				await popupService.ShowErrorAsync("Nem találtunk ilyen területet", "Információ");
 			else
 			{
 				CurrentProject = current_project.data;
@@ -51,7 +51,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			PolygonsResponseDTO? polygons = await dataService.GetPolygonsByProject(CurrentProject!.id);
 			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
-				await popupService.ShowErrorAsync("Nem találtunk területet az adott polygonhoz");
+				await popupService.ShowErrorAsync("Nem találtunk területet az adott polygonhoz", "Információ");
 
 			if (polygons != null && polygons.data != null)
 			{
