@@ -11,11 +11,8 @@ using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
-	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
 	public partial class PasswordResetViewModel : BaseViewModel
 	{
-		public const string NAV_URL = "navigatedFrom";
-		public string? NavigatedFrom { get; set; }
 		public ForgotPasswordRequestDTO ForgotPasswordRequest { get; set; } = new ForgotPasswordRequestDTO();
 		private readonly IAuthService authService;
 		private readonly IPopupService popupService;
@@ -28,10 +25,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>
 			{
-				if(NavigatedFrom==nameof(PasswordChangePage))
-					await Shell.Current.GoToAsync($"{NavigatedFrom}");
-				else
-					await Shell.Current.GoToAsync($"//{NavigatedFrom}");
+				await Shell.Current.GoToAsync($"..");
 			});
 			return true;
 		}
@@ -41,6 +35,8 @@ namespace kulonut_Mobil.ViewModels
 			bool check_result = await InputCheck();
 			if (!check_result) return;
 			await authService.RequestPasswordResetAsync(ForgotPasswordRequest);
+			await popupService.ShowErrorAsync("A Jelszó visszaállítása sikeresen megkezdődött. A visszaállítás menetét email-ben részletezzük.", "Üzenet");
+			await authService.LogoutAsync();
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
 		private async Task<bool> InputCheck()
