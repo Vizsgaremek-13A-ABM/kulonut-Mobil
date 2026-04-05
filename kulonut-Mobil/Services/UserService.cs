@@ -37,7 +37,6 @@ namespace kulonut_Mobil.Services
 					await SetCurrentUser(response.data);
 				return response.data;
 			}
-			Debug.WriteLine("No User Data Found");
 			return default;
 		}
 		public async Task<UserModel?> UpdateCurrentUserAsync(Dictionary<string, string> request)
@@ -49,8 +48,6 @@ namespace kulonut_Mobil.Services
 				OnCurrentUserChanged();
 				return response.data;
 			}
-
-			Debug.WriteLine($"No User With Id {user!.id} found");
 			return default;
 		}
 		public async Task<UserModel?> UploadUserImageAsync(Stream stream, string fileName)
@@ -66,7 +63,6 @@ namespace kulonut_Mobil.Services
 				OnCurrentUserChanged();
 				return response.data;
 			}
-			Debug.WriteLine($"No User With Id {user!.id} found");
 			return default;
 		}
 		public async Task SetCurrentUser(UserModel _user)

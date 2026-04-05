@@ -45,14 +45,12 @@ namespace kulonut_Mobil.MapFeatures
 			BindingContext = mapControl?.BindingContext;
 		}
 
-		private void OnInfo(object sender, MapInfoEventArgs e)
+		private void OnInfo(object? sender, MapInfoEventArgs e)
 		{
 			if (e.MapInfo!.Feature is PolygonFeature feature)
 			{
-				if (Command == null) Debug.WriteLine("Command is null");
 				if (Command?.CanExecute(feature) == true)
 					Command.Execute(feature);
-				else Debug.WriteLine("Cant exec command");
 			}
 		}
 

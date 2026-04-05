@@ -48,10 +48,8 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowErrorAsync("Nem találtunk ilyen területet");
 
 			if (polygons != null && polygons.data != null)
-			{
 				mapHandler.ShowPolygons(polygons.data);
-				Debug.WriteLine(polygons.data.Count);
-			}
+			
 			IsLoading = false;
 		}
 		
