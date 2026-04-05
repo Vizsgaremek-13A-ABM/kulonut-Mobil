@@ -32,7 +32,6 @@ namespace kulonut_Mobil.ViewModels
 			authService = _authService;
 			popupService = _popupService;
 			userService = _userService;
-			
 		}
 		[RelayCommand]
 		private async Task BiometricAuth()
@@ -43,7 +42,9 @@ namespace kulonut_Mobil.ViewModels
 				AuthenticationRequestConfiguration request = new AuthenticationRequestConfiguration("Biometrikus azonosítás", "Kérjük azonosítsa magát.");
 				FingerprintAuthenticationResult result = await CrossFingerprint.Current.AuthenticateAsync(request);
 				if (result.Authenticated)
-					await HandleBioAuthenticated();
+					await Remember(true);
+				else
+					await popupService.ShowErrorAsync("Nem sikerült a biometrikus azonosítás", "Hiba");
 			}
 			else
 				await popupService.ShowErrorAsync("A biometrikus azonosítás nem elérhető a készülékén!");
@@ -52,10 +53,13 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task HandleRemember()
 		{
-			IsLoading = true;
-			await Remember();
-			IsLoading = false;
 			LoginRequestDTO = new LoginRequestDTO();
+			string? remember_str = await SecureStorage.GetAsync(AuthService.REMEMBER_KEY);
+			if (remember_str == null || remember_str == "0")
+				return;
+			IsLoading = true;
+			await Remember(false);
+			IsLoading = false;
 		}
 		
 		[RelayCommand]
@@ -78,17 +82,20 @@ namespace kulonut_Mobil.ViewModels
 		{
 			await Shell.Current.GoToAsync($"{nameof(PasswordResetPage)}");
 		}
-		private async Task Remember()
+		private async Task Remember(bool isBiometric)
 		{
-			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
 			string? token = await authService.GetTokenAsync();
-			if (string.IsNullOrEmpty(token)) return;
+			if (string.IsNullOrEmpty(token))
+			{
+				if (isBiometric)
+					await popupService.ShowErrorAsync("Nincs beállítva biometrikus bejelentkezés, jelentkezzen be manuálisan.", "Információ");
+				return;
+			}
 			authService.SetToken(token);
 			if (authService.IsAuthenticated())
-				await HandleAuthenticatedRemember(user);
+				await HandleAuthenticatedRemember();
 			else
 				await popupService.ShowErrorAsync("Lejárt token");
-			
 		}
 		private async Task SetUserAppshell()
 		{
@@ -104,20 +111,9 @@ namespace kulonut_Mobil.ViewModels
 				}
 			}
 		}
-		private async Task HandleBioAuthenticated()
+		private async Task HandleAuthenticatedRemember()
 		{
-			UserModel? user = await userService.GetCurrentUserFromStorageAsync();
-			if (user != null)
-			{
-				await HandleLogin();
-				return;
-			}
-			await popupService.ShowErrorAsync("Nem található a megadott felhasználó");
-		}
-		private async Task HandleAuthenticatedRemember(UserModel? user)
-		{
-			if (user == null || user.email == null)
-				user = await userService.GetCurrentUserAsync();
+			UserModel? user = await userService.GetCurrentUserAsync();
 			if (user == null)
 			{
 				await popupService.ShowErrorAsync("Nem található a megadott fehasználó");

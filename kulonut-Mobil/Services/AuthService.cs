@@ -16,6 +16,7 @@ namespace kulonut_Mobil.Services
 		private IApiClient apiClient;
 		private string? token;
 		public const string TOKEN_KEY = "token";
+		public const string REMEMBER_KEY = "remember";
 
         public AuthService(IApiClient _apiClient)
 		{
@@ -28,8 +29,11 @@ namespace kulonut_Mobil.Services
 			{
 				token = response.token;
 				SetToken(token);
-				if(remember)
-					await SecureStorage.SetAsync(TOKEN_KEY, response.token);
+				await SecureStorage.SetAsync(TOKEN_KEY, response.token);
+				if (remember)
+					await SecureStorage.SetAsync(REMEMBER_KEY, "1");
+				else
+					await SecureStorage.SetAsync(REMEMBER_KEY, "0");
 				
 			}
 			return response?.user;
