@@ -59,12 +59,13 @@
                 </Border>
                 <Border Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
                     <VerticalStackLayout Spacing="10">
-                        <views:DetailsLabel Style="{StaticResource DetailsNoteLabel}" BodyText="{Binding CurrentProject.notes, TargetNullValue='Nincs'}"/>
+                        <views:DetailsLabel BodyFontSize="14" Spacing="10" Style="{StaticResource DetailsNoteLabel}" HeaderText="Megjegyzés" 
+                                            BodyText="{Binding CurrentProject.notes, TargetNullValue='Nincs'}"/>
                     </VerticalStackLayout>
                 </Border>
                 <Grid Margin="20" HeightRequest="600" WidthRequest="400">
                     <mapsui:MapControl Map="{Binding Map}"/>
-                     <ImageButton Style="{StaticResource LocatorIconButton}" Source="locator" Command="{Binding LocateCommand}"/>
+                    <ImageButton Style="{StaticResource LocatorIconButton}" Source="locator" Command="{Binding LocateCommand}"/>
                 </Grid>
             </VerticalStackLayout>
         </ScrollView>
