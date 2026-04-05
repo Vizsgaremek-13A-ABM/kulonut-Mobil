@@ -6,6 +6,7 @@ using kulonut_Mobil.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Authentication;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,9 +34,16 @@ namespace kulonut_Mobil.ViewModels
 			bool input_check = await InputCheck();
 			if (!input_check)
 				return;
-			await authService.ChangePasswordAsync(ChangePasswordRequest);
-			await authService.LogoutAsync();
-			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+			try
+			{
+				await authService.ChangePasswordAsync(ChangePasswordRequest);
+				await authService.LogoutAsync();
+				await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
+			}
+			catch (InvalidCredentialException)
+			{
+				await popupService.ShowErrorAsync("Helytelen jelszavat adott meg.");
+			}
 		}
 		private async Task<bool> InputCheck()
 		{
