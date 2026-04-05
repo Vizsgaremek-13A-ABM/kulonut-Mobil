@@ -14,15 +14,15 @@
         <tool:EventToCommandBehavior Command="{Binding HandleProjectLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
     <Grid RowDefinitions="Auto, *" Margin="10, 0" >
-        <HorizontalStackLayout  Grid.Row="0" Spacing="30" HorizontalOptions="End" VerticalOptions="End">
+        <HorizontalStackLayout  Grid.Row="0" Spacing="30" HorizontalOptions="Center" VerticalOptions="End">
             <ImageButton Style="{StaticResource MapIconButton}" Source="close" Command="{Binding RemoveFilterCommand}" />
             <ImageButton Style="{StaticResource MapIconButton}" Source="filter" Command="{Binding OpenFilterCommand}"/>
         </HorizontalStackLayout>
-        <Border Grid.Row="1" StrokeShape="RoundRectangle 20" Margin="0, 5" BackgroundColor="{StaticResource MidGray}">
+        <Border Grid.Row="1" Margin="10" Style="{StaticResource BlockBorderDark}">
             <CollectionView   VerticalOptions="Start" HorizontalOptions="Center" ItemsSource="{Binding Projects}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="20" Stroke="{StaticResource DarkGray}" BackgroundColor="{StaticResource White}" Style="{StaticResource BlockBorder}">
+                        <Border Margin="10" Style="{StaticResource BlockBorderLight}">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type pages:TablePage}}, Path=BindingContext.NavigateToDetailsCommand}"

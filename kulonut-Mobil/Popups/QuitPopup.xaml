@@ -6,7 +6,7 @@
              Color="Transparent">
     <Border Style="{StaticResource PopupBorder}">
         <Grid Margin="5" RowDefinitions="Auto, Auto, *">
-            <Label Grid.Row="0" Text="Biztosan ki Akar lépni?" FontSize="22" FontAttributes="Bold"/>
+            <Label Grid.Row="0" Text="Biztosan ki Akar lépni?" TextColor="{StaticResource LightestGray}" FontSize="22" FontAttributes="Bold"/>
             <HorizontalStackLayout Margin="0, 15, 0, 0" Spacing="15" Grid.Row="1">
                 <Button x:Name="CloseBTN" Clicked="CloseBTN_Clicked" Style="{StaticResource QuitPopupButton}" Text="Nem"/>
                 <Button x:Name="QuitBTN" Clicked="QuitBTN_Clicked" Text="Igen"  Style="{StaticResource QuitPopupButton}" BackgroundColor="{StaticResource ErrorColor}" />

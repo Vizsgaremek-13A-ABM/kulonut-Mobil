@@ -7,7 +7,7 @@
     <Border Style="{StaticResource PopupBorder}">
         <Grid Margin="5" RowDefinitions="Auto, Auto, *">
             <Label Grid.Row="0" Text="{Binding TitleHead}" Style="{StaticResource PopupHeaderLabel}"/>
-            <Label Grid.Row="1" Margin="0, 25" Text="{Binding Description}" FontSize="18"/>
+            <Label Grid.Row="1" Margin="0, 25" Text="{Binding Description}" FontSize="18" TextColor="{StaticResource LightestGray}"/>
             <Button Grid.Row="2" x:Name="CloseBTN" Clicked="CloseBTN_Clicked" Style="{StaticResource PopupButton}" Text="Bezárás"/>
         </Grid>
     </Border>

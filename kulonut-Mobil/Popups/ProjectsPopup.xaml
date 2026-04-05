@@ -13,7 +13,7 @@
             <CollectionView Grid.Row="1" ItemsSource="{Binding ProjectsByPolygon.projects}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="0, 10" Stroke="{StaticResource MidGray}" Style="{StaticResource BlockBorder}" BackgroundColor="{StaticResource LightestGray}">
+                        <Border Margin="0, 10" Style="{StaticResource BlockBorderLight}">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer 
                                         Command="{Binding Source={RelativeSource AncestorType={x:Type popups:ProjectsPopup}}, Path=BindingContext.NavigateToDetailsCommand}"

@@ -24,6 +24,7 @@
         <Setter Property="TextDecorations" Value="Underline"/>
     </Style>
     <Style TargetType="Label" x:Key="CheckboxLabel">
+        <Setter Property="TextColor" Value="{StaticResource MidGray}"/>
         <Setter Property="VerticalOptions" Value="Center"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontAttributes" Value="Bold"/>
@@ -98,10 +99,13 @@
         <Setter Property="HorizontalOptions" Value="End"/>
         <Setter Property="VerticalOptions" Value="Start"/>
     </Style>
-    <Style TargetType="Border" x:Key="BlockBorder">
+    <Style TargetType="Border" x:Key="BlockBorderDark">
         <Setter Property="BackgroundColor" Value="{StaticResource MidGray}"/>
         <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
         <Setter Property="Padding" Value="20"/>
+    </Style>
+    <Style TargetType="Border" x:Key="BlockBorderLight" BasedOn="{StaticResource BlockBorderDark}">
+        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
     </Style>
     <Style TargetType="Border" x:Key="AuthBorder">
         <Setter Property="BackgroundColor" Value="White"/>
@@ -149,7 +153,7 @@
     </Style>
     <Style TargetType="CheckBox" x:Key="DetailsCheckbox">
         <Setter Property="HorizontalOptions" Value="Start"/>
-        <Setter Property="Color" Value="{StaticResource LightestGray}"/>
+        <Setter Property="Color" Value="{StaticResource MidGray}"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
     <Style TargetType="Line" x:Key="MenuLine">
