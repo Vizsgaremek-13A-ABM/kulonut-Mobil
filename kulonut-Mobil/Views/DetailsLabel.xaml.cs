@@ -28,6 +28,15 @@ namespace kulonut_Mobil.Views
 			get => HeaderLabel.FontSize;
 			set => HeaderLabel.FontSize = value;
 		}
+		public Color TextColor
+		{
+			get => HeaderLabel.TextColor;
+			set
+			{
+				HeaderLabel.TextColor = value;
+				BodyLabel.TextColor = value;
+			}
+		}
 		public DetailsLabel()
 		{
 			InitializeComponent();

@@ -12,15 +12,15 @@
     <Grid>
 
         <ScrollView Margin="20">
-            <Grid RowDefinitions="*, *, 5.5*, 0.5*">
+            <Grid  RowDefinitions="*, *, 5.5*, 0.5*">
                 <Label Grid.Row="0" Text="Különút KFT" Style="{StaticResource AuthHeader1}"/>
                 <Label Grid.Row="1"  Text="Bejelentkezés" Style="{StaticResource HeaderLine2}"/>
                 <Border Style="{StaticResource BlockBorder}" Grid.Row="2">
                     <Grid RowDefinitions="1.2*, 1.2*, *, *, 0.7*, 0.7*, Auto">
                         <views:AuthEntry Grid.Row="0" Text="{Binding LoginRequestDTO.email}" LabelText="Email Cím" Placeholder="Béla@gmail.com"/>
                         <views:AuthEntry Grid.Row="1" Text="{Binding LoginRequestDTO.password}" LabelText="Jelszó" IsPassword="True" Placeholder="Password"/>
-                        <Button Grid.Row="2" Background="{StaticResource DarkGray}" Style="{StaticResource AuthButton}" Command="{Binding LoginCommand}" Text="Bejelentkezés"/>
-                        <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Command="{Binding NavigateToRegisterCommand}" Text="Regisztráció"/>
+                        <Button Grid.Row="2" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Command="{Binding LoginCommand}" Text="Bejelentkezés"/>
+                        <Button Grid.Row="3" Background="{StaticResource Secondary}" Style="{StaticResource AuthButton}" Command="{Binding NavigateToRegisterCommand}" Text="Regisztráció"/>
                         <HorizontalStackLayout Grid.Row="4">
                             <Label VerticalOptions="Center" Text="Bejelentkezve Maradok" Style="{StaticResource AuthLabel}"/>
                             <CheckBox IsChecked="{Binding RememberLogin}" Style="{StaticResource DetailsCheckbox}"/>

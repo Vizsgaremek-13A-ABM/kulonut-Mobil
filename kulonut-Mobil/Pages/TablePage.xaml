@@ -13,33 +13,35 @@
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
         <tool:EventToCommandBehavior Command="{Binding HandleProjectLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    <Grid RowDefinitions="Auto, *" Margin="20, 0">
+    <Grid RowDefinitions="Auto, *" Margin="10, 0" >
         <HorizontalStackLayout  Grid.Row="0" Spacing="30" HorizontalOptions="End" VerticalOptions="End">
             <ImageButton Style="{StaticResource MapIconButton}" Source="close" Command="{Binding RemoveFilterCommand}" />
             <ImageButton Style="{StaticResource MapIconButton}" Source="filter" Command="{Binding OpenFilterCommand}"/>
         </HorizontalStackLayout>
-        <CollectionView Grid.Row="1" VerticalOptions="Start" ItemsSource="{Binding Projects}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Margin="0, 5,0,15" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type pages:TablePage}}, Path=BindingContext.NavigateToDetailsCommand}"
-                                CommandParameter="{Binding id}" />
-                        </Border.GestureRecognizers>
-                        <VerticalStackLayout Spacing="10">
-                            <views:DetailsLabel BodyFontSize="20" HeaderFontSize="26" HeaderText="Projekt Neve" BodyText="{Binding project_name}" Margin="0, 0, 0, 15"/>
-                            <views:DetailsLabel HeaderText="Kiadás Dátuma" BodyText="{Binding plan_issue_date, StringFormat='{0:yyyy.MM.dd}'}"/>
-                            <views:DetailsLabel HeaderText="Generáltervező" BodyText="{Binding general_designer, TargetNullValue='Nincs'}" />
-                            <views:DetailsLabel HeaderText="Tervezők" BodyText="{Binding designer, TargetNullValue='Nincs'}" />
-                            <views:DetailsLabel HeaderText="Megrendelő" BodyText="{Binding client, TargetNullValue='Nincs'}" />
-                            <views:DetailsLabel HeaderText="Megjegyzés" BodyText="{Binding notes, TargetNullValue='Nincs'}"/>
+        <Border Grid.Row="1" StrokeShape="RoundRectangle 20" Margin="0, 5" BackgroundColor="{StaticResource MidGray}">
+            <CollectionView   VerticalOptions="Start" HorizontalOptions="Center" ItemsSource="{Binding Projects}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="20" Stroke="{StaticResource DarkGray}" BackgroundColor="{StaticResource White}" Style="{StaticResource BlockBorder}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type pages:TablePage}}, Path=BindingContext.NavigateToDetailsCommand}"
+                                    CommandParameter="{Binding id}" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="10">
+                                <views:DetailsLabel BodyFontSize="20" HeaderFontSize="26" HeaderText="Projekt Neve" BodyText="{Binding project_name}" Margin="0, 0, 0, 15"/>
+                                <views:DetailsLabel HeaderText="Kiadás Dátuma" BodyText="{Binding plan_issue_date, StringFormat='{0:yyyy.MM.dd}'}"/>
+                                <views:DetailsLabel HeaderText="Generáltervező" BodyText="{Binding general_designer, TargetNullValue='Nincs'}" />
+                                <views:DetailsLabel HeaderText="Tervezők" BodyText="{Binding designer, TargetNullValue='Nincs'}" />
+                                <views:DetailsLabel HeaderText="Megrendelő" BodyText="{Binding client, TargetNullValue='Nincs'}" />
+                                <views:DetailsLabel HeaderText="Megjegyzés" BodyText="{Binding notes, TargetNullValue='Nincs'}"/>
 
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
         <views:Loader Grid.Row="0" Grid.RowSpan="2" IsLoading="{Binding IsLoading}"/>
     </Grid>
 </pages:BasePage>
