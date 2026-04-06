@@ -11,7 +11,7 @@
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
     <Style TargetType="Label" x:Key="AuthLabel">
-        <Setter Property="TextColor" Value="{StaticResource DarkGray}"/>
+        <Setter Property="TextColor" Value="{StaticResource LightestGray}"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Margin" Value="5, 0, 0, 3"/>
     </Style>
@@ -24,6 +24,7 @@
         <Setter Property="TextDecorations" Value="Underline"/>
     </Style>
     <Style TargetType="Label" x:Key="CheckboxLabel">
+        <Setter Property="TextColor" Value="{StaticResource MidGray}"/>
         <Setter Property="VerticalOptions" Value="Center"/>
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontAttributes" Value="Bold"/>
@@ -36,18 +37,20 @@
     </Style>
     <Style TargetType="Label" x:Key="FilterHideLabel">
         <Setter Property="Text" Value="Válassz dátumot"/>
-        <Setter Property="TextColor" Value="{StaticResource LightestGray}"/>
+        <Setter Property="TextColor" Value="{StaticResource MidGray}"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="VerticalTextAlignment" Value="Center"/>
         <Setter Property="Background" Value="White"/>
     </Style>
     <Style TargetType="Label" x:Key="PopupHeaderLabel">
+        <Setter Property="TextColor" Value="{StaticResource LightestGray}"/>
         <Setter Property="FontSize" Value="26"/>
         <Setter Property="FontAttributes" Value="Bold"/>
     </Style>
     <Style TargetType="Label" x:Key="MenuLabel">
         <Setter Property="Padding" Value="25"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="Grid.Column" Value="1"/>
     </Style>
     <Style TargetType="Label" x:Key="FilterLabel" BasedOn="{StaticResource AuthLabel}">
@@ -97,11 +100,16 @@
         <Setter Property="HorizontalOptions" Value="End"/>
         <Setter Property="VerticalOptions" Value="Start"/>
     </Style>
-    <Style TargetType="Border" x:Key="BlockBorder">
+    <Style TargetType="Border" x:Key="BlockBorderDark">
+        <Setter Property="BackgroundColor" Value="{StaticResource MidGray}"/>
         <Setter Property="StrokeShape" Value="RoundRectangle 20"/>
         <Setter Property="Padding" Value="20"/>
     </Style>
+    <Style TargetType="Border" x:Key="BlockBorderLight" BasedOn="{StaticResource BlockBorderDark}">
+        <Setter Property="BackgroundColor" Value="{StaticResource White}"/>
+    </Style>
     <Style TargetType="Border" x:Key="AuthBorder">
+        <Setter Property="BackgroundColor" Value="White"/>
         <Setter Property="Margin" Value="0, 5"/>
         <Setter Property="Padding" Value="12, 4"/>
         <Setter Property="StrokeShape" Value="RoundRectangle 10"/>
@@ -130,24 +138,28 @@
         <Setter Property="WidthRequest" Value="350"/>
         <Setter Property="Padding" Value="20"/>
         <Setter Property="StrokeShape" Value="RoundRectangle 30"/>
-        <Setter Property="BackgroundColor" Value="White"/>
+        <Setter Property="Stroke" Value="Transparent"/>
+        <Setter Property="BackgroundColor" Value="{StaticResource MidGray}"/>
     </Style>
     <Style TargetType="DatePicker" x:Key="FilterDate">
+        <Setter Property="TextColor" Value="{StaticResource MidGray}"/>
         <Setter Property="FontSize" Value="18"/>
         <Setter Property="Format" Value="yyyy/MM/dd"/>
     </Style>
     <Style TargetType="Entry" x:Key="AuthEntry">
+        <Setter Property="TextColor" Value="{StaticResource DarkGray}"/>
         <Setter Property="FontSize" Value="16"/> 
         <Setter Property="HeightRequest" Value="40"/> 
         <Setter Property="VerticalTextAlignment" Value="Center"/>
     </Style>
     <Style TargetType="CheckBox" x:Key="DetailsCheckbox">
         <Setter Property="HorizontalOptions" Value="Start"/>
-        <Setter Property="Color" Value="{StaticResource DarkGray}"/>
+        <Setter Property="Color" Value="{StaticResource MidGray}"/>
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
     <Style TargetType="Line" x:Key="MenuLine">
-        <Setter Property="Stroke" Value="White"/>
+        <Setter Property="Stroke" Value="{StaticResource MidGray}"/>
+        <Setter Property="StrokeThickness" Value="1.5"/>
         <Setter Property="X2" Value="1000"/>
         <Setter Property="Grid.ColumnSpan" Value="2"/>
     </Style>

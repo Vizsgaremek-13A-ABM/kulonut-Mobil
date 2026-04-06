@@ -14,10 +14,10 @@
     <Color x:Key="Tertiary">#351512</Color>
     <Color x:Key="ErrorColor">#e21</Color>
 
-    <Color x:Key="LightestGray">#C8C8C8</Color>
+    <Color x:Key="LightestGray">#e5e1e6</Color>
     <Color x:Key="LightGray">#999999</Color>
     <Color x:Key="MidGray">#454545</Color>
-    <Color x:Key="DarkGray">#2f2f2f</Color>
+    <Color x:Key="DarkGray">#212529</Color>
     
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>

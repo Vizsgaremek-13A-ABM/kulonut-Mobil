@@ -7,39 +7,40 @@
              x:Class="kulonut_Mobil.Pages.TablePage"
              Title="Táblázat Nézet">
     <Shell.TitleView>
-        <views:UserHeader Title="Táblázat Nézet"  User="{Binding User}"/>
+        <views:UserHeader Title="Projektek"  User="{Binding User}"/>
     </Shell.TitleView>
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
         <tool:EventToCommandBehavior Command="{Binding HandleProjectLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    <Grid RowDefinitions="Auto, *" Margin="20, 0">
-        <HorizontalStackLayout  Grid.Row="0" Spacing="30" HorizontalOptions="End" VerticalOptions="End">
+    <Grid RowDefinitions="Auto, *" Margin="10, 10, 10, 0" >
+        <HorizontalStackLayout  Grid.Row="0" Spacing="30" HorizontalOptions="Center" VerticalOptions="End">
             <ImageButton Style="{StaticResource MapIconButton}" Source="close" Command="{Binding RemoveFilterCommand}" />
             <ImageButton Style="{StaticResource MapIconButton}" Source="filter" Command="{Binding OpenFilterCommand}"/>
         </HorizontalStackLayout>
-        <CollectionView Grid.Row="1" VerticalOptions="Start" ItemsSource="{Binding Projects}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Margin="0, 5,0,15" Stroke="{StaticResource DarkGray}" Style="{StaticResource BlockBorder}">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type pages:TablePage}}, Path=BindingContext.NavigateToDetailsCommand}"
-                                CommandParameter="{Binding id}" />
-                        </Border.GestureRecognizers>
-                        <VerticalStackLayout Spacing="10">
-                            <views:DetailsLabel BodyFontSize="20" HeaderFontSize="26" HeaderText="Projekt Neve" BodyText="{Binding project_name}" Margin="0, 0, 0, 15"/>
-                            <views:DetailsLabel HeaderText="Kiadás Dátuma" BodyText="{Binding plan_issue_date, StringFormat='{0:yyyy.MM.dd}'}"/>
-                            <views:DetailsLabel HeaderText="Generáltervező" BodyText="{Binding general_designer, TargetNullValue='Nincs'}" />
-                            <views:DetailsLabel HeaderText="Tervezők" BodyText="{Binding designer, TargetNullValue='Nincs'}" />
-                            <views:DetailsLabel HeaderText="Megrendelő" BodyText="{Binding client, TargetNullValue='Nincs'}" />
-                            <views:DetailsLabel HeaderText="Megjegyzés" BodyText="{Binding notes, TargetNullValue='Nincs'}"/>
-
-                        </VerticalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Border Grid.Row="1" Margin="10, 15, 10, 10" Style="{StaticResource BlockBorderDark}">
+            <CollectionView Margin="5, 10" VerticalOptions="Start" HorizontalOptions="Center" ItemsSource="{Binding Projects}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Border Margin="0, 0, 0, 20" Style="{StaticResource BlockBorderLight}">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type pages:TablePage}}, Path=BindingContext.NavigateToDetailsCommand}"
+                                    CommandParameter="{Binding id}" />
+                            </Border.GestureRecognizers>
+                            <VerticalStackLayout Spacing="10">
+                                <views:DetailsLabel BodyFontSize="20" HeaderFontSize="26" HeaderText="Projekt Neve" BodyText="{Binding project_name}" Margin="0, 0, 0, 15"/>
+                                <views:DetailsLabel HeaderText="Kiadás Dátuma" BodyText="{Binding plan_issue_date, StringFormat='{0:yyyy.MM.dd}'}"/>
+                                <views:DetailsLabel HeaderText="Generáltervező" BodyText="{Binding general_designer, TargetNullValue='Nincs'}" />
+                                <views:DetailsLabel HeaderText="Tervezők" BodyText="{Binding designer, TargetNullValue='Nincs'}" />
+                                <views:DetailsLabel HeaderText="Megrendelő" BodyText="{Binding client, TargetNullValue='Nincs'}" />
+                                <views:DetailsLabel HeaderText="Megjegyzés" BodyText="{Binding notes, TargetNullValue='Nincs'}"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
         <views:Loader Grid.Row="0" Grid.RowSpan="2" IsLoading="{Binding IsLoading}"/>
     </Grid>
 </pages:BasePage>

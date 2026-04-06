@@ -17,14 +17,14 @@ namespace kulonut_Mobil.ViewModels
 	{
 		private static readonly Dictionary<string, Func<UserModel, string?>> _propMap = new()
 		{
-			{ "Név", u => u.name },
-			{ "Felhasználónév", u => u.display_name },
+			{ "Felhasználónév", u => u.name },
+			{ "Megjelenő Név", u => u.display_name },
 			{ "Email Cím", u => u.email }
 		};
 		private static readonly Dictionary<string, string> _fieldMap = new()
 		{
-			{ "Név", "name" },
-			{ "Felhasználónév", "display_name" },
+			{ "Felhasználónév", "name" },
+			{ "Megjelenő Név", "display_name" },
 			{ "Email Cím", "email" }
 		};
 
