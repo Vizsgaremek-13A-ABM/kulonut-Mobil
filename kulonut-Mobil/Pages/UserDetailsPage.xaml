@@ -18,8 +18,8 @@
                     </Grid.GestureRecognizers>
                     <Border Grid.Row="0" Style="{StaticResource BlockBorderLight}">
                         <Grid RowDefinitions="*,*,*,*">
-                            <views:UserEditLabel Grid.Row="0" HeaderText="Név" BodyText="{Binding User.name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
-                            <views:UserEditLabel Grid.Row="1" HeaderText="Felhasználónév" BodyText="{Binding User.display_name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
+                            <views:UserEditLabel Grid.Row="0" HeaderText="Felhasználónév" BodyText="{Binding User.name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
+                            <views:UserEditLabel Grid.Row="1" HeaderText="Megjelenő Név" BodyText="{Binding User.display_name}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
                             <views:UserEditLabel Grid.Row="2" HeaderText="Email Cím" BodyText="{Binding User.email}" RefreshUserCommand="{Binding HandleUserLoadCommand}"/>
                             <views:DetailsLabel Grid.Row="3" HeaderText="Rang" BodyText="{Binding User.role.role_name}"/>
                         </Grid>

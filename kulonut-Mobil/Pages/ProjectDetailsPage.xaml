@@ -20,7 +20,7 @@
                 <Border Grid.Row="0" Margin="0, 10, 0, 20" Style="{StaticResource BlockBorderLight}">
                     <views:DetailsLabel Spacing="5" HeaderFontSize="24" HeaderText="Projekt Neve" BodyText="{Binding CurrentProject.project_name}" />
                 </Border>
-                <ScrollView x:Name="MainScrollView" Grid.Row="1" >
+                <ScrollView Grid.Row="1" >
                     <VerticalStackLayout Spacing="20" >
                         <Border Style="{StaticResource BlockBorderLight}">
                             <VerticalStackLayout Spacing="10">
@@ -64,7 +64,7 @@
                                                     BodyText="{Binding CurrentProject.notes, TargetNullValue='Nincs'}"/>
                             </VerticalStackLayout>
                         </Border>
-                        <Grid Margin="20" HeightRequest="600" WidthRequest="400">
+                        <Grid Margin="20, 20, 20, 5" HeightRequest="600" WidthRequest="400">
                             <mapsui:MapControl Map="{Binding Map}"/>
                             <ImageButton Style="{StaticResource LocatorIconButton}" Source="locator" Margin="40, 5" Command="{Binding LocateCommand}"/>
                         </Grid>

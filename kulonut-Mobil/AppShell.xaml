@@ -26,7 +26,7 @@
         <DataTemplate>
             <Grid ColumnDefinitions="Auto,*" Padding="25,0">
                 <Line Style="{StaticResource MenuLine}"/>
-                <Image Source="{Binding Icon}" WidthRequest="25"/>
+                <Image Source="{Binding Icon}" WidthRequest="30"/>
                 <Label Text="{Binding Text}" Style="{StaticResource MenuLabel}"/>
             </Grid>
         </DataTemplate>
@@ -35,23 +35,23 @@
 
     <Shell.FlyoutHeader>
         <StackLayout Padding="20">
-            <Border WidthRequest="100" StrokeShape="RoundRectangle 50">
-                <Image Source="{Binding User.avatar, FallbackValue='splash', TargetNullValue='splash'}"/>
+            <Border Margin="0, 20" WidthRequest="150" HeightRequest="150" StrokeShape="RoundRectangle 150">
+                <Image Source="{Binding User.avatar, FallbackValue='splash', TargetNullValue='splash'}" Aspect="AspectFill"/>
             </Border>
-            <Label Text="Bejelentkezve mint:" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="0,10,0,0"/>
-            <Label Text="{Binding User.display_name}" HorizontalTextAlignment="Center" FontAttributes="Bold"/>
+            <Label FontSize="20" Text="Bejelentkezve mint:" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="0,10,0,0"/>
+            <Label FontSize="18" Text="{Binding User.display_name}" HorizontalTextAlignment="Center" FontAttributes="Bold" Margin="0,0,0,20"/>
         </StackLayout>
     </Shell.FlyoutHeader>
 
     <ShellContent Title="" ContentTemplate="{DataTemplate pages:MainPage}" Route="MainPage" FlyoutItemIsVisible="False"/>
     
-    <FlyoutItem Title="Térkép nézet" Icon="mapicon" Route="MapPage">
+    <FlyoutItem Title="Térkép" Icon="mapicon" Route="MapPage">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:MapPage}"/>
         </Tab>
     </FlyoutItem>
 
-    <FlyoutItem Title="Táblázat nézet" Icon="tableicon" Route="TablePage">
+    <FlyoutItem Title="Projektek" Icon="tableicon" Route="TablePage">
         <Tab>
             <ShellContent ContentTemplate="{DataTemplate pages:TablePage}"/>
         </Tab>

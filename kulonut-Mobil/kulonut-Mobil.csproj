@@ -56,6 +56,7 @@
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\appicon.png" />
 	  <None Remove="Resources\Images\Icons\close.png" />
+	  <None Remove="Resources\Images\Icons\edit.png" />
 	  <None Remove="Resources\Images\Icons\faceidicon.png" />
 	  <None Remove="Resources\Images\Icons\filter.png" />
 	  <None Remove="Resources\Images\Icons\locator.png" />
@@ -65,10 +66,10 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Icons\close.png" />
+	  <MauiImage Include="Resources\Images\Icons\edit.png" />
 	  <MauiImage Include="Resources\Images\Icons\faceidicon.png" />
 	  <MauiImage Include="Resources\Images\Icons\filter.png" />
 	  <MauiImage Include="Resources\Images\Icons\logouticon.png" />
-	  <MauiImage Include="Resources\Images\Icons\edit.png" />
 	</ItemGroup>
 
 	<ItemGroup>

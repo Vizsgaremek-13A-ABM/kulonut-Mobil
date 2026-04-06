@@ -7,22 +7,22 @@
              x:Class="kulonut_Mobil.Pages.TablePage"
              Title="Táblázat Nézet">
     <Shell.TitleView>
-        <views:UserHeader Title="Táblázat Nézet"  User="{Binding User}"/>
+        <views:UserHeader Title="Projektek"  User="{Binding User}"/>
     </Shell.TitleView>
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
         <tool:EventToCommandBehavior Command="{Binding HandleProjectLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
-    <Grid RowDefinitions="Auto, *" Margin="10, 0" >
+    <Grid RowDefinitions="Auto, *" Margin="10, 10, 10, 0" >
         <HorizontalStackLayout  Grid.Row="0" Spacing="30" HorizontalOptions="Center" VerticalOptions="End">
             <ImageButton Style="{StaticResource MapIconButton}" Source="close" Command="{Binding RemoveFilterCommand}" />
             <ImageButton Style="{StaticResource MapIconButton}" Source="filter" Command="{Binding OpenFilterCommand}"/>
         </HorizontalStackLayout>
-        <Border Grid.Row="1" Margin="10" Style="{StaticResource BlockBorderDark}">
-            <CollectionView   VerticalOptions="Start" HorizontalOptions="Center" ItemsSource="{Binding Projects}">
+        <Border Grid.Row="1" Margin="10, 15, 10, 10" Style="{StaticResource BlockBorderDark}">
+            <CollectionView Margin="5, 10" VerticalOptions="Start" HorizontalOptions="Center" ItemsSource="{Binding Projects}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="10" Style="{StaticResource BlockBorderLight}">
+                        <Border Margin="0, 0, 0, 20" Style="{StaticResource BlockBorderLight}">
                             <Border.GestureRecognizers>
                                 <TapGestureRecognizer
                                     Command="{Binding Source={RelativeSource AncestorType={x:Type pages:TablePage}}, Path=BindingContext.NavigateToDetailsCommand}"
@@ -35,7 +35,6 @@
                                 <views:DetailsLabel HeaderText="Tervezők" BodyText="{Binding designer, TargetNullValue='Nincs'}" />
                                 <views:DetailsLabel HeaderText="Megrendelő" BodyText="{Binding client, TargetNullValue='Nincs'}" />
                                 <views:DetailsLabel HeaderText="Megjegyzés" BodyText="{Binding notes, TargetNullValue='Nincs'}"/>
-
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>

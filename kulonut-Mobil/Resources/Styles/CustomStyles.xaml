@@ -50,6 +50,7 @@
     <Style TargetType="Label" x:Key="MenuLabel">
         <Setter Property="Padding" Value="25"/>
         <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="18"/>
         <Setter Property="Grid.Column" Value="1"/>
     </Style>
     <Style TargetType="Label" x:Key="FilterLabel" BasedOn="{StaticResource AuthLabel}">
@@ -157,7 +158,8 @@
         <Setter Property="VerticalOptions" Value="Center"/>
     </Style>
     <Style TargetType="Line" x:Key="MenuLine">
-        <Setter Property="Stroke" Value="White"/>
+        <Setter Property="Stroke" Value="{StaticResource MidGray}"/>
+        <Setter Property="StrokeThickness" Value="1.5"/>
         <Setter Property="X2" Value="1000"/>
         <Setter Property="Grid.ColumnSpan" Value="2"/>
     </Style>
