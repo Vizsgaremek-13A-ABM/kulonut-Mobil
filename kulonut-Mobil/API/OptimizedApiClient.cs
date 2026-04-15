@@ -1,10 +1,37 @@
-﻿using System.Data;
+﻿using Microsoft.Extensions.Logging;
+using System.Data;
+using System.Globalization;
 using System.Net.Http.Json;
 using System.Text.Json;
-using Microsoft.Extensions.Logging;
+using System.Text.Json.Serialization;
 
 namespace kulonut_Mobil.API
 {
+	public class FlexibleFloatConverter : JsonConverter<float>
+	{
+		public override float Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		{
+			if (reader.TokenType == JsonTokenType.Number)
+			{
+				return reader.GetSingle();
+			}
+
+			if (reader.TokenType == JsonTokenType.String)
+			{
+				var str = reader.GetString();
+
+				if (float.TryParse(str, NumberStyles.Float, CultureInfo.InvariantCulture, out float value))
+					return value;
+			}
+
+			throw new JsonException("Invalid float format");
+		}
+
+		public override void Write(Utf8JsonWriter writer, float value, JsonSerializerOptions options)
+		{
+			writer.WriteNumberValue(value);
+		}
+	}
 	public class OptimizedApiClient : IApiClient
 	{
 		public const string NAME = "OptimizedClient";
@@ -117,7 +144,7 @@ namespace kulonut_Mobil.API
 			try
 			{
 				using Stream content = await response.Content.ReadAsStreamAsync();
-				T? result = await JsonSerializer.DeserializeAsync<T>(content);
+				T? result = await JsonSerializer.DeserializeAsync<T>(content, new JsonSerializerOptions { Converters = { new FlexibleFloatConverter() } });
 
 				if (result != null && cacheKey != null)
 					await cacheService.SetAsync(cacheKey, result);
