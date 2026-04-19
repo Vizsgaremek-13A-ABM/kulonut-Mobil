@@ -6,9 +6,9 @@
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              xmlns:tool="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="kulonut_Mobil.Pages.ProjectDetailsPage"
-             Title="Projekt Adatok">
+             Title="Projekt Adatai">
     <Shell.TitleView>
-        <views:UserHeader Title="Projekt Adatok" User="{Binding User}" />
+        <views:UserHeader Title="Projekt Adatai" User="{Binding User}" />
     </Shell.TitleView>
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>

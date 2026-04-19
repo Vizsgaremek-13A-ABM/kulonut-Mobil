@@ -22,7 +22,7 @@
                 WidthRequest="50"
                 HeightRequest="50">
                 <ImageButton HeightRequest="50" WidthRequest="50" x:Name="UserIconButton" Clicked="UserIconButton_Clicked" Aspect="AspectFill"
-                    Source="{Binding User.avatar, Source={RelativeSource AncestorType={x:Type ContentView}}, FallbackValue='splash', TargetNullValue='splash'}"/>
+                    Source="{Binding User.avatar, Source={RelativeSource AncestorType={x:Type ContentView}}, FallbackValue='default_avatar', TargetNullValue='default_avatar'}"/>
             </Border>
         </HorizontalStackLayout>
     </Grid>

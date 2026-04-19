@@ -5,7 +5,7 @@
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              xmlns:tool="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
-             Title="Fehasználó Adatok">
+             Title="Fehasználó Adatai">
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
@@ -26,7 +26,7 @@
                     </Border>
                     <Grid Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center">
                         <Border Style="{StaticResource UserDetailsIconBorder}">
-                            <ImageButton Source="{Binding User.avatar, TargetNullValue='splash', FallbackValue='splash'}" Aspect="AspectFill" Command="{Binding UploadPictureCommand}"/>
+                            <ImageButton Source="{Binding User.avatar, TargetNullValue='default_avatar', FallbackValue='default_avatar'}" Aspect="AspectFill" Command="{Binding UploadPictureCommand}"/>
                         </Border>
                         <Border Style="{StaticResource UserIconEditBorder}" IsVisible="{Binding User.avatar, Converter={tool:IsNullConverter}}">
                             <ImageButton Source="edit" Aspect="AspectFit" BackgroundColor="Transparent" Command="{Binding UploadPictureCommand}"/>

@@ -47,7 +47,7 @@ namespace kulonut_Mobil.ViewModels
 				if(projects_response == null || projects_response.data == null)
 					await popupService.ShowMessageAsync("Nem sikerult betölteni a projekteket");
 				else
-					await popupService.ShowMessageAsync("Nincs ilyen projekt");
+					await popupService.ShowMessageAsync("Nem találtunk ilyen projektet", "Információ");
 				IsLoading = false;
 				return;
 			}
