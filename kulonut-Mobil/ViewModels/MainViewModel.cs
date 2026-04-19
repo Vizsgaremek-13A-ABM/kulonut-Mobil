@@ -45,10 +45,10 @@ namespace kulonut_Mobil.ViewModels
 				if (result.Authenticated)
 					await Remember(true);
 				else
-					await popupService.ShowErrorAsync("Nem sikerült a biometrikus azonosítás", "Hiba");
+					await popupService.ShowMessageAsync("Nem sikerült a biometrikus azonosítás", "Hiba");
 			}
 			else
-				await popupService.ShowErrorAsync("A biometrikus azonosítás nem elérhető a készülékén!");
+				await popupService.ShowMessageAsync("A biometrikus azonosítás nem elérhető a készülékén!");
 		}
 
 		[RelayCommand]
@@ -85,18 +85,18 @@ namespace kulonut_Mobil.ViewModels
 		}
 		private async Task Remember(bool isBiometric)
 		{
-			string? token = await authService.GetTokenAsync();
+			string? token = await authService.GetToken();
 			if (string.IsNullOrEmpty(token))
 			{
 				if (isBiometric)
-					await popupService.ShowErrorAsync("Nincs beállítva biometrikus bejelentkezés, jelentkezzen be manuálisan.", "Információ");
+					await popupService.ShowMessageAsync("Nincs beállítva biometrikus bejelentkezés, jelentkezzen be manuálisan.", "Információ");
 				return;
 			}
 			authService.SetToken(token);
 			if (authService.IsAuthenticated())
 				await HandleAuthenticatedRemember();
 			else
-				await popupService.ShowErrorAsync("Lejárt token");
+				await popupService.ShowMessageAsync("Lejárt token");
 		}
 		private async Task SetUserAppshell()
 		{
@@ -117,10 +117,10 @@ namespace kulonut_Mobil.ViewModels
 			UserModel? user = await userService.GetCurrentUserAsync();
 			if (user == null)
 			{
-				await popupService.ShowErrorAsync("Nem található a megadott fehasználó");
+				await popupService.ShowMessageAsync("Nem található a megadott fehasználó");
 				return;
 			}
-			else if (user.role == null)
+			else if (user.email_verified_at == null)
 			{
 				await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
 				return;
@@ -133,23 +133,31 @@ namespace kulonut_Mobil.ViewModels
 		{
 			try
 			{
-				UserModel? response = await authService.LoginAsync(LoginRequestDTO, RememberLogin);
+				UserModel? response = await authService.Login(LoginRequestDTO, RememberLogin);
 				if (response == null)
 				{
-					await popupService.ShowErrorAsync("Helytelen Email-cím vagy jelszó");
+					await popupService.ShowMessageAsync("Helytelen Email-cím vagy jelszó");
 					return;
 				}
 				await userService.SetCurrentUser(response);
-				await SetUserAppshell();
-				await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+				if (response.email_verified_at == null)
+				{
+					await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
+				}
+
+				else
+				{
+					await SetUserAppshell();
+					await Shell.Current.GoToAsync($"//{nameof(MapPage)}");
+				}
 			}
 			catch (DuplicateNameException)
 			{
-				await popupService.ShowErrorAsync("Helytelen Email-cím vagy jelszó");
+				await popupService.ShowMessageAsync("Helytelen Email-cím vagy jelszó");
 			}
 			catch (Exception)
 			{
-				await popupService.ShowErrorAsync("Váratlan hiba lépett fel a bejelentkezés közben");
+				await popupService.ShowMessageAsync($"Váratlan hiba lépett fel a bejelentkezés közben");
 			}
 
 		}
@@ -158,13 +166,13 @@ namespace kulonut_Mobil.ViewModels
 			string? email_valid = InputValidator.ValidateEmail(LoginRequestDTO.email);
             if(email_valid != null)
 			{
-				await popupService.ShowErrorAsync(email_valid);
+				await popupService.ShowMessageAsync(email_valid);
 				return false;
 			}
             string? user_password = InputValidator.ValidatePassword(LoginRequestDTO.password);
             if (user_password != null)
             {
-                await popupService.ShowErrorAsync(user_password);
+                await popupService.ShowMessageAsync(user_password);
                 return false;
             }
             return true;

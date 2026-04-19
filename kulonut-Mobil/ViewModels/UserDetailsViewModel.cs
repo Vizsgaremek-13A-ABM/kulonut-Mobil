@@ -44,7 +44,7 @@ namespace kulonut_Mobil.ViewModels
 			}
 			catch (Exception ex)
 			{
-				await popupService.ShowErrorAsync(ex.Message);
+				await popupService.ShowMessageAsync(ex.Message);
 			}
 		}
 		public override bool OnBackButtonPressed()

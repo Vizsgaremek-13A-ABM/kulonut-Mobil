@@ -58,7 +58,7 @@ namespace kulonut_Mobil.ViewModels
 				UserModel? updatedUser = await userService.UpdateCurrentUserAsync(requestBody);
 				if (updatedUser == null)
 				{
-					ErrorText = $"Nem módosítható felhasználó {user.id} id-vel";
+					ErrorText = $"Nem módosítható a {user.name} nevű felhasználó";
 					return;
 				}
 				await ClosePopup();

@@ -26,7 +26,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task Logout()
 		{
-			await authService.LogoutAsync();
+			await authService.Logout();
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}

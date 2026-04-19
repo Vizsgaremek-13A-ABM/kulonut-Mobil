@@ -30,15 +30,15 @@ namespace kulonut_Mobil.ViewModels
 			}
 			catch (UnauthorizedAccessException)
 			{
-				await popupService.ShowErrorAsync("A helymeghatározási engedély nincs megadva.");
+				await popupService.ShowMessageAsync("A helymeghatározási engedély nincs megadva.");
 			}
 			catch (InvalidOperationException)
 			{
-				await popupService.ShowErrorAsync("Nem sikerült meghatározni a tartózkodási helyet.");
+				await popupService.ShowMessageAsync("Nem sikerült meghatározni a tartózkodási helyet.");
 			}
 			catch (Exception)
 			{
-				await popupService.ShowErrorAsync("Ismeretlen hiba történt a helymeghatározás során.");
+				await popupService.ShowMessageAsync("Ismeretlen hiba történt a helymeghatározás során.");
 			}
 		}
 	}
