@@ -53,7 +53,7 @@ namespace kulonut_Mobil.ViewModels
 			string? email_valid = InputValidator.ValidateEmail(ForgotPasswordRequest.email);
 			if (email_valid != null)
 			{
-				await popupService.ShowMessageAsync(email_valid);
+				await popupService.ShowMessageAsync(email_valid, "Információ");
 				return false;
 			}
 			return true;

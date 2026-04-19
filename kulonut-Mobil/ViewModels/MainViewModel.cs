@@ -44,9 +44,8 @@ namespace kulonut_Mobil.ViewModels
 					await popupService.ShowMessageAsync("Nem sikerült a biometrikus azonosítás", "Információ");
 			}
 			else
-				await popupService.ShowMessageAsync("A biometrikus azonosítás nem elérhető a készülékén!");
+				await popupService.ShowMessageAsync("A biometrikus azonosítás nem elérhető a készülékén!", "Információ");
 		}
-
 		[RelayCommand]
 		private async Task HandleRemember()
 		{
@@ -58,7 +57,6 @@ namespace kulonut_Mobil.ViewModels
 			await Remember(false);
 			IsLoading = false;
 		}
-		
 		[RelayCommand]
 		private async Task Login()
 		{
@@ -149,7 +147,7 @@ namespace kulonut_Mobil.ViewModels
 			}
 			catch (DuplicateNameException)
 			{
-				await popupService.ShowMessageAsync("Helytelen Email-cím vagy jelszó");
+				await popupService.ShowMessageAsync("Helytelen Email-cím vagy jelszó", "Információ");
 			}
 			catch (Exception)
 			{
@@ -162,13 +160,13 @@ namespace kulonut_Mobil.ViewModels
 			string? email_valid = InputValidator.ValidateEmail(LoginRequestDTO.email);
             if(email_valid != null)
 			{
-				await popupService.ShowMessageAsync(email_valid);
+				await popupService.ShowMessageAsync(email_valid, "Információ");
 				return false;
 			}
             string? user_password = InputValidator.ValidatePassword(LoginRequestDTO.password);
             if (user_password != null)
             {
-                await popupService.ShowMessageAsync(user_password);
+                await popupService.ShowMessageAsync(user_password, "Információ");
                 return false;
             }
             return true;
