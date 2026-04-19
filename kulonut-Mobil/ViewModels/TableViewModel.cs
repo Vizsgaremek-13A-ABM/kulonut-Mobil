@@ -4,12 +4,6 @@ using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -47,7 +41,7 @@ namespace kulonut_Mobil.ViewModels
 				if(projects_response == null || projects_response.data == null)
 					await popupService.ShowMessageAsync("Nem sikerult betölteni a projekteket");
 				else
-					await popupService.ShowMessageAsync("Nem találtunk ilyen projektet", "Információ");
+					await popupService.ShowMessageAsync("Nem találtunk ilyen projektet, ezért az előző szűrés eredménye marad megjelenítve", "Információ");
 				IsLoading = false;
 				return;
 			}

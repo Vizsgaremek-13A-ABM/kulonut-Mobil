@@ -2,7 +2,6 @@
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {

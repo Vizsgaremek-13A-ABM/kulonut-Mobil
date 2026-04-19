@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using kulonut_Mobil.MapFeatures;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Services;

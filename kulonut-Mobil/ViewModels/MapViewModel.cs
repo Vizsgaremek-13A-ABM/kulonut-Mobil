@@ -2,7 +2,6 @@
 using kulonut_Mobil.MapFeatures;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Services;
-using System.Diagnostics;
 using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.ViewModels
@@ -45,7 +44,7 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
 			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
-				await popupService.ShowMessageAsync("Nem találtunk ilyen területet", "Információ");
+				await popupService.ShowMessageAsync("Nem találtunk ilyen területet, ezért az előző szűrés eredménye marad megjelenítve", "Információ");
 
 			if (polygons != null && polygons.data != null)
 				mapHandler.ShowPolygons(polygons.data);

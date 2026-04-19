@@ -8,7 +8,7 @@
              x:Class="kulonut_Mobil.Pages.ProjectDetailsPage"
              Title="Projekt Adatai">
     <Shell.TitleView>
-        <views:UserHeader Title="Projekt Adatai" User="{Binding User}" />
+        <views:UserHeader Title="Projektadatok" User="{Binding User}" />
     </Shell.TitleView>
     <ContentPage.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>

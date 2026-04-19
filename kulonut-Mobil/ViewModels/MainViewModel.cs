@@ -1,7 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Java.Security;
-using kulonut_Mobil.API;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
@@ -10,8 +8,6 @@ using kulonut_Mobil.Validation;
 using Plugin.Fingerprint;
 using Plugin.Fingerprint.Abstractions;
 using System.Data;
-using System.Diagnostics;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -45,7 +41,7 @@ namespace kulonut_Mobil.ViewModels
 				if (result.Authenticated)
 					await Remember(true);
 				else
-					await popupService.ShowMessageAsync("Nem sikerült a biometrikus azonosítás", "Hiba");
+					await popupService.ShowMessageAsync("Nem sikerült a biometrikus azonosítás", "Információ");
 			}
 			else
 				await popupService.ShowMessageAsync("A biometrikus azonosítás nem elérhető a készülékén!");
@@ -117,7 +113,7 @@ namespace kulonut_Mobil.ViewModels
 			UserModel? user = await userService.GetCurrentUserAsync();
 			if (user == null)
 			{
-				await popupService.ShowMessageAsync("Nem található a megadott fehasználó");
+				await popupService.ShowMessageAsync("Nem található a megadott fehasználó", "Információ");
 				return;
 			}
 			else if (user.email_verified_at == null)
@@ -136,7 +132,7 @@ namespace kulonut_Mobil.ViewModels
 				UserModel? response = await authService.Login(LoginRequestDTO, RememberLogin);
 				if (response == null)
 				{
-					await popupService.ShowMessageAsync("Helytelen Email-cím vagy jelszó");
+					await popupService.ShowMessageAsync("Helytelen Email-cím vagy jelszó", "Információ");
 					return;
 				}
 				await userService.SetCurrentUser(response);

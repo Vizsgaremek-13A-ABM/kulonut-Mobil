@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Views.UserHeader">
     <Grid ColumnDefinitions="*, Auto"  Padding="0,0,10,0" HeightRequest="50">
-        <Label  x:Name="TitleLabel" VerticalTextAlignment="Center" FontSize="22" FontAttributes="Bold" />
+        <Label  x:Name="TitleLabel" VerticalTextAlignment="Center" FontSize="20" FontAttributes="Bold" />
 
         <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
 

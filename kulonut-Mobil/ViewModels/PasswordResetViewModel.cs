@@ -3,12 +3,7 @@ using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -41,7 +36,7 @@ namespace kulonut_Mobil.ViewModels
 			}
 			catch (DuplicateNameException)
 			{ 
-				await popupService.ShowMessageAsync("Nincs ilyen email-cím az adatbázisban");
+				await popupService.ShowMessageAsync("Nincs ilyen email-cím az adatbázisban", "Információ");
 				return;
 			}
 			catch (Exception)
@@ -49,7 +44,7 @@ namespace kulonut_Mobil.ViewModels
 				await popupService.ShowMessageAsync("Váratlan hiba történt");
 				return;
 			}
-			await popupService.ShowMessageAsync("A Jelszó visszaállítása sikeresen megkezdődött. A visszaállítás menetét email-ben részletezzük.", "Üzenet");
+			await popupService.ShowMessageAsync("A Jelszó visszaállítása sikeresen megkezdődött. A visszaállítás menetét email-ben részletezzük.", "Információ");
 			await authService.Logout();
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}

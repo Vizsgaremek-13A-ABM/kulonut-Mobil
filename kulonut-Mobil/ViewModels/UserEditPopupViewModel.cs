@@ -2,14 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Services;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {

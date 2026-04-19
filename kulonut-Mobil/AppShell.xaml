@@ -8,7 +8,6 @@
             FlyoutBackgroundColor="{StaticResource LightestGray}"
             Title="kulonut_Mobil"
             FlyoutIsPresented="{Binding FlyoutIsOpen}">
-    
     <Shell.Behaviors>
         <tool:EventToCommandBehavior Command="{Binding HandleUserLoadCommand}" EventName="Appearing"/>
     </Shell.Behaviors>

@@ -14,7 +14,7 @@
         <tool:EventToCommandBehavior Command="{Binding HandleProjectLoadCommand}" EventName="Appearing"/>
     </ContentPage.Behaviors>
     <Grid RowDefinitions="Auto, *" Margin="10, 10, 10, 0" >
-        <HorizontalStackLayout  Grid.Row="0" Spacing="30" HorizontalOptions="Center" VerticalOptions="End">
+        <HorizontalStackLayout  Grid.Row="0" Margin="0, 10, 0, 0" Spacing="30" HorizontalOptions="Center" VerticalOptions="End">
             <ImageButton Style="{StaticResource MapIconButton}" Source="close" Command="{Binding RemoveFilterCommand}" />
             <ImageButton Style="{StaticResource MapIconButton}" Source="filter" Command="{Binding OpenFilterCommand}"/>
         </HorizontalStackLayout>

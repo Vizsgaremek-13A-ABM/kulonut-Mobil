@@ -3,13 +3,8 @@ using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Security.Authentication;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -56,23 +51,23 @@ namespace kulonut_Mobil.ViewModels
 			string? old_password_error = InputValidator.ValidatePassword(ChangePasswordRequest?.current_password);
 			if (old_password_error != null)
 			{
-				await popupService.ShowMessageAsync(old_password_error);
+				await popupService.ShowMessageAsync(old_password_error, "Információ");
 				return false;
 			}
 			string? password_error = InputValidator.ValidatePassword(ChangePasswordRequest?.password);
 			if (password_error != null)
 			{
-				await popupService.ShowMessageAsync(password_error);
+				await popupService.ShowMessageAsync(password_error, "Információ");
 				return false;
 			}
 			if(ChangePasswordRequest?.password == ChangePasswordRequest?.current_password)
 			{
-				await popupService.ShowMessageAsync("Nem lehet ugyanaz a régi és az új jelszó");
+				await popupService.ShowMessageAsync("Nem lehet ugyanaz a régi és az új jelszó", "Információ");
 				return false;
 			}
 			if (ChangePasswordRequest?.password != ChangePasswordRequest?.password_confirmation)
 			{
-				await popupService.ShowMessageAsync("Nem egyezik a két jelszó");
+				await popupService.ShowMessageAsync("Nem egyezik a két jelszó", "Információ");
 				return false;
 			}
 			return true;
