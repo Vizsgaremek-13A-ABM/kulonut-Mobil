@@ -34,6 +34,7 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<PublishAot>False</PublishAot>
 	</PropertyGroup>
   <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-android'">
     <AndroidPackageFormat>apk</AndroidPackageFormat>
@@ -45,6 +46,7 @@
     <AndroidKeyStore>False</AndroidKeyStore>
     <ApplicationTitle>Kulonut-Mobil</ApplicationTitle>
     <ApplicationId>Kulonut-Mobil</ApplicationId>
+    <RunAOTCompilation>False</RunAOTCompilation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
     <AndroidKeyStore>False</AndroidKeyStore>

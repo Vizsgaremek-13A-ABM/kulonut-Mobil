@@ -10,7 +10,7 @@
             <VerticalStackLayout VerticalOptions="Center" >
                 <Label 
                     FontAttributes="Bold"
-                    Text="{Binding User.display_name, Source={RelativeSource AncestorType={x:Type ContentView}}}"                    
+                    Text="{Binding DisplayNameOrFallback, Source={RelativeSource AncestorType={x:Type ContentView}}}"                    
                     FontSize="16"/>
                 <Label 
                     Text="{Binding User.role.role_name, Source={RelativeSource AncestorType={x:Type ContentView}}}"

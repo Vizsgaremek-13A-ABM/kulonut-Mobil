@@ -36,12 +36,14 @@ namespace kulonut_Mobil.ViewModels
 			bool is_available = await CrossFingerprint.Current.IsAvailableAsync(true);
 			if (is_available)
 			{
+				IsLoading = true;
 				AuthenticationRequestConfiguration request = new AuthenticationRequestConfiguration("Biometrikus azonosítás", "Kérjük azonosítsa magát.");
 				FingerprintAuthenticationResult result = await CrossFingerprint.Current.AuthenticateAsync(request);
 				if (result.Authenticated)
 					await Remember(true);
 				else
 					await popupService.ShowMessageAsync("Nem sikerült a biometrikus azonosítás", "Információ");
+				IsLoading = false;
 			}
 			else
 				await popupService.ShowMessageAsync("A biometrikus azonosítás nem elérhető a készülékén!", "Információ");

@@ -15,8 +15,8 @@
                 <Border Style="{StaticResource BlockBorderDark}" Grid.Row="0">
                     <Grid RowDefinitions="1.5*, 1.5*, 1.5*, 0.8*, 0.8*, 0.5*, 0.5*, 0.7*">
                         <Image Grid.Row="0" Source="logo"/>
-                        <views:AuthEntry Grid.Row="1" Text="{Binding LoginRequestDTO.email}" LabelText="Email Cím" Placeholder="Béla@gmail.com"/>
-                        <views:AuthEntry Grid.Row="2" Text="{Binding LoginRequestDTO.password}" LabelText="Jelszó" IsPassword="True" Placeholder="Password"/>
+                        <views:AuthEntry Grid.Row="1" Text="{Binding LoginRequestDTO.email}" LabelText="E-mail Cím" Placeholder="E-mail cím"/>
+                        <views:AuthEntry Grid.Row="2" Text="{Binding LoginRequestDTO.password}" LabelText="Jelszó" IsPassword="True" Placeholder="Jelszó"/>
                         <Button Grid.Row="3" Background="{StaticResource PrimaryDark}" Style="{StaticResource AuthButton}" Command="{Binding LoginCommand}" Text="Bejelentkezés"/>
                         <Button Grid.Row="4" Background="{StaticResource Secondary}" Style="{StaticResource AuthButton}" Command="{Binding NavigateToRegisterCommand}" Text="Regisztráció"/>
                         <HorizontalStackLayout Grid.Row="5">

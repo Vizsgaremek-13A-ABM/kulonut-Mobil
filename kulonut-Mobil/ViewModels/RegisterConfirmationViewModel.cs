@@ -32,6 +32,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			try
 			{
+				IsLoading = true;
 				MessageResponseDTO? response = await authService.ResendRegister();
 				if (response == null) await popupService.ShowMessageAsync("Váratlan hiba történt az újraküldés közben");
 				else await popupService.ShowMessageAsync($"Hitelesítő email elküldve.", "Információ");
@@ -39,6 +40,10 @@ namespace kulonut_Mobil.ViewModels
 			catch (Exception)
 			{
 				await popupService.ShowMessageAsync("Váratlan hiba történt az újraküldés közben");
+			}
+			finally
+			{
+				IsLoading = false;
 			}
 		}
 	}
