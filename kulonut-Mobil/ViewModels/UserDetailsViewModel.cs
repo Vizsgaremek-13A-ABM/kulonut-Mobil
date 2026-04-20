@@ -42,9 +42,9 @@ namespace kulonut_Mobil.ViewModels
 			{
 				await popupService.ShowMessageAsync("Túl nagy a fájl", "Információ");
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
-				await popupService.ShowMessageAsync(ex.Message);
+				await popupService.ShowMessageAsync("Váratlan hiba képfeltöltés közben");
 			}
 			finally 
 			{
