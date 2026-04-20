@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Java.Lang;
+using kulonut_Mobil.Models;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 

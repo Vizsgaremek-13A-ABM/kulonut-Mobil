@@ -41,7 +41,7 @@ namespace kulonut_Mobil.Services
 		}
 		public async Task<UserModel?> UpdateCurrentUserAsync(Dictionary<string, string> request)
 		{
-			GetUserResponseDTO? response = await apiClient.PutAsync<GetUserResponseDTO?, Dictionary<string, string>>($"users/{user!.id}", request);
+			GetUserResponseDTO? response = await apiClient.PutAsync<GetUserResponseDTO?, Dictionary<string, string>>($"user/profile", request);
 			if (response != null && response.data != null)
 			{
 				await SetCurrentUser(response.data);

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Android.App;
+using Microsoft.Extensions.Logging;
 using System.Data;
 using System.Globalization;
 using System.Net.Http.Json;
@@ -66,8 +67,17 @@ namespace kulonut_Mobil.API
 
 		public async Task<T?> GetAsync<T>(string url, string? cacheKey = null)
 		{
-			using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
-			return await HandleResponse<T>(response, cacheKey);
+			try
+			{
+				using HttpResponseMessage response = await httpClient.GetAsync(url).ConfigureAwait(false);
+				return await HandleResponse<T>(response, cacheKey);
+			}
+			catch (HttpRequestException ex)
+			{
+				logger.LogError(ex, "Network error in Put for URL {Url}", url);
+				return default;
+			}
+			
 		}
 
 		public async Task<T?> PostAsync<T, TBody>(string url, TBody? body)
@@ -76,6 +86,10 @@ namespace kulonut_Mobil.API
 			{
 				using HttpResponseMessage response = await httpClient.PostAsJsonAsync(url, body).ConfigureAwait(false);
 				return await HandleResponse<T>(response, null);
+			}
+			catch (HttpRequestException)
+			{
+				return default;
 			}
 			catch (DuplicateNameException)
 			{
@@ -98,7 +112,7 @@ namespace kulonut_Mobil.API
 			catch (HttpRequestException ex)
 			{
 				logger.LogError(ex, "Network error in Put for URL {Url}", url);
-				throw;
+				return default;
 			}
 			catch (Exception ex)
 			{
@@ -137,6 +151,8 @@ namespace kulonut_Mobil.API
 			{
 				if (response.StatusCode == System.Net.HttpStatusCode.UnprocessableEntity)
 					throw new DuplicateNameException("Email is taken");
+				if (response.StatusCode == System.Net.HttpStatusCode.RequestEntityTooLarge)
+					throw new ApplicationException("Request entity too large (413).");
 				logger.LogWarning("Request failed with status code {StatusCode}", response.StatusCode);
 				return default;
 			}

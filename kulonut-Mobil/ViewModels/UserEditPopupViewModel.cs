@@ -55,7 +55,6 @@ namespace kulonut_Mobil.ViewModels
 					return;
 				}
 				await ClosePopup();
-
 			}
 			catch (DuplicateNameException)
 			{

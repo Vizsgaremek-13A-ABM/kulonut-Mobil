@@ -27,17 +27,28 @@ namespace kulonut_Mobil.ViewModels
 		{
 			try
 			{
+				
 				FileResult? result = await MediaPicker.Default.PickPhotoAsync();
 				if (result == null)
 					return;
+				
+				IsLoading = true;
 				using Stream stream = await result.OpenReadAsync();
 				UserModel? user = await userService.UploadUserImageAsync(stream, result.FileName);
 				if (user != null)
-					User = user;								
+					User = user;
+			}
+			catch (ApplicationException)
+			{
+				await popupService.ShowMessageAsync("Túl nagy a fájl", "Információ");
 			}
 			catch (Exception ex)
 			{
 				await popupService.ShowMessageAsync(ex.Message);
+			}
+			finally 
+			{
+				IsLoading = false;
 			}
 		}
 		public override bool OnBackButtonPressed()

@@ -16,7 +16,7 @@ namespace kulonut_Mobil.DependencyInjection
 			.AddSingleton<ICacheService, DualLayerCacheService>()
 			.AddHttpClient(OptimizedApiClient.NAME, client =>
 			{
-				client.Timeout = TimeSpan.FromSeconds(5);
+				client.Timeout = TimeSpan.FromSeconds(15);
 				client.DefaultRequestHeaders.Add("Accept", "application/json");
 				client.BaseAddress = new Uri("https://kulonutapi.jcloud.jedlik.cloud/api/");
 			})

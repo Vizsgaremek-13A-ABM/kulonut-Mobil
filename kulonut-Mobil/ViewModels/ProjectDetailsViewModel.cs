@@ -48,7 +48,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			PolygonsResponseDTO? polygons = await dataService.GetPolygonsByProject(CurrentProject!.id);
 			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
-				await popupService.ShowMessageAsync("Nem találtunk területet az adott polygonhoz", "Információ");
+				await popupService.ShowMessageAsync("Nem találtunk területet az adott projekthez", "Információ");
 
 			if (polygons != null && polygons.data != null)
 			{

@@ -44,8 +44,11 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
 			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
+			{
 				await popupService.ShowMessageAsync("Nem találtunk ilyen területet, ezért az előző szűrés eredménye marad megjelenítve", "Információ");
-
+				IsLoading = false;
+				return;
+			}
 			if (polygons != null && polygons.data != null)
 				mapHandler.ShowPolygons(polygons.data);
 			

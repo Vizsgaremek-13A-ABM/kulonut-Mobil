@@ -73,7 +73,6 @@
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\appicon.png" />
 	  <None Remove="Resources\Images\Icons\close.png" />
-	  <None Remove="Resources\Images\Icons\default_avatar.png" />
 	  <None Remove="Resources\Images\Icons\edit.png" />
 	  <None Remove="Resources\Images\Icons\faceidicon.png" />
 	  <None Remove="Resources\Images\Icons\filter.png" />

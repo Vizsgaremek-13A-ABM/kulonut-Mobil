@@ -2,8 +2,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Views.DetailsCheckbox">
-    <HorizontalStackLayout>
-        <CheckBox x:Name="CheckBox" IsChecked="{Binding IsChecked, Source={RelativeSource AncestorType={x:Type ContentView}}}" Style="{StaticResource DetailsCheckbox}" IsEnabled="False" />
-        <Label x:Name="HeaderLabel" Style="{StaticResource CheckboxLabel}"/>
-    </HorizontalStackLayout>
+    <Grid ColumnDefinitions="*, 5*">
+        <CheckBox Grid.Column="0" x:Name="CheckBox" IsChecked="{Binding IsChecked, Source={RelativeSource AncestorType={x:Type ContentView}}}" Style="{StaticResource DetailsCheckbox}" IsEnabled="False" />
+        <Label Grid.Column="1" x:Name="HeaderLabel" Style="{StaticResource CheckboxLabel}"/>
+    </Grid>
 </ContentView>
