@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Android.Runtime;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
@@ -8,14 +9,11 @@ using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.ViewModels
 {
-	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
 	[QueryProperty(nameof(Id), ID_URL)]
 	public partial class ProjectDetailsViewModel : MapViewModelBase
 	{
 
-		public const string NAV_URL = "navigatedFrom";
 		public const string ID_URL = "id";
-		public string? NavigatedFrom { get; set; }
 		public int Id { get; set; }
 
 		[ObservableProperty]
@@ -42,7 +40,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>
 			{
-				await Shell.Current.GoToAsync($"//{NavigatedFrom}");
+				await Shell.Current.GoToAsync("..");
 			});
 			return true;
 		}

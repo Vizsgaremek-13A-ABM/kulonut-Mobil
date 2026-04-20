@@ -76,7 +76,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>
 			{
-				await Shell.Current.GoToAsync($"..");
+				await Shell.Current.GoToAsync("..");
 			});
 			return true;
 		}

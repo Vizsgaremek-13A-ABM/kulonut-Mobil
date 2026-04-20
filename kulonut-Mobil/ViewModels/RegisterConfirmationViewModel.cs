@@ -33,7 +33,8 @@ namespace kulonut_Mobil.ViewModels
 			try
 			{
 				MessageResponseDTO? response = await authService.ResendRegister();
-				if(response == null) await popupService.ShowMessageAsync("Váratlan hiba történt az újraküldés közben");
+				if (response == null) await popupService.ShowMessageAsync("Váratlan hiba történt az újraküldés közben");
+				else await popupService.ShowMessageAsync($"Hitelesítő email elküldve.", "Információ");
 			}
 			catch (Exception)
 			{

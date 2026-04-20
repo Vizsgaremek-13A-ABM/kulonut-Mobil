@@ -60,7 +60,7 @@
                         </Border>
                         <Border Style="{StaticResource BlockBorderLight}">
                             <VerticalStackLayout Spacing="10">
-                                <views:DetailsLabel BodyFontSize="14" Spacing="10" Style="{StaticResource DetailsNoteLabel}" HeaderText="Megjegyzés" 
+                                <views:DetailsLabel BodyFontSize="14" Spacing="10" HeaderText="Megjegyzés" 
                                                     BodyText="{Binding CurrentProject.notes, TargetNullValue='Nincs'}"/>
                             </VerticalStackLayout>
                         </Border>
