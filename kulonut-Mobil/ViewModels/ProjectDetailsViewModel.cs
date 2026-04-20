@@ -1,6 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Android.Runtime;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using kulonut_Mobil.MapFeatures;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Services;
@@ -9,14 +9,11 @@ using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.ViewModels
 {
-	[QueryProperty(nameof(NavigatedFrom), NAV_URL)]
 	[QueryProperty(nameof(Id), ID_URL)]
 	public partial class ProjectDetailsViewModel : MapViewModelBase
 	{
 
-		public const string NAV_URL = "navigatedFrom";
 		public const string ID_URL = "id";
-		public string? NavigatedFrom { get; set; }
 		public int Id { get; set; }
 
 		[ObservableProperty]
@@ -31,7 +28,7 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			ProjectResponseDTO? current_project = await dataService.GetProjectById(Id);
 			if (current_project == null || current_project.data == null)
-				await popupService.ShowErrorAsync("Nem találtunk ilyen területet", "Információ");
+				await popupService.ShowMessageAsync("Nem találtunk ilyen területet", "Információ");
 			else
 			{
 				CurrentProject = current_project.data;
@@ -43,7 +40,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			MainThread.BeginInvokeOnMainThread(async () =>
 			{
-				await Shell.Current.GoToAsync($"//{NavigatedFrom}");
+				await Shell.Current.GoToAsync("..");
 			});
 			return true;
 		}
@@ -51,7 +48,7 @@ namespace kulonut_Mobil.ViewModels
 		{
 			PolygonsResponseDTO? polygons = await dataService.GetPolygonsByProject(CurrentProject!.id);
 			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
-				await popupService.ShowErrorAsync("Nem találtunk területet az adott polygonhoz", "Információ");
+				await popupService.ShowMessageAsync("Nem találtunk területet az adott projekthez", "Információ");
 
 			if (polygons != null && polygons.data != null)
 			{

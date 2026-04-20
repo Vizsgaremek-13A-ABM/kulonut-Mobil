@@ -5,14 +5,17 @@
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              x:Class="kulonut_Mobil.Pages.RegisterConfirmationPage"
              Shell.NavBarIsVisible="False">
-   
-        
-    <Border HeightRequest="300" Margin="20, 40" Style="{StaticResource BlockBorderDark}">
-        <VerticalStackLayout Spacing="30">
-            <Image Source="logo"/>
-            <views:DetailsLabel Spacing="20" HeaderFontSize="26" BodyFontSize="20" HeaderText="Regisztrált" TextColor="{StaticResource LightestGray}" 
-                                BodyText="Hitelesítse az email címét és várjon, hogy az admin rangot adjon"/>
-        </VerticalStackLayout>
-    </Border>
-    
+
+    <Grid>
+        <Border HeightRequest="450" Margin="20, 40" Style="{StaticResource BlockBorderDark}">
+            <VerticalStackLayout Spacing="30">
+                <Image Source="logo"/>
+                <views:DetailsLabel Spacing="20" HeaderFontSize="26" BodyFontSize="20" HeaderText="Regisztrált" TextColor="{StaticResource LightestGray}" 
+                                    BodyText="Hitelesítse az email címét és várjon, hogy az admin rangot adjon"/>
+                <Button Text="Email Újraküldése" Style="{StaticResource AuthButton}" Command="{Binding ResendCommand}"/>
+                <Button Text="Vissza" Style="{StaticResource AuthButton}" BackgroundColor="{StaticResource Secondary}" Command="{Binding NavBackCommand}"/>
+            </VerticalStackLayout>
+        </Border>
+         <views:Loader IsLoading="{Binding IsLoading}"/>
+    </Grid>
 </pages:BasePage>

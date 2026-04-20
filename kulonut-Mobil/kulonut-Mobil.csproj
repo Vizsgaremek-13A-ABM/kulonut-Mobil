@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net8.0-android;</TargetFrameworks>
+		<TargetFrameworks>net8.0-android</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net8.0-tizen</TargetFrameworks> -->
 
@@ -11,7 +11,6 @@
 		The Mac App Store will NOT accept apps with ONLY maccatalyst-arm64 indicated;
 		either BOTH runtimes must be indicated or ONLY macatalyst-x64. -->
 		<!-- For example: <RuntimeIdentifiers>maccatalyst-x64;maccatalyst-arm64</RuntimeIdentifiers> -->
-
 		<OutputType>Exe</OutputType>
 		<RootNamespace>kulonut_Mobil</RootNamespace>
 		<UseMaui>true</UseMaui>
@@ -35,8 +34,26 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+		<PublishAot>False</PublishAot>
 	</PropertyGroup>
-
+  <PropertyGroup Condition="'$(TargetFramework)'=='net8.0-android'">
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <AndroidFastDeploymentType>None</AndroidFastDeploymentType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net8.0-android|AnyCPU'">
+    <AndroidKeyStore>False</AndroidKeyStore>
+    <ApplicationTitle>Kulonut-Mobil</ApplicationTitle>
+    <ApplicationId>Kulonut-Mobil</ApplicationId>
+    <RunAOTCompilation>False</RunAOTCompilation>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net8.0-android|AnyCPU'">
+    <AndroidKeyStore>False</AndroidKeyStore>
+    <ApplicationTitle>Kulonut-Mobil</ApplicationTitle>
+    <ApplicationId>Kulonut-Mobil</ApplicationId>
+    <RunAOTCompilation>False</RunAOTCompilation>
+  </PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
     <MauiIcon Include="Resources\AppIcon\appicon.png" Foreground="Resources\AppIcon\appicon.png" Color="#454545" />
@@ -66,6 +83,7 @@
 
 	<ItemGroup>
 	  <MauiImage Include="Resources\Images\Icons\close.png" />
+	  <MauiImage Include="Resources\Images\Icons\default_avatar.png" />
 	  <MauiImage Include="Resources\Images\Icons\edit.png" />
 	  <MauiImage Include="Resources\Images\Icons\faceidicon.png" />
 	  <MauiImage Include="Resources\Images\Icons\filter.png" />

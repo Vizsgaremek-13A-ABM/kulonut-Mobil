@@ -1,14 +1,8 @@
-﻿using Android.Graphics.Drawables;
-using CommunityToolkit.Maui;
-using kulonut_Mobil.API;
+﻿using CommunityToolkit.Maui;
 using kulonut_Mobil.DependencyInjection;
-using kulonut_Mobil.Pages;
-using kulonut_Mobil.Services;
-using kulonut_Mobil.ViewModels;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Handlers;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using System.Net;
 
 namespace kulonut_Mobil
 {
@@ -23,8 +17,9 @@ namespace kulonut_Mobil
                 .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
-                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+					fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+					fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+					fonts.AddFont("IBMPlexMono-Regular.ttf", "IBM");
                 })
 				.ConfigureMauiHandlers(handlers =>
 				{
@@ -39,6 +34,7 @@ namespace kulonut_Mobil
 						nativeView.Background = null;
 						nativeView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
 					});
+
 #endif
 				});
 			builder.Logging.ClearProviders();
@@ -50,7 +46,7 @@ namespace kulonut_Mobil
 
 #if DEBUG
 			builder.Logging.AddDebug();
-        #endif
+#endif
 			return builder.Build();
         }
     }

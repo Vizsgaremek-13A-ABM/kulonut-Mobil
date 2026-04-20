@@ -61,8 +61,6 @@ namespace kulonut_Mobil.Validation
 		}
 		public static string? ValidateDateInterval(DateTime? startDate, DateTime? endDate)
 		{
-			if (startDate != null && startDate.Value < DateTime.Now)
-				return "A kezdő dátum nem lehet a múltban.";
 			if (startDate != null && endDate != null && startDate > endDate)
 				return "A kezdő dátum nem lehet későbbi, mint a befejező dátum.";
 

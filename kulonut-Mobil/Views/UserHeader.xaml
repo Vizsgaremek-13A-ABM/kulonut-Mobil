@@ -2,15 +2,16 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="kulonut_Mobil.Views.UserHeader">
-    <Grid ColumnDefinitions="*, Auto"  Padding="0,0,10,0" HeightRequest="50">
-        <Label  x:Name="TitleLabel" VerticalTextAlignment="Center" FontSize="22" FontAttributes="Bold" />
+    <Grid ColumnDefinitions="*, Auto"  Padding="0,0,5,0" HeightRequest="50">
+        <Label  x:Name="TitleLabel" VerticalTextAlignment="Center" FontSize="18" FontAttributes="Bold" />
 
         <HorizontalStackLayout Grid.Column="1" Spacing="10" VerticalOptions="Center">
 
             <VerticalStackLayout VerticalOptions="Center" >
                 <Label 
                     FontAttributes="Bold"
-                    Text="{Binding User.display_name, Source={RelativeSource AncestorType={x:Type ContentView}}}"                    
+                    HorizontalOptions="Center"
+                    Text="{Binding User.formatted_name, Source={RelativeSource AncestorType={x:Type ContentView}}}"                    
                     FontSize="16"/>
                 <Label 
                     Text="{Binding User.role.role_name, Source={RelativeSource AncestorType={x:Type ContentView}}}"
@@ -22,7 +23,7 @@
                 WidthRequest="50"
                 HeightRequest="50">
                 <ImageButton HeightRequest="50" WidthRequest="50" x:Name="UserIconButton" Clicked="UserIconButton_Clicked" Aspect="AspectFill"
-                    Source="{Binding User.avatar, Source={RelativeSource AncestorType={x:Type ContentView}}, FallbackValue='splash', TargetNullValue='splash'}"/>
+                    Source="{Binding User.display_avatar, Source={RelativeSource AncestorType={x:Type ContentView}}, FallbackValue='default_avatar', TargetNullValue='default_avatar'}"/>
             </Border>
         </HorizontalStackLayout>
     </Grid>

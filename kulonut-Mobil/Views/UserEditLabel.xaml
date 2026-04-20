@@ -7,6 +7,6 @@
             <Label x:Name="HeaderLabel" FontSize="20" FontAttributes="Bold" TextColor="{StaticResource MidGray}"/>
             <ImageButton Source="edit" Clicked="ImageButton_Clicked" Style="{StaticResource UserEditButton}"/>
         </HorizontalStackLayout>
-        <Label x:Name="BodyLabel" TextColor="{StaticResource MidGray}" Text="{Binding BodyText, Source={RelativeSource AncestorType={x:Type ContentView}}}" FontSize="18" />
+        <Label x:Name="BodyLabel" TextColor="{StaticResource MidGray}" Text="{Binding BodyText, Source={RelativeSource AncestorType={x:Type ContentView}}, FallbackValue='Nincs', TargetNullValue='Nincs'}" FontSize="18" />
     </VerticalStackLayout>
 </ContentView>

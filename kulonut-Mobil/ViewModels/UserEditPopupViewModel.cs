@@ -2,14 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Services;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -58,11 +51,10 @@ namespace kulonut_Mobil.ViewModels
 				UserModel? updatedUser = await userService.UpdateCurrentUserAsync(requestBody);
 				if (updatedUser == null)
 				{
-					ErrorText = $"Nem módosítható felhasználó {user.id} id-vel";
+					ErrorText = $"Nem módosítható a {user.name} nevű felhasználó";
 					return;
 				}
 				await ClosePopup();
-
 			}
 			catch (DuplicateNameException)
 			{

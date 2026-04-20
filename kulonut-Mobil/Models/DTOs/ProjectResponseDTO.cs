@@ -8,6 +8,6 @@ namespace kulonut_Mobil.Models.DTOs
 {
     public class ProjectResponseDTO
     {
-        public ProjectModel data { get; set; }
+        public ProjectModel? data { get; set; }
     }
 }

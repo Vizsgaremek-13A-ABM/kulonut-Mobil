@@ -18,7 +18,7 @@ namespace kulonut_Mobil.Services
 		{
 			_serviceProvider = serviceProvider;
 		}
-		public async Task ShowErrorAsync(string message, string titleHead = "Hiba")
+		public async Task ShowMessageAsync(string message, string titleHead = "Hiba")
         {
 			ErrorPopup errorPopup = new ErrorPopup(message, titleHead);
             await Application.Current!.MainPage!.ShowPopupAsync(errorPopup);

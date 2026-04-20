@@ -10,13 +10,14 @@ namespace kulonut_Mobil.Services
 {
     public interface IAuthService
     {
-		public Task<UserModel?> LoginAsync(LoginRequestDTO request, bool remember);
-		public Task<UserModel?> RegisterAsync(RegisterRequestDTO request);
-		public Task LogoutAsync();
+		public Task<UserModel?> Login(LoginRequestDTO request, bool remember);
+		public Task<UserModel?> Register(RegisterRequestDTO request);
+		public Task<MessageResponseDTO?> ResendRegister();
+		public Task Logout();
 		public void SetToken(string _token);
-		public Task RequestPasswordResetAsync(ForgotPasswordRequestDTO request);
-		public Task ChangePasswordAsync(ChangePasswordRequestDTO request);
-		public Task<string?> GetTokenAsync();
+		public Task RequestPasswordReset(ForgotPasswordRequestDTO request);
+		public Task ChangePassword(ChangePasswordRequestDTO request);
+		public Task<string?> GetToken();
 		public bool IsAuthenticated();
 	}
 }

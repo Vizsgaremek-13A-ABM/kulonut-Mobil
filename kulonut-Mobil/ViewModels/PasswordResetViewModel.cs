@@ -3,11 +3,7 @@ using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -34,9 +30,22 @@ namespace kulonut_Mobil.ViewModels
 		{
 			bool check_result = await InputCheck();
 			if (!check_result) return;
-			await authService.RequestPasswordResetAsync(ForgotPasswordRequest);
-			await popupService.ShowErrorAsync("A Jelszó visszaállítása sikeresen megkezdődött. A visszaállítás menetét email-ben részletezzük.", "Üzenet");
-			await authService.LogoutAsync();
+			try
+			{
+				await authService.RequestPasswordReset(ForgotPasswordRequest);
+			}
+			catch (DuplicateNameException)
+			{ 
+				await popupService.ShowMessageAsync("Nincs ilyen email-cím az adatbázisban", "Információ");
+				return;
+			}
+			catch (Exception)
+			{
+				await popupService.ShowMessageAsync("Váratlan hiba történt");
+				return;
+			}
+			await popupService.ShowMessageAsync("A Jelszó visszaállítása sikeresen megkezdődött. A visszaállítás menetét email-ben részletezzük.", "Információ");
+			await authService.Logout();
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}
 		private async Task<bool> InputCheck()
@@ -44,7 +53,7 @@ namespace kulonut_Mobil.ViewModels
 			string? email_valid = InputValidator.ValidateEmail(ForgotPasswordRequest.email);
 			if (email_valid != null)
 			{
-				await popupService.ShowErrorAsync(email_valid);
+				await popupService.ShowMessageAsync(email_valid, "Információ");
 				return false;
 			}
 			return true;

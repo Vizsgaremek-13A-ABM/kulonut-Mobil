@@ -87,8 +87,8 @@ namespace kulonut_Mobil.MapFeatures
 		}
 		private IStyle CreatePolyStyle() => new VectorStyle
 		{
-			Fill = new Mapsui.Styles.Brush(Mapsui.Styles.Color.FromArgb(120, 255, 165, 0)),
-			Outline = new Pen(Mapsui.Styles.Color.Orange, 2)
+			Fill = new Mapsui.Styles.Brush(Mapsui.Styles.Color.FromArgb(100, 109, 165, 242)),
+			Outline = new Pen(Mapsui.Styles.Color.FromArgb(160, 109, 165, 242), 2)
 		};
 	}
 }

@@ -8,9 +8,9 @@ namespace kulonut_Mobil.Models.DTOs
 {
 	public class RegisterRequestDTO
 	{
-		public string? name { get; set; } = "bela";
-		public string? email { get; set; } = "bela@gmail.com";
-		public string? password { get; set; } = "password";
-		public string? password_confirmation { get; set; } = "password";
+		public string? name { get; set; }
+		public string? email { get; set; }
+		public string? password { get; set; }
+		public string? password_confirmation { get; set; } 
 	}
 }

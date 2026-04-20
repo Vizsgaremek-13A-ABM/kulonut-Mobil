@@ -4,12 +4,6 @@ using kulonut_Mobil.Models;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -45,9 +39,9 @@ namespace kulonut_Mobil.ViewModels
 			if (projects_response == null || projects_response.data == null || projects_response.data.Count == 0)
 			{
 				if(projects_response == null || projects_response.data == null)
-					await popupService.ShowErrorAsync("Nem sikerult betölteni a projekteket");
+					await popupService.ShowMessageAsync("Nem sikerult betölteni a projekteket");
 				else
-					await popupService.ShowErrorAsync("Nincs ilyen projekt");
+					await popupService.ShowMessageAsync("Nem találtunk ilyen projektet, ezért az előző szűrés eredménye marad megjelenítve", "Információ");
 				IsLoading = false;
 				return;
 			}
@@ -58,7 +52,7 @@ namespace kulonut_Mobil.ViewModels
 		private async Task NavigateToDetails(int project_id)
 		{
 			IsLoading = true;
-			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(TablePage)}&{ProjectDetailsViewModel.ID_URL}={project_id}");
+			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.ID_URL}={project_id}");
 			IsLoading = false;
 		}		
 	}

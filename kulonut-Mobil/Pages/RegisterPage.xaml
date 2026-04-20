@@ -4,16 +4,19 @@
              xmlns:views="clr-namespace:kulonut_Mobil.Views"
              xmlns:pages="clr-namespace:kulonut_Mobil.Pages"
              x:Class="kulonut_Mobil.Pages.RegisterPage">
+    <Shell.TitleView>
+        <Label Text="Regisztráció" Style="{StaticResource TitleLabel}"/>
+    </Shell.TitleView>
     <Grid>
         <ScrollView Margin="20">
             <Grid RowDefinitions="7*, *" Margin="0, 50, 0, 0">
                 <Border Style="{StaticResource BlockBorderDark}" Grid.Row="0">
                         <Grid RowDefinitions="1.5*, 1.5*, 1.5*, 1.5*, 1.5*, 0.8*">
                         <Image Source="logo.png"/>
-                        <views:AuthEntry Grid.Row="1" LabelText="Felhasználónév" Text="{Binding RegisterRequestDTO.name}" Placeholder="Béla"/>
-                            <views:AuthEntry Grid.Row="2" LabelText="Email Cím" Text="{Binding RegisterRequestDTO.email}" Placeholder="Béla@gmail.com"/>
-                            <views:AuthEntry Grid.Row="3" LabelText="Jelszó" Text="{Binding RegisterRequestDTO.password}" IsPassword="True" Placeholder="erősjelszó12!"/>
-                            <views:AuthEntry Grid.Row="4" LabelText="Jelszó megerősítése" Text="{Binding RegisterRequestDTO.password_confirmation}" IsPassword="True" Placeholder="erősjelszó12!"/>
+                        <views:AuthEntry Grid.Row="1" LabelText="Felhasználónév" Text="{Binding RegisterRequestDTO.name}" Placeholder="Felhasználónév"/>
+                            <views:AuthEntry Grid.Row="2" LabelText="Email Cím" Text="{Binding RegisterRequestDTO.email}" Placeholder="E-mail cím"/>
+                            <views:AuthEntry Grid.Row="3" LabelText="Jelszó" Text="{Binding RegisterRequestDTO.password}" IsPassword="True" Placeholder="jelszó"/>
+                            <views:AuthEntry Grid.Row="4" LabelText="Jelszó megerősítése" Text="{Binding RegisterRequestDTO.password_confirmation}" IsPassword="True" Placeholder="jelszó újra"/>
                             <Button Grid.Row="5" VerticalOptions="Center" Command="{Binding HandleRegisterCommand}" Background="{StaticResource Secondary}" Style="{StaticResource AuthButton}" Text="Regisztráció"/>
                         </Grid>
                     </Border>

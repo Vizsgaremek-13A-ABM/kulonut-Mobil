@@ -5,7 +5,6 @@ using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
 using kulonut_Mobil.Validation;
 using System.Data;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -32,22 +31,15 @@ namespace kulonut_Mobil.ViewModels
 			}
 			try
 			{
-				UserModel? response = await authService.RegisterAsync(RegisterRequestDTO);
-				if (response == null)
-				{
-					IsLoading = false;
-					await popupService.ShowErrorAsync("Hiba történt a regisztrációban");
-					return;
-				}
-				await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
+				await HandleUserResponse();
 			}
 			catch (DuplicateNameException)
 			{
-				await popupService.ShowErrorAsync("Az email cím már foglalt", "Információ");
+				await popupService.ShowMessageAsync("Az email cím már foglalt", "Információ");
 			}
 			catch (Exception)
 			{
-				await popupService.ShowErrorAsync("Váratlan hiba lépett fel regisztráció közben");
+				await popupService.ShowMessageAsync("Váratlan hiba lépett fel regisztráció közben");
 			}
 			finally
 			{
@@ -55,29 +47,40 @@ namespace kulonut_Mobil.ViewModels
 			}
 			
 		}
+		private async Task HandleUserResponse()
+		{
+			UserModel? response = await authService.Register(RegisterRequestDTO);
+			if (response == null)
+			{
+				IsLoading = false;
+				await popupService.ShowMessageAsync("Váratlan hiba történt a regisztrációban");
+				return;
+			}
+			await Shell.Current.GoToAsync($"{nameof(RegisterConfirmationPage)}");
+		}
 		private async Task<bool> InputCheck()
 		{
 			string? email_error = InputValidator.ValidateEmail(RegisterRequestDTO.email);
 			if (email_error != null)
 			{
-				await popupService.ShowErrorAsync(email_error);
+				await popupService.ShowMessageAsync(email_error, "Információ");
 				return false;
 			}
 			string? name_error = InputValidator.ValidateName(RegisterRequestDTO?.name);
 			if(name_error != null)
 			{
-				await popupService.ShowErrorAsync(name_error);
+				await popupService.ShowMessageAsync(name_error, "Információ");
 				return false;
 			}
 			string? password_error = InputValidator.ValidatePassword(RegisterRequestDTO?.password);
 			if (password_error != null)
 			{
-				await popupService.ShowErrorAsync(password_error);
+				await popupService.ShowMessageAsync(password_error, "Információ");
 				return false;
 			}	
 			if(RegisterRequestDTO?.password != RegisterRequestDTO?.password_confirmation)
 			{
-				await popupService.ShowErrorAsync("Nem egyezik a két jelszó");
+				await popupService.ShowMessageAsync("Nem egyezik a két jelszó", "Információ");
 				return false;
 			}
 			return true;

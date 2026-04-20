@@ -23,7 +23,7 @@ namespace kulonut_Mobil.Services
 		{
 			apiClient = _apiClient;
 		}
-		public async Task<UserModel?> LoginAsync(LoginRequestDTO request, bool remember)
+		public async Task<UserModel?> Login(LoginRequestDTO request, bool remember)
 		{
 			LoginResponseDTO? response = await apiClient!.PostAsync<LoginResponseDTO, LoginRequestDTO>("auth/login", request);
 			if (response != null && !string.IsNullOrEmpty(response.token))
@@ -39,20 +39,24 @@ namespace kulonut_Mobil.Services
 			}
 			return response?.user;
 		}
-		public async Task<UserModel?> RegisterAsync(RegisterRequestDTO request)
+		public async Task<UserModel?> Register(RegisterRequestDTO request)
 		{
 			LoginResponseDTO? response = await apiClient!.PostAsync<LoginResponseDTO, RegisterRequestDTO>("auth/register", request);
-			if(response != null && response.token != null)
-				token = response.token;
+			if (response != null && response.token != null)
+				SetToken(response.token);
 			return response?.user;
 		}
-		public async Task LogoutAsync()
+		public async Task<MessageResponseDTO?> ResendRegister()
+		{
+			return await apiClient.PostAsync<MessageResponseDTO?, object?>("email/verification-notification", null);
+		}
+		public async Task Logout()
 		{
 			await apiClient.PostAsync<MessageResponseDTO?, object?>("auth/logout", null);
 			SecureStorage.Remove(TOKEN_KEY);
 			token = null;
 		}
-		public async Task<string?> GetTokenAsync()
+		public async Task<string?> GetToken()
 		{
 			return await SecureStorage.GetAsync(TOKEN_KEY);
 		}
@@ -61,35 +65,20 @@ namespace kulonut_Mobil.Services
 			if (string.IsNullOrEmpty(token)) return false;
 			apiClient.SetToken(token);
 			return true;
-			//return !string.IsNullOrEmpty(token) && IsJwtValid(); TODO: Fix JWT validation for offline use
 		}
 		public void SetToken(string _token)
 		{
-			if(_token != null)
+			if(!string.IsNullOrEmpty(_token))
 			{
 				token = _token;
 				apiClient.SetToken(_token);
 			}
 		}
-		private bool IsJwtValid()
+		public async Task RequestPasswordReset(ForgotPasswordRequestDTO request)
 		{
-			if (string.IsNullOrWhiteSpace(token))
-				return false;
-			try
-			{
-				var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
-				return jwt.ValidTo > DateTime.UtcNow.AddMinutes(1);
-			}
-			catch
-			{
-				return false;
-			}
+			await apiClient.PostAsync<MessageResponseDTO?, ForgotPasswordRequestDTO>("auth/forgot-password", request);
 		}
-		public async Task RequestPasswordResetAsync(ForgotPasswordRequestDTO request)
-		{
-			await apiClient.PostAsync<MessageResponseDTO?, ForgotPasswordRequestDTO>("auth/update-password", request);
-		}
-		public async Task ChangePasswordAsync(ChangePasswordRequestDTO request)
+		public async Task ChangePassword(ChangePasswordRequestDTO request)
 		{
 			var response = await apiClient.PostAsync<MessageResponseDTO?, ChangePasswordRequestDTO>("auth/update-password", request);
 			if (response == null)

@@ -2,11 +2,6 @@
 using CommunityToolkit.Mvvm.Input;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Pages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -25,7 +20,7 @@ namespace kulonut_Mobil.ViewModels
         private async Task NavigateToDetails(int project_id)
         {
             await ClosePopup();
-            await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.NAV_URL}={nameof(MapPage)}&{ProjectDetailsViewModel.ID_URL}={project_id}");
+			await Shell.Current.GoToAsync($"{nameof(ProjectDetailsPage)}?{ProjectDetailsViewModel.ID_URL}={project_id}");
         }
 
 	}

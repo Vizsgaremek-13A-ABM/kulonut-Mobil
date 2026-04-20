@@ -1,13 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Java.Lang;
 using kulonut_Mobil.Models;
 using kulonut_Mobil.Pages;
 using kulonut_Mobil.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace kulonut_Mobil.ViewModels
 {
@@ -26,7 +22,7 @@ namespace kulonut_Mobil.ViewModels
 		[RelayCommand]
 		private async Task Logout()
 		{
-			await authService.LogoutAsync();
+			await authService.Logout();
 			FlyoutIsOpen = false;
 			await Shell.Current.GoToAsync($"//{nameof(MainPage)}");
 		}

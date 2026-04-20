@@ -2,7 +2,6 @@
 using kulonut_Mobil.MapFeatures;
 using kulonut_Mobil.Models.DTOs;
 using kulonut_Mobil.Services;
-using System.Diagnostics;
 using Map = Mapsui.Map;
 
 namespace kulonut_Mobil.ViewModels
@@ -26,7 +25,7 @@ namespace kulonut_Mobil.ViewModels
 			ProjectsByPolygonResponseDTO? response = await dataService.GetProjectsByPolygonId(polygonFeature.Id);
 			if (response == null || response.data == null)
 			{
-				await popupService.ShowErrorAsync("Nem sikerült lekérni a projekt adatokat");
+				await popupService.ShowMessageAsync("Nem sikerült lekérni a projekt adatokat");
 				IsLoading = false;
                 return;
             }
@@ -45,8 +44,11 @@ namespace kulonut_Mobil.ViewModels
 			IsLoading = true;
 			PolygonsResponseDTO? polygons = await dataService.GetPolygons();
 			if (polygons == null || polygons.data == null || polygons.data.Count == 0)
-				await popupService.ShowErrorAsync("Nem találtunk ilyen területet", "Információ");
-
+			{
+				await popupService.ShowMessageAsync("Nem találtunk ilyen területet, ezért az előző szűrés eredménye marad megjelenítve", "Információ");
+				IsLoading = false;
+				return;
+			}
 			if (polygons != null && polygons.data != null)
 				mapHandler.ShowPolygons(polygons.data);
 			
